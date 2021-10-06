@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoker</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="scripts/script.js"></script>
+</head>
+<body>
+    <div class='wrap'>
+        <div class="logo">
+            Invoker
+        </div>
+        <form action="localhost:8000/servlet" method="get" id="invoker">
+            <label for="fkey">key</label>
+            <input type="text" id="sync" name="fkey">
+            <label for="value">value</label>
+            <input type="text" id="value" name="fvalue">
+            <label for="mock">mock</label>
+            <select id="mock" name="">
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+            <label for="sync">sync:</label>
+            <select id="sync" name="">
+                <option value="true">true</option>
+                <option value="false">false</option>
+              </select>
+        </form>
+        <button id='invoke-btn' type="submit" form="invoker" value="Submit">Send</button>
+        <div class='result'>
+        </
+    </div>
+</body>
+</html>
