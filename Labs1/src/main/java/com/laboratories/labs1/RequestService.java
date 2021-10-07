@@ -12,41 +12,59 @@ public class RequestService {
     public RequestService() {
     }
 
-    public List<String> readFromRepository() throws IOException {
-        List<String> content = new ArrayList<String>();
+    public List<String> readFromRepository() {
+        List<String> content = new ArrayList<>();
 
-        BufferedReader reader = new BufferedReader(new FileReader("repository.txt"));
-        String line;
-
-        while ((line = reader.readLine()) != null) {
-            content.add(line);
+        try(BufferedReader br = new BufferedReader(new FileReader("repository.txt"))) {
+            for(String line; (line = br.readLine()) != null; ) {
+                content.add(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         return content;
 
     }
 
-    public void writeToRepository(String key,int value) throws IOException {
+    public boolean writeToRepository(String key,int value)  {
         String timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
         String writeToFile = (key + ' ').repeat(value) + '#' + timestamp;
-        BufferedWriter writer = new BufferedWriter(new FileWriter("repository.txt", true));
-        writer.append(writeToFile);
-        writer.append('\n');
+
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter("repository.txt", true));
+            writer.append(writeToFile);
+            writer.append('\n');
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
     }
 
     public String formatAsHTML(List<String> content) {
         Collections.sort(content);
 
-        String html = "<table><tr><th>Timestamp</th><th>Value</th></tr>";
+        String html = "<table style=\" border: 1px solid black;\"><tr><th>Timestamp</th><th>Value</th></tr>";
 
         for(String line: content) {
             String[] columns = line.split("#");
-            html = html.concat("<tr><td>" + columns[0] + "</td><td>"+ columns[1] +"</td></tr>");
+            html = html.concat("<tr><td>" + columns[1] + "</td><td>"+ columns[0] +"</td></tr>");
         }
         return html;
     }
 
-    public String formatAsJSON(List<String> content) {
-        return null;
+    public String formatAsCSV(List<String> content) {
+        Collections.sort(content);
+
+        String csv = "";
+
+        for(String line:content) {
+            String[] columns = line.split("#");
+            csv = csv.concat(columns[1] + "," +columns[0] + "\n");
+        }
+
+        return csv;
     }
 }

@@ -6,7 +6,7 @@ import javax.servlet.http.*;
 @javax.servlet.annotation.WebServlet(name = "WebServlet", value = "/web")
 public class WebServlet extends HttpServlet {
 
-    private RequestService service = new RequestService();
+    private final RequestService service = new RequestService();
     final Object lock = new Object();
 
     public void logOnRequest(HttpServletRequest request) {
