@@ -1,3 +1,4 @@
+
 # Requirements
 
 -   (2p) Create a servlet that:
@@ -13,3 +14,8 @@
     In this case, the servlet must respond with a simple text, instead of an HTML page.  
     
 -   (1p)  Analyze the performance and concurrency issues, invoking the servlet repeatedly, in an asynchronous manner (use different values for the  _mock_  and  _sync_  parameters).
+
+# Explanations
+
+ 1. For the first part of the requirement I have create a servlet called `WebServlet`, mapped to the /web endpoint. As stated in the requirement we are interested in delivering `text/html` content to our clients. `Request` class is used to extract from the incoming request the mock, sync, value and key request parameters and delivering them when necessary. `RequestService` service class is used to read and write from and to the repository file but also to convert the content of the repository file into a valid HTML table which can be rendered by the client. As mentioned in the requirements when sync argument value is true we need to ensure that the write operation to the repository is thread safe, I did this by using a lock object and subsequently a syncronized block of instructions connected to the lock. A simple HTML form from which the servlet can be invoked was also provided and can be found in the project tree in the folder `app`.
+ 2. For the second and the third part of the assignment I wrote a JavaScript script to either invoke the service or benchmarked it by making a batch of `n` asyncronous requests. Although there is already an `WebServlet` defined and mapped to the /web endpoint, I created another servlet called `Servlet` and mapped to the /servlet endpoint which is similiar to the previous mentioned one but with the only difference that this one is using `Request` and `RequestService` to deliver content as text and not `text/html`. The script from which we either invoke or benchmark the servlet should be ran with the following configuration `node app.js [mode: invoke, benchmark] [mock: boolean] [sync: boolean] [key: string] [value: integer] [benchmark-with-req-count: integer]`.
