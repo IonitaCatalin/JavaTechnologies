@@ -7,8 +7,8 @@ For each laboratory there is an associated folder where by using a README.md the
 
 # Status
 
- - **Laboratory 1** ✔️
- - **Laboratory 2** ✔️
+ - **[Laboratory 1](https://profs.info.uaic.ro/~acf/tj/labs/lab_01.html)** ✔️
+ - **[Laboratory 2](https://profs.info.uaic.ro/~acf/tj/labs/lab_02.html)** ✔️
  - **Laboratory 3** ⌛
  - **Laboratory 4** ⌛
  - **Laboratory 5** ⌛
@@ -16,4 +16,4 @@ For each laboratory there is an associated folder where by using a README.md the
  - **Laboratory 7** ⌛
  - **Laboratory 8** ⌛
  - **Laboratory 9** ⌛
- - **Laboratory 10** ⌛
+ - **Laboratory 10**⌛
