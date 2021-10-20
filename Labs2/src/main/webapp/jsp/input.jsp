@@ -36,7 +36,6 @@
                     out.println("<option value=\""+category.getCategory()+"\">"
                             + category.getCategory().toUpperCase(Locale.ROOT) + "</option>");
                 }
-
             }
 
         %>
