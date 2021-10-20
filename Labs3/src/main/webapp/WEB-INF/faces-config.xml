@@ -18,33 +18,33 @@
 
         <navigation-case>
             <from-outcome>viewReport</from-outcome>
-            <to-view-id>/management/report/view.xhtml</to-view-id>
+            <to-view-id>/management/reports/view.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>addStudent</from-outcome>
-            <to-view-id>/management/student/add.xhtml</to-view-id>
+            <to-view-id>/management/students/add.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>removeStudent</from-outcome>
-            <to-view-id>/management/student/remove.xhtml</to-view-id>
+            <to-view-id>/management/students/remove.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>addExam</from-outcome>
-            <to-view-id>/management/exam/add.xhtml</to-view-id>
+            <to-view-id>/management/exams/add.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>removeExam</from-outcome>
-            <to-view-id>/management/exam/remove.xhtml</to-view-id>
+            <to-view-id>/management/exams/remove.xhtml</to-view-id>
         </navigation-case>
 
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/management/student/add.xhtml</from-view-id>
+        <from-view-id>/management/students/add.xhtml</from-view-id>
 
         <navigation-case>
             <from-outcome>home</from-outcome>
@@ -54,7 +54,7 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/management/exam/add.xhtml</from-view-id>
+        <from-view-id>/management/exams/add.xhtml</from-view-id>
 
         <navigation-case>
             <from-outcome>home</from-outcome>
@@ -62,6 +62,18 @@
         </navigation-case>
 
     </navigation-rule>
+
+    <managed-bean>
+        <managed-bean-name>ExamControllerBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs3.controllers.ExamControllerBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>StudentControllerBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs3.controllers.StudentControllerBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
 
 </faces-config>
