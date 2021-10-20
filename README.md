@@ -1,9 +1,10 @@
 
-# JavaTechnologies
 
-This repository's purpose is to host the practical work of the Java Technologies Course as part of the Software Engineering Master Program First Year Semester I.
+# [JavaTechnologies](https://profs.info.uaic.ro/~acf/tj/Fisa%20disciplinei%20-%20Tehnologii%20Java%20%28en%29.pdf)
 
-For each laboratory there is an associated folder where by using a README.md the work done for that laboratory in the available timeframe, is described.
+This repository's sole purpose is to host the practical work done as part of the Java Technologies course included in the Master's Degree program, Software Engineering branch first year semester 1. Additional pieces of information over this course's requirements, as well as details, can be found [here](https://profs.info.uaic.ro/~acf/tj/).
+
+Each laboratory has its associated folder with an additional file README.md used to describe the steps involved in implementing the asked solution.
 
 # Status
 
