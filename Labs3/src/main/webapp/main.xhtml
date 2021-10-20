@@ -3,9 +3,24 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, This is a Scheduler app, please select one of the options below."/>
-</f:view>
+      xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Scheduler App!</title>
+</h:head>
+
+<h:body>
+    <h:panelGroup id="wrapper" style="position: absolute; top: 50%;left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; width:20%" >
+        <h:outputLabel>View</h:outputLabel>
+        <b:button look="default" style="margin-right: 10px" outcome="viewReport" value="View"></b:button>
+        <h:outputLabel>Students</h:outputLabel>
+        <b:button look="default" style="margin-right: 10px" outcome="addStudent" value="Add"></b:button>
+        <b:button look="default" style="margin-right: 10px" outcome="removeStudent" value="Remove"></b:button>
+        <h:outputLabel>Exams</h:outputLabel>
+        <b:button look="default" style="margin-right: 10px" outcome="addExam" value="Add"></b:button>
+        <b:button look="default" style="margin-right: 10px" outcome="removeExam" value="Remove"></b:button>
+    </h:panelGroup>
+</h:body>
+
 </html>

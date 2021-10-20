@@ -2,7 +2,66 @@
 <faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
-    http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+        http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+
+
+    <application>
+        <resource-bundle>
+            <base-name>Locales</base-name>
+            <var>locales</var>
+        </resource-bundle>
+    </application>
+
+    <navigation-rule>
+        <from-view-id>/main.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>viewReport</from-outcome>
+            <to-view-id>/management/report/view.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>addStudent</from-outcome>
+            <to-view-id>/management/student/add.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>removeStudent</from-outcome>
+            <to-view-id>/management/student/remove.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>addExam</from-outcome>
+            <to-view-id>/management/exam/add.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>removeExam</from-outcome>
+            <to-view-id>/management/exam/remove.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/management/student/add.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/management/exam/add.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
 
 
 </faces-config>
