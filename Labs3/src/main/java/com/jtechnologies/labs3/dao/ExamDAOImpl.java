@@ -30,7 +30,7 @@ public class ExamDAOImpl implements ExamDAO {
                     break;
                 }
                 exams.add(new Exam(
-                        Integer.parseInt(resultSet.getString("id")),
+                        resultSet.getInt("id"),
                         resultSet.getString("subject"),
                         resultSet.getString("starting"),
                         Integer.parseInt(resultSet.getString("duration"))));
@@ -42,12 +42,31 @@ public class ExamDAOImpl implements ExamDAO {
     }
 
     @Override
-    public Exam getExamById(String id) {
-        return null;
+    public Exam getExamById(int id) {
+
+        Exam exam = null;
+        ResultSet resultSet = postgresRepository.run("SELECT * FROM EXAM WHERE EXAM.ID=" + id +";");
+
+        try {
+            if(!resultSet.next()) {
+                return null;
+            } else {
+                exam = new Exam(
+                        resultSet.getInt("id"),
+                        resultSet.getString("subject"),
+                        resultSet.getString("starting"),
+                        resultSet.getInt("duration"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return exam;
+
     }
 
     @Override
     public void removeExamById(String id) {
+
         String query = "";
     }
 

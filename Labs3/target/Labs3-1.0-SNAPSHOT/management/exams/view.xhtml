@@ -5,26 +5,30 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui">
-<f:view>
-    <h:form style=" position: absolute; top: 50%;left: 50%; transform: translate(-50%, -50%);">
-        <b:dataTable value="#{ExamBean.getExams()}"
-                     var="exam"
-                     page-length="5"
-                     page-length-menu="5,10,20">
-            <f:facet name="header" >
-                <tr>
-                    <th>Id</th>
-                    <th>Subject</th>
-                    <th>Duration(h)</th>
-                    <th>Starting</th>
-                </tr>
-            </f:facet>
-            <b:dataTableColumn value="#{exam.getId()}"/>
-            <b:dataTableColumn value="#{exam.getSubject()}" />
-            <b:dataTableColumn value="#{exam.getDuration()}" />
-            <b:dataTableColumn value="#{exam.getStarting()}" />
-        </b:dataTable>
-        <b:button look="default" style="margin-top: 15px;outline:none; width:80px;" outcome="home" value="Back"></b:button>
-    </h:form>
-</f:view>
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>View Exams</title>
+</h:head>
+<h:body>
+        <h:form style=" position: absolute; top: 50%;left: 50%; transform: translate(-50%, -50%);">
+            <b:dataTable value="#{ExamBean.getExams()}"
+                         var="exam"
+                         page-length="5"
+                         page-length-menu="5,10,20">
+                <f:facet name="header" >
+                    <tr>
+                        <th>Id</th>
+                        <th>Subject</th>
+                        <th>Duration(h)</th>
+                        <th>Starting</th>
+                    </tr>
+                </f:facet>
+                <b:dataTableColumn value="#{exam.getId()}"/>
+                <b:dataTableColumn value="#{exam.getSubject()}" />
+                <b:dataTableColumn value="#{exam.getDuration()}" />
+                <b:dataTableColumn value="#{exam.getStarting()}" />
+            </b:dataTable>
+            <b:button look="default" style="margin-top: 15px;outline:none; width:80px;" outcome="home" value="Back"></b:button>
+        </h:form>
+</h:body>
 </html>

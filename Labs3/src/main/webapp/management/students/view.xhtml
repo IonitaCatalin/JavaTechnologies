@@ -5,12 +5,15 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:b="http://bootsfaces.net/ui">
-<f:view>
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>View Students</title>
+</h:head>
+<h:body>
     <h:form style=" position: absolute; top: 50%;left: 50%; transform: translate(-50%, -50%);">
         <b:dataTable value="#{StudentBean.getStudents()}"
                      var="exam"
-                     page-length="5"
-                     page-length-menu="5,10,20">
+                     page-length="20">
             <f:facet name="header" >
                 <tr>
                     <th>Id</th>
@@ -22,5 +25,5 @@
         </b:dataTable>
         <b:button look="default" style="margin-top: 15px;outline:none; width:80px;" outcome="home" value="Back"></b:button>
     </h:form>
-</f:view>
+</h:body>
 </html>
