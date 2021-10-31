@@ -32,7 +32,7 @@
                     out.println("<option selected value=\"" + category.getCategory()+"\">"
                             + category.getCategory().toUpperCase(Locale.ROOT) + "</option>");
 
-                } else {    
+                } else {
                     out.println("<option value=\""+category.getCategory()+"\">"
                             + category.getCategory().toUpperCase(Locale.ROOT) + "</option>");
                 }

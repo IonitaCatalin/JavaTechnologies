@@ -10,23 +10,13 @@
     <b:container>
         <b:form id="studentForm">
             <legend>Add Student</legend>
-            <b:inputText id="fullName" name="fullName" placeholder="Name" required="true" requiredMessage="Please input Full Name!">
+            <b:inputText id="fullName" value="#{StudentInputBean.fullName}" name="fullName" placeholder="Name" required="true" requiredMessage="Please input Full Name!">
                 <f:facet name="prepend">
                     <b:icon name="user"/>
                 </f:facet>
             </b:inputText>
-            <b:selectMultiMenu style="margin-right:20px; width:100%;" value="ids" id="examsIDs" >
-                <f:selectItem itemLabel="Logica" itemValue="1"/>
-                <f:selectItem itemLabel="Logica" itemValue="1"/>
-                <f:selectItem itemLabel="Logica" itemValue="1"/>
-                <f:selectItem itemLabel="Logica" itemValue="1"/>
-                <f:selectItem itemLabel="Logica" itemValue="1"/>
-                <f:selectItem itemLabel="Logica" itemValue="1"/>
-                <f:selectItem itemLabel="Logica" itemValue="1"/>
-                <f:selectItem itemLabel="Logica" itemValue="1"/>
-            </b:selectMultiMenu>
             <h:outputText value=" &lt;br /&gt;  &lt;br /&gt; " escape="false" />
-            <b:commandButton look="primary" style="margin-right: 10px" value="Add"></b:commandButton>
+            <b:commandButton look="primary" action="#{StudentInputBean.submit()}" style="margin-right: 10px" value="Add"></b:commandButton>
             <b:button look="default" style="outline:none" outcome="home" value="Back"></b:button>
         </b:form>
     </b:container>

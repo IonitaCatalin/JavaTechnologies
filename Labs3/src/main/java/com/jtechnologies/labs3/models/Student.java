@@ -3,16 +3,20 @@ package com.jtechnologies.labs3.models;
 import java.util.List;
 
 public class Student {
-    private String id;
+    private int id;
     private String fullName;
-    private List<Exam> exams;
 
-    public String getId() {
-        return id;
+    public Student(int id, String fullName) {
+        this.id = id;
+        this.fullName = fullName;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public Student(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getFullName() {
@@ -23,15 +27,5 @@ public class Student {
         this.fullName = fullName;
     }
 
-    public List<Exam> getExams() {
-        return exams;
-    }
 
-    public void setExams(List<Exam> exams) {
-        this.exams = exams;
-    }
-
-    public Student(String fullName) {
-        this.fullName = fullName;
-    }
 }

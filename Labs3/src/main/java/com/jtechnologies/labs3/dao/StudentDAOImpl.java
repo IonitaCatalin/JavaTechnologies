@@ -1,28 +1,59 @@
 package com.jtechnologies.labs3.dao;
 
+import com.jtechnologies.labs3.models.Exam;
 import com.jtechnologies.labs3.models.Student;
+import com.jtechnologies.labs3.utils.PostgresRepository;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentDAOImpl implements StudentDAO{
+
+    private final PostgresRepository postgresRepository;
+
+    public StudentDAOImpl() {
+        postgresRepository = PostgresRepository.get();
+    }
+
     @Override
-    public List<Student> getAllStudents() throws SQLException {
+    public List<Student> getStudents() {
+
+        List<Student> students = new ArrayList<>();
+        ResultSet resultSet = postgresRepository.run("SELECT * FROM STUDENTS;");
+
+        while(true){
+            try {
+                if (!resultSet.next())
+                {
+                    break;
+                }
+                students.add(new Student(
+                        Integer.parseInt(resultSet.getString("id")),
+                        resultSet.getString("name")));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return students;
+    }
+
+    @Override
+    public Student getStudentById(String id) {
         return null;
     }
 
     @Override
-    public Student getStudentById(String id) throws SQLException {
-        return null;
+    public void addStudent(Student student) {
+        String query = "INSERT INTO STUDENTS(name) VALUES (" +
+                "'"+ student.getFullName()+ "'" + ")";
+
+        postgresRepository.run(query);
     }
 
     @Override
-    public void addStudent(Student student) throws SQLException {
-
-    }
-
-    @Override
-    public void removeStudentById(String id) throws SQLException{
+    public void removeStudentById(String id) {
 
     }
 }

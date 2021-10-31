@@ -17,13 +17,23 @@
         <from-view-id>/main.xhtml</from-view-id>
 
         <navigation-case>
-            <from-outcome>viewReport</from-outcome>
-            <to-view-id>/management/reports/view.xhtml</to-view-id>
+            <from-outcome>viewEnrolment</from-outcome>
+            <to-view-id>/management/enrolment/view.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>addEnrolment</from-outcome>
+            <to-view-id>/management/enrolment/add.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>addStudent</from-outcome>
             <to-view-id>/management/students/add.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>viewStudent</from-outcome>
+            <to-view-id>/management/students/view.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
@@ -41,10 +51,26 @@
             <to-view-id>/management/exams/remove.xhtml</to-view-id>
         </navigation-case>
 
+        <navigation-case>
+            <from-outcome>viewExam</from-outcome>
+            <to-view-id>/management/exams/view.xhtml</to-view-id>
+        </navigation-case>
+
     </navigation-rule>
 
     <navigation-rule>
         <from-view-id>/management/students/add.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <from-view-id>/management/exams/add.xhtml</from-view-id>
 
         <navigation-case>
             <from-outcome>home</from-outcome>
@@ -63,15 +89,53 @@
 
     </navigation-rule>
 
+    <navigation-rule>
+        <from-view-id>/management/students/view.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/management/exams/view.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
     <managed-bean>
-        <managed-bean-name>ExamControllerBean</managed-bean-name>
-        <managed-bean-class>com.jtechnologies.labs3.controllers.ExamControllerBean</managed-bean-class>
+        <managed-bean-name>ExamBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs3.controllers.ExamBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
-        <managed-bean-name>StudentControllerBean</managed-bean-name>
-        <managed-bean-class>com.jtechnologies.labs3.controllers.StudentControllerBean</managed-bean-class>
+        <managed-bean-name>StudentBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs3.controllers.StudentBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>ExamInputBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs3.controllers.ExamInputBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>StudentInputBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs3.controllers.StudentInputBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>EnrolBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs3.controllers.EnrolBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 

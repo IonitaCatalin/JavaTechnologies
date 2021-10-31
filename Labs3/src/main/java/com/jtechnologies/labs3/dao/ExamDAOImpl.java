@@ -1,45 +1,64 @@
 package com.jtechnologies.labs3.dao;
 
 import com.jtechnologies.labs3.models.Exam;
-import com.jtechnologies.labs3.utils.ConnectionFactory;
+import com.jtechnologies.labs3.utils.PostgresRepository;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ExamDAOImpl implements ExamDAO {
 
+    private final PostgresRepository postgresRepository;
+
     public ExamDAOImpl() {
-        ConnectionFactory connectionFactory = new ConnectionFactory();
+        postgresRepository = PostgresRepository.get();
     }
 
     @Override
-    public List<Exam> getAllExams() throws SQLException {
+    public List<Exam> getExams() {
+
+        List<Exam> exams = new ArrayList<>();
+        ResultSet resultSet = postgresRepository.run("SELECT * FROM EXAMS;");
+
+        while(true){
+            try {
+                if (!resultSet.next())
+                {
+                    break;
+                }
+                exams.add(new Exam(
+                        Integer.parseInt(resultSet.getString("id")),
+                        resultSet.getString("subject"),
+                        resultSet.getString("starting"),
+                        Integer.parseInt(resultSet.getString("duration"))));
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return exams;
+    }
+
+    @Override
+    public Exam getExamById(String id) {
         return null;
     }
 
     @Override
-    public Exam getExamById(String id) throws SQLException {
-        return null;
+    public void removeExamById(String id) {
+        String query = "";
     }
 
     @Override
-    public void removeExamById(String id) throws SQLException {
+    public void addExam(Exam exam) {
 
-    }
+        String query = "INSERT INTO exams(subject,starting,duration) VALUES (" +
+                "'"+ exam.getSubject() +"',"+
+                "'"+ exam.getStarting() +"'," +
+                "'" + exam.getDuration() +"'" + "); ";
 
-    @Override
-    public void addExam(Exam exam) throws SQLException {
-
-        Connection dbcon = ConnectionFactory.getConnection();
-        PreparedStatement stmt =  dbcon.prepareStatement("INSERT INTO exams VALUES (?,?,?,?);");
-        stmt.setString(1,exam.getSubject());
-        stmt.setString(2,exam.getDuration());
-        stmt.setString(3,exam.getStarting());
-
-        dbcon.commit();
-
+        postgresRepository.run(query);
     }
 }
