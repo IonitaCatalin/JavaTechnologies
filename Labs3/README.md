@@ -18,3 +18,7 @@ Internationalize the user interface and offer support for at least two locales.
 - Create a page for displaying the results.
 - Create a random generator that produces problem instances of various sizes and test your algorithm.
 - A bonus may be awarded for an "efficient" implementation of the algorithm.
+
+# Explanations
+
+Soon ...
