@@ -4,29 +4,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui">
-<body>
     <ui:composition>
-
-        <b:navBar brandHref="#" id="dropMenuExample">
+        <b:navBar brandHref="#" id="schedulerNavBar">
             <b:navbarLinks>
                 <b:dropMenu value="Students" >
-                    <b:navLink value="Add" href="/scheduler/managment/students/add.xhtml"></b:navLink>
-                    <b:navLink value="Remove" href="#"></b:navLink>
-                    <b:navLink value="View" href="#"></b:navLink>
+                    <b:navLink value="Add" href="#{msg['application.students.add']}"></b:navLink>
+                    <b:navLink value="Remove" href="#{msg['application.students.remove']}"></b:navLink>
+                    <b:navLink value="View" href="#{msg['application.students.view']}"></b:navLink>
                 </b:dropMenu>
                 <b:dropMenu value="Exams" >
-                    <b:navLink value="Add" href="#"></b:navLink>
-                    <b:navLink value="Remove" href="#"></b:navLink>
-                    <b:navLink value="View" href="#"></b:navLink>
+                    <b:navLink value="Add" href="#{msg['application.exams.add']}"></b:navLink>
+                    <b:navLink value="Remove" href="#{msg['application.exams.remove']}"></b:navLink>
+                    <b:navLink value="View" href="#{msg['application.exams.view']}"></b:navLink>
                 </b:dropMenu>
                 <b:dropMenu value="Enrolment" >
-                    <b:navLink value="Add" href="#"></b:navLink>
-                    <b:navLink value="Remove" href="#"></b:navLink>
-                    <b:navLink value="View" href="#"></b:navLink>
+                    <b:navLink value="Add" href="#{msg['application.enrolments.add']}"></b:navLink>
+                    <b:navLink value="Remove" href="#{msg['application.enrolments.remove']}"></b:navLink>
+                    <b:navLink value="View" href="#{msg['application.enrolments.view']}"></b:navLink>
                 </b:dropMenu>
             </b:navbarLinks>
         </b:navBar>
 
     </ui:composition>
-</body>
 </html>
