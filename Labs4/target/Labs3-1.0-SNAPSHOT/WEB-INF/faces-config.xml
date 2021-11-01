@@ -166,31 +166,31 @@
 
     <managed-bean>
         <managed-bean-name>ExamBean</managed-bean-name>
-        <managed-bean-class>com.jtechnologies.labs3.controllers.ExamBean</managed-bean-class>
+        <managed-bean-class>com.jtechnologies.labs4.controllers.ExamBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>StudentBean</managed-bean-name>
-        <managed-bean-class>com.jtechnologies.labs3.controllers.StudentBean</managed-bean-class>
+        <managed-bean-class>com.jtechnologies.labs4.controllers.StudentBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>ExamInputBean</managed-bean-name>
-        <managed-bean-class>com.jtechnologies.labs3.controllers.ExamInputBean</managed-bean-class>
+        <managed-bean-class>com.jtechnologies.labs4.controllers.ExamInputBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>StudentInputBean</managed-bean-name>
-        <managed-bean-class>com.jtechnologies.labs3.controllers.StudentInputBean</managed-bean-class>
+        <managed-bean-class>com.jtechnologies.labs4.controllers.StudentInputBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>EnrolBean</managed-bean-name>
-        <managed-bean-class>com.jtechnologies.labs3.controllers.EnrolmentBean</managed-bean-class>
+        <managed-bean-class>com.jtechnologies.labs4.controllers.EnrolmentBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 

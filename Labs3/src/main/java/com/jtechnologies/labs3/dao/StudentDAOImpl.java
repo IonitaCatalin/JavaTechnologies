@@ -1,6 +1,5 @@
 package com.jtechnologies.labs3.dao;
 
-import com.jtechnologies.labs3.models.Exam;
 import com.jtechnologies.labs3.models.Student;
 import com.jtechnologies.labs3.utils.PostgresRepository;
 

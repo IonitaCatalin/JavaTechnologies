@@ -1,7 +1,5 @@
 package com.jtechnologies.labs3.models;
 
-import java.util.List;
-
 public class Student {
     private int id;
     private String fullName;

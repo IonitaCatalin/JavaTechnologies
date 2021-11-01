@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+<body>
+    <ui:composition>
+
+        <b:navBar brandHref="#" id="dropMenuExample">
+            <b:navbarLinks>
+                <b:dropMenu value="Students" >
+                    <b:navLink value="Add" href="/scheduler/managment/students/add.xhtml"></b:navLink>
+                    <b:navLink value="Remove" href="#"></b:navLink>
+                    <b:navLink value="View" href="#"></b:navLink>
+                </b:dropMenu>
+                <b:dropMenu value="Exams" >
+                    <b:navLink value="Add" href="#"></b:navLink>
+                    <b:navLink value="Remove" href="#"></b:navLink>
+                    <b:navLink value="View" href="#"></b:navLink>
+                </b:dropMenu>
+                <b:dropMenu value="Enrolment" >
+                    <b:navLink value="Add" href="#"></b:navLink>
+                    <b:navLink value="Remove" href="#"></b:navLink>
+                    <b:navLink value="View" href="#"></b:navLink>
+                </b:dropMenu>
+            </b:navbarLinks>
+        </b:navBar>
+
+    </ui:composition>
+</body>
+</html>

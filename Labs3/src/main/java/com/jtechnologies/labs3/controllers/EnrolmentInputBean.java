@@ -2,7 +2,6 @@ package com.jtechnologies.labs3.controllers;
 
 import com.jtechnologies.labs3.dao.EnrolmentDAO;
 import com.jtechnologies.labs3.dao.EnrolmentDAOImpl;
-import com.jtechnologies.labs3.dao.ExamDAO;
 import com.jtechnologies.labs3.models.Enrolment;
 
 import javax.faces.bean.ManagedBean;

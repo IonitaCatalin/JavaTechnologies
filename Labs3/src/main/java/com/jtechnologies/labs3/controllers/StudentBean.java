@@ -6,8 +6,6 @@ import com.jtechnologies.labs3.models.Student;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
-import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
 @ManagedBean(name = "StudentBean ", eager = false)

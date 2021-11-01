@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Scheduler App!</title>
+</h:head>
+
+<h:body>
+
+<!--    <h:panelGroup id="wrapper" style="position: absolute; top: 50%;left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; width:20%" >-->
+<!--        <h:outputLabel>Enrolment</h:outputLabel>-->
+<!--        <b:button look="default" style="margin-right: 10px" outcome="addEnrolment" value="Add"></b:button>-->
+<!--        <b:button look="default" style="margin-right: 10px" outcome="viewEnrolment" value="View"></b:button>-->
+<!--        <b:button look="default" style="margin-right: 10px" outcome="removeEnrolment" value="Remove"></b:button>-->
+<!--        <h:outputLabel>Students</h:outputLabel>-->
+<!--        <b:button look="default" style="margin-right: 10px" outcome="addStudent" value="Add"></b:button>-->
+<!--        <b:button look="default" style="margin-right: 10px" outcome="viewStudent" value="View"></b:button>-->
+<!--        <b:button look="default" style="margin-right: 10px" outcome="removeStudent" value="Remove"></b:button>-->
+<!--        <h:outputLabel>Exams</h:outputLabel>-->
+<!--        <b:button look="default" style="margin-right: 10px" outcome="addExam" value="Add"></b:button>-->
+<!--        <b:button look="default" style="margin-right: 10px" outcome="removeExam" value="Remove"></b:button>-->
+<!--        <b:button look="default" style="margin-right: 10px" outcome="viewExam" value="View"></b:button>-->
+
+<!--    </h:panelGroup>-->
+
+
+    <ui:composition template="/WEB-INF/templates/page.xhtml">
+        <ui:param name="pageTitle" value="#{application['main.title']}"/>
+        <ui:define name="content">
+            Hello World!
+        </ui:define>
+    </ui:composition>
+
+
+
+</h:body>
+
+</html>

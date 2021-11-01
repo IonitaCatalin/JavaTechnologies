@@ -5,7 +5,6 @@ import com.jtechnologies.labs3.utils.PostgresRepository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
