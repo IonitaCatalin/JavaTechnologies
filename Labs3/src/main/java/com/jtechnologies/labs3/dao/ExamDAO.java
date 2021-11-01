@@ -7,6 +7,6 @@ import java.util.List;
 public interface ExamDAO {
     List<Exam> getExams() ;
     Exam getExamById(int id) ;
-    void removeExamById(String id) ;
+    void removeExamById(int id) ;
     void addExam(Exam exam) ;
 }

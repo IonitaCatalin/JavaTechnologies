@@ -9,6 +9,6 @@ public interface EnrolmentDAO {
 
     List<Enrolment> getEnrolments() ;
     Exam getEnrolmentById(int id) ;
-    void removeEnrolmentById(String id) ;
+    void removeEnrolmentById(int id) ;
     void addEnrolment(Enrolment enrolment) ;
 }

@@ -30,6 +30,7 @@ public class EnrolmentDAOImpl implements EnrolmentDAO{
                     break;
                 }
                 enrolments.add(new Enrolment(
+                        resultSet.getInt("id"),
                         resultSet.getInt("student_id"),
                         resultSet.getInt("exam_id") ));
             } catch (SQLException e) {
@@ -45,8 +46,9 @@ public class EnrolmentDAOImpl implements EnrolmentDAO{
     }
 
     @Override
-    public void removeEnrolmentById(String id) {
-
+    public void removeEnrolmentById(int id) {
+        String query = "DELETE FROM ENROLMENT WHERE ID = " + id;
+        postgresRepository.run(query);
     }
 
     @Override

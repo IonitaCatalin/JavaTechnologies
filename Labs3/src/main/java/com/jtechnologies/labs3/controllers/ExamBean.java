@@ -13,7 +13,7 @@ import java.util.List;
 public class ExamBean {
 
     private ExamDAO examDAO;
-    String id;
+    private int id;
 
     public ExamBean() {
         examDAO = new ExamDAOImpl();
@@ -27,4 +27,11 @@ public class ExamBean {
         examDAO.removeExamById(this.id);
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 }

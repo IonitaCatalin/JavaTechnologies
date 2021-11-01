@@ -12,6 +12,7 @@ import java.util.List;
 @RequestScoped
 public class EnrolmentBean {
 
+    private int id;
 
     private EnrolmentDAO enrolmentDAO;
 
@@ -21,5 +22,17 @@ public class EnrolmentBean {
 
     public List<Enrolment> getEnrolments() {
         return enrolmentDAO.getEnrolments();
+    }
+
+    public void removeEnrolmentById() {
+        enrolmentDAO.removeEnrolmentById(id);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

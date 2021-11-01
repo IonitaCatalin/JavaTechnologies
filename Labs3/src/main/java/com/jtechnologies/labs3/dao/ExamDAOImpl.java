@@ -61,13 +61,12 @@ public class ExamDAOImpl implements ExamDAO {
             e.printStackTrace();
         }
         return exam;
-
     }
 
     @Override
-    public void removeExamById(String id) {
-
-        String query = "";
+    public void removeExamById(int id) {
+        String query = "DELETE FROM EXAMS WHERE ID = " + id;
+        postgresRepository.run(query);
     }
 
     @Override

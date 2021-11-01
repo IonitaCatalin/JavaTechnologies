@@ -1,11 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
-<f:view>
-    <h:outputLabel value="Hello, world"/>
-</f:view>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Remove Student</title>
+</h:head>
+<h:body style="padding: 60px; min-height: 2000px;">
+    <b:container>
+        <b:form id="examRemoveForm">
+            <legend>Remove Student</legend>
+            <b:inputText id="studentId" value="#{StudentBean.id}" name="examId" placeholder="StudentId" required="true" requiredMessage="Please input Student Id!">
+                <f:facet name="prepend">
+                    <b:icon name="user"/>
+                </f:facet>
+            </b:inputText>
+            <h:outputText value=" &lt;br /&gt;  &lt;br /&gt; " escape="false" />
+            <b:commandButton look="primary" action="#{StudentBean.removeStudentById()}" style="background-color:red;margin-right: 10px" value="Remove"></b:commandButton>
+            <b:button look="default" style="outline:none" outcome="home" value="Back"></b:button>
+        </b:form>
+    </b:container>
+</h:body>
 </html>

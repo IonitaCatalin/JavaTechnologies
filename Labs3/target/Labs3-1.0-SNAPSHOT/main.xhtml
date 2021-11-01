@@ -11,18 +11,22 @@
 </h:head>
 
 <h:body>
+
     <h:panelGroup id="wrapper" style="position: absolute; top: 50%;left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; width:20%" >
         <h:outputLabel>Enrolment</h:outputLabel>
-        <b:button look="default" style="margin-right: 10px" outcome="viewEnrolment" value="View"></b:button>
         <b:button look="default" style="margin-right: 10px" outcome="addEnrolment" value="Add"></b:button>
+        <b:button look="default" style="margin-right: 10px" outcome="viewEnrolment" value="View"></b:button>
+        <b:button look="default" style="margin-right: 10px" outcome="removeEnrolment" value="Remove"></b:button>
         <h:outputLabel>Students</h:outputLabel>
         <b:button look="default" style="margin-right: 10px" outcome="addStudent" value="Add"></b:button>
         <b:button look="default" style="margin-right: 10px" outcome="viewStudent" value="View"></b:button>
-<!--        <b:button look="default" style="margin-right: 10px" outcome="removeStudent" value="Remove"></b:button>-->
+        <b:button look="default" style="margin-right: 10px" outcome="removeStudent" value="Remove"></b:button>
         <h:outputLabel>Exams</h:outputLabel>
         <b:button look="default" style="margin-right: 10px" outcome="addExam" value="Add"></b:button>
-<!--        <b:button look="default" style="margin-right: 10px" outcome="removeExam" value="Remove"></b:button>-->
+        <b:button look="default" style="margin-right: 10px" outcome="removeExam" value="Remove"></b:button>
         <b:button look="default" style="margin-right: 10px" outcome="viewExam" value="View"></b:button>
+        
+
     </h:panelGroup>
 </h:body>
 

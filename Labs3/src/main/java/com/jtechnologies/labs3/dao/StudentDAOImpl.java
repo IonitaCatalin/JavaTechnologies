@@ -40,7 +40,7 @@ public class StudentDAOImpl implements StudentDAO{
     }
 
     @Override
-    public Student getStudentById(String id) {
+    public Student getStudentById(int id) {
         return null;
     }
 
@@ -53,7 +53,9 @@ public class StudentDAOImpl implements StudentDAO{
     }
 
     @Override
-    public void removeStudentById(String id) {
+    public void removeStudentById(int id) {
+        String query = "DELETE FROM STUDENTS WHERE ID = " + id;
+        postgresRepository.run(query);
 
     }
 }

@@ -12,8 +12,9 @@ import java.util.List;
 
 @ManagedBean(name = "StudentBean ", eager = false)
 @RequestScoped
-public class StudentBean implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class StudentBean {
+
+    private int id;
     private StudentDAO studentsDAO;
 
     public StudentBean() {
@@ -24,12 +25,20 @@ public class StudentBean implements Serializable {
         return studentsDAO.getStudents();
     }
 
-    public Student getStudentById(String id) {
+    public Student getStudentById() {
         return studentsDAO.getStudentById(id);
     }
 
-    public void removeStudentById(String id) {
+    public void removeStudentById() {
         studentsDAO.removeStudentById(id);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
 
