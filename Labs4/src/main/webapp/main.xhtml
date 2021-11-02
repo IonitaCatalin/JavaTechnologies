@@ -5,26 +5,20 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:customs="http://java.sun.com/jsf/composite/components">
-
-<h:head>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>#{msg['application.name']}</title>
-</h:head>
-
-<h:body>
+      xmlns:customs="http://java.sun.com/jsf/composite/components" xmlns:b="http://bootsfaces.net/ui">
 
     <ui:composition template="/WEB-INF/templates/page.xhtml">
-        <ui:param name="pageTitle" value="#{msg['application.main.title']}" />
         <ui:define name="content">
-            <p>
-                <customs:notify
-                        message="Warning! This is still under active development!"
-                />
-            </p>
+            <customs:notify
+                    message="Warning! This is still under active development!"
+            />
+            <h:form>
+                <b:poll interval="300"
+                        update="currentActiveSession"/>
+                <h:outputText id="currentActiveSession"
+                              value="Current active time count :##{SessionBean.sessionCount}" />
+            </h:form>
         </ui:define>
     </ui:composition>
-
-</h:body>
 
 </html>

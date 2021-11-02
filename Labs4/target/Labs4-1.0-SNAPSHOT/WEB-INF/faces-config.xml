@@ -185,6 +185,11 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>SessionBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs4.beans.SessionBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 
     <application>
         <resource-bundle>
@@ -192,6 +197,7 @@
             <var>msg</var>
         </resource-bundle>
     </application>
+
 
 
 

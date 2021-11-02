@@ -15,5 +15,8 @@
         <param-name>javax.faces.PROJECT_STAGE</param-name>
         <param-value>Development</param-value>
     </context-param>
+    <listener>
+        <listener-class>com.jtechnologies.labs4.listeners.SessionCounterListener</listener-class>
+    </listener>
 
 </web-app>
