@@ -11,7 +11,7 @@ Each laboratory has its associated folder with an additional file README.md used
  - **[Laboratory 1](https://profs.info.uaic.ro/~acf/tj/labs/lab_01.html)** ✔️
  - **[Laboratory 2](https://profs.info.uaic.ro/~acf/tj/labs/lab_02.html)** ✔️
  - **[Laboratory 3](https://github.com/IonitaCatalin/JavaTechnologies/tree/main/Labs3)** ✔️
- - **Laboratory 4** ⌛
+ - **[Laboratory 4](https://github.com/IonitaCatalin/JavaTechnologies/tree/main/Labs4)** ✔️ ⌛
  - **Laboratory 5** ⌛
  - **Laboratory 6** ⌛
  - **Laboratory 7** ⌛
