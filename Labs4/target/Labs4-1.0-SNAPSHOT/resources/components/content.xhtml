@@ -3,14 +3,16 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:composite="http://java.sun.com/jsf/composite"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:customs="http://xmlns.jcp.org/jsf/composite/components">
 
     <composite:interface>
-        <composite:attribute name="messageBoxInfo" type="java.lang.String" required="false"/>
+
+        <composite:attribute name="warning" type="java.lang.Boolean" required="true"/>
+        <composite:attribute name="message" type="java.lang.String" required="#{cc.attrs.warning == true}"/>
     </composite:interface>
 
     <composite:implementation>
-        <b:alert severity="warning"><strong>Warning! Under active development!</strong>
-        </b:alert>
+        <customs:notify rendered="#{cc.attrs.warning == true}" message="#{cc.attrs.message}"/>
     </composite:implementation>
 </html>

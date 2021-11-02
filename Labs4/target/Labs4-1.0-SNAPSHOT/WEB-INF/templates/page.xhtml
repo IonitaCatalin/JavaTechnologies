@@ -18,7 +18,10 @@
             <customs:footer owner="#{msg['application.owner']}"
                             version="#{msg['application.version']}"
                             namespace="#{msg['application.namespace']}"/>
-            <customs:content messageBoxInfo="Under continous development!"/>
+
+        <customs:content warning="true" message="Currently under development!">
+            
+        </customs:content>;
     </b:container>
 
 </h:body>

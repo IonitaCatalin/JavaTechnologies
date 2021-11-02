@@ -9,16 +9,11 @@
 <ui:component>
         <composite:interface>
                 <composite:attribute name="message" type="java.lang.String" required="true"/>
-                <composite:attribute name="title" type="java.lang.String" required="true"/>
         </composite:interface>
 
         <composite:implementation>
-
-                <b:modal id="notify" title="" styleClass="modalPseudoClass">
-                        <p>#{cc.attrs.message}</p>
-                        <b:button value="Close" dismiss="modal" />
-                        <b:button value="Ok" look="primary" dismiss="modal" />
-                </b:modal>
+                <b:alert severity="warning"><strong>#{cc.attrs.message}</strong>
+                </b:alert>
         </composite:implementation>
 </ui:component>
 
