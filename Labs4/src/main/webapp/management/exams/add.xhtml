@@ -1,34 +1,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <title>Add Exam</title>
 </h:head>
 <h:body style="padding: 60px; min-height: 2000px;">
-    <b:container>
-        <h:form id="examForm">
-            <legend>Add Exam</legend>
-            <b:inputText id="subject" value="#{ExamInputBean.subject}" name="Subject" placeholder="Subject" required="true" requiredMessage="Please input Name of the Subject!">
-                <f:facet name="prepend">
-                    <b:icon name="user"/>
-                </f:facet>
-            </b:inputText>
-            <b:inputText id="duration" value="#{ExamInputBean.duration}" name="Duration" placeholder="Duration" required="true" requiredMessage="Please input the exam's Duration!">
-                <f:facet name="prepend">
-                    <b:icon name="time"/>
-                </f:facet>
-            </b:inputText>
-            <b:dateTimePicker id="starting" value="#{ExamInputBean.starting}" icon-position="left"
-                              mode="popup"
-                              show-date="true"
-                              show-time="true"
-                              show-icon="true"
-                              use-current="true" style="margin-bottom: 20px;"/>
-            <b:commandButton look="primary" style="margin-right: 10px" value="Add" action="#{ExamInputBean.submit()}"></b:commandButton>
-            <b:button look="default" style="outline:none" outcome="home" value="Back"></b:button>
-        </h:form>
-    </b:container>
+    <ui:composition template="/WEB-INF/templates/page.xhtml">
+        <ui:define name="content">
+            <b:container>
+                <h:form id="examForm">
+                    <legend>Add Exam</legend>
+                    <b:inputText id="subject" value="#{ExamInputBean.subject}" name="Subject" placeholder="Subject" required="true" requiredMessage="Please input Name of the Subject!">
+                        <f:facet name="prepend">
+                            <b:icon name="user"/>
+                        </f:facet>
+                    </b:inputText>
+                    <b:inputText id="duration" value="#{ExamInputBean.duration}" name="Duration" placeholder="Duration" required="true" requiredMessage="Please input the exam's Duration!">
+                        <f:facet name="prepend">
+                            <b:icon name="time"/>
+                        </f:facet>
+                    </b:inputText>
+                    <b:dateTimePicker id="starting" value="#{ExamInputBean.starting}" icon-position="left"
+                                      mode="popup"
+                                      show-date="true"
+                                      show-time="true"
+                                      show-icon="true"
+                                      use-current="true" style="margin-bottom: 20px;"/>
+                    <b:commandButton look="primary" style="margin-right: 10px" value="Add" action="#{ExamInputBean.submit()}"></b:commandButton>
+                    <b:button look="default" style="outline:none" outcome="home" value="Back"></b:button>
+                </h:form>
+            </b:container>
+        </ui:define>
+    </ui:composition>
+
 </h:body>
 </html>

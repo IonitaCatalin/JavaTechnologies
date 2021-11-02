@@ -4,6 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:b="http://bootsfaces.net/ui">
 <h:head>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -11,23 +12,28 @@
 </h:head>
 <h:body>
     <h:form style=" position: absolute; top: 50%;left: 50%; transform: translate(-50%, -50%);">
-        <b:dataTable value="#{EnrolmentBean.getEnrolments()}"
-                     var="enrolment"
-                     page-length="5"
-                     page-length-menu="5,10,20">
-            <f:facet name="header" >
-                <tr>
-                    <th>Id</th>
-                    <th>ExamId</th>
-                    <th>StudentId</th>
-                </tr>
-            </f:facet>
-            <b:dataTableColumn value="#{enrolment.getId()}"/>
-            <b:dataTableColumn value="#{enrolment.getExamId()}" />
-            <b:dataTableColumn value="#{enrolment.getStudentId()}" />
+        <ui:composition template="/WEB-INF/templates/page.xhtml">
+            <ui:define name="content">
+                <b:dataTable value="#{EnrolmentBean.getEnrolments()}"
+                             var="enrolment"
+                             page-length="5"
+                             page-length-menu="5,10,20">
+                    <f:facet name="header" >
+                        <tr>
+                            <th>Id</th>
+                            <th>ExamId</th>
+                            <th>StudentId</th>
+                        </tr>
+                    </f:facet>
+                    <b:dataTableColumn value="#{enrolment.getId()}"/>
+                    <b:dataTableColumn value="#{enrolment.getExamId()}" />
+                    <b:dataTableColumn value="#{enrolment.getStudentId()}" />
 
-        </b:dataTable>
-        <b:button look="default" style="margin-top: 15px;outline:none; width:80px;" outcome="home" value="Back"></b:button>
+                </b:dataTable>
+                <b:button look="default" style="margin-top: 15px;outline:none; width:80px;" outcome="home" value="Back"></b:button>
+            </ui:define>
+        </ui:composition>
+
     </h:form>
 </h:body>
 </html>
