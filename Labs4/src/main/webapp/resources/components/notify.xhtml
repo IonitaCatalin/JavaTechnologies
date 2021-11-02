@@ -8,11 +8,12 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <ui:component>
         <composite:interface>
-                <composite:attribute name="message" type="java.lang.String" required="true"/>
+                <composite:attribute name="development" type="java.lang.String" required="true"/>
+                <composite:attribute name="message" type="java.lang.String" required="#{cc.attrs.development == true}"/>
         </composite:interface>
 
         <composite:implementation>
-                <b:alert severity="warning"><strong>#{cc.attrs.message}</strong>
+                <b:alert rendered="#{cc.attrs.development == 'true'}" severity="warning"><strong>#{cc.attrs.message}</strong>
                 </b:alert>
         </composite:implementation>
 </ui:component>
