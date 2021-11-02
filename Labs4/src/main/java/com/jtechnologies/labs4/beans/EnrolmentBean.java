@@ -14,7 +14,7 @@ public class EnrolmentBean {
 
     private int id;
 
-    private EnrolmentDAO enrolmentDAO;
+    private final EnrolmentDAO enrolmentDAO;
 
     public EnrolmentBean() {
         enrolmentDAO = new EnrolmentDAOImpl();

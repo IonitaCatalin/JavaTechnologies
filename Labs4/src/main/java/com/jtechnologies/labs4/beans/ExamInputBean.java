@@ -10,11 +10,12 @@ import javax.faces.bean.RequestScoped;
 @ManagedBean(name = "ExamInputBean", eager = false)
 @RequestScoped
 public class ExamInputBean {
+
     private String subject;
     private String starting;
     private int duration;
 
-    ExamDAO examDao;
+    private final ExamDAO examDao;
 
     public ExamInputBean() {
         examDao = new ExamDAOImpl();

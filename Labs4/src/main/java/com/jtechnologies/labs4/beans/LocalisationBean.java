@@ -13,6 +13,7 @@ import javax.faces.event.ValueChangeEvent;
 @ManagedBean(name = "LocalisationBean", eager = true)
 @SessionScoped
 public class LocalisationBean implements Serializable {
+
     private static final long serialVersionUID = 1L;
     private String locale;
 

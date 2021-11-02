@@ -12,7 +12,7 @@ import java.util.List;
 @RequestScoped
 public class ExamBean {
 
-    private ExamDAO examDAO;
+    private final ExamDAO examDAO;
     private int id;
 
     public ExamBean() {

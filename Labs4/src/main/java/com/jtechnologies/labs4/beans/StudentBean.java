@@ -13,7 +13,7 @@ import java.util.List;
 public class StudentBean {
 
     private int id;
-    private StudentDAO studentsDAO;
+    private final StudentDAO studentsDAO;
 
     public StudentBean() {
         studentsDAO = new StudentDAOImpl();
@@ -21,10 +21,6 @@ public class StudentBean {
 
     public List<Student> getStudents() {
         return studentsDAO.getStudents();
-    }
-
-    public Student getStudentById() {
-        return studentsDAO.getStudentById(id);
     }
 
     public void removeStudentById() {

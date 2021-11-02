@@ -14,7 +14,7 @@ public class EnrolmentInputBean {
     private int studentId;
     private int examId;
 
-    private EnrolmentDAO enrolmentDAO;
+    private final EnrolmentDAO enrolmentDAO;
 
     public EnrolmentInputBean() {
         enrolmentDAO = new EnrolmentDAOImpl();

@@ -12,7 +12,7 @@ import javax.faces.bean.RequestScoped;
 public class StudentInputBean {
     private String fullName;
 
-    private StudentDAO studentDao;
+    private final StudentDAO studentDao;
 
     public StudentInputBean() {
         studentDao = new StudentDAOImpl();
