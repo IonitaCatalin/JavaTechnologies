@@ -16,7 +16,7 @@
         <param-value>Development</param-value>
     </context-param>
     <listener>
-        <listener-class>com.jtechnologies.labs4.listeners.SessionCounterListener</listener-class>
+        <listener-class>com.jtechnologies.labs5.listeners.SessionCounterListener</listener-class>
     </listener>
 
 </web-app>
