@@ -11,37 +11,37 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class ExamInputBean {
 
-    private String subject;
-    private String starting;
-    private int duration;
-
-    private final ExamDAO examDao;
-
-    public ExamInputBean() {
-        examDao = new ExamDAOImpl();
-    }
-
-    public void submit() {
-        examDao.addExam(new Exam(subject,starting,duration));
-    }
-
-    public String getSubject() {
-        return subject;
-    }
-    public String getStarting() {
-        return starting;
-    }
-    public int getDuration() {
-        return duration;
-    }
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-    public void setStarting(String starting) {
-        this.starting = starting;
-    }
-    public void setDuration(int duration) {
-        this.duration = duration;
-    }
+//    private String subject;
+//    private String starting;
+//    private int duration;
+//
+//    private final ExamDAO examDao;
+//
+//    public ExamInputBean() {
+//        examDao = new ExamDAOImpl();
+//    }
+//
+//    public void submit() {
+//        examDao.addExam(new Exam(subject,starting,duration));
+//    }
+//
+//    public String getSubject() {
+//        return subject;
+//    }
+//    public String getStarting() {
+//        return starting;
+//    }
+//    public int getDuration() {
+//        return duration;
+//    }
+//    public void setSubject(String subject) {
+//        this.subject = subject;
+//    }
+//    public void setStarting(String starting) {
+//        this.starting = starting;
+//    }
+//    public void setDuration(int duration) {
+//        this.duration = duration;
+//    }
 
 }

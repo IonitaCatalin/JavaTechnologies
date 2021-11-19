@@ -11,32 +11,32 @@ import javax.faces.bean.RequestScoped;
 @RequestScoped
 public class EnrolmentInputBean {
 
-    private int studentId;
-    private int examId;
-
-    private final EnrolmentDAO enrolmentDAO;
-
-    public EnrolmentInputBean() {
-        enrolmentDAO = new EnrolmentDAOImpl();
-    }
-
-    public void submit() {
-        enrolmentDAO.addEnrolment(new Enrolment(studentId,examId));
-    }
-
-    public int getStudentId() {
-        return studentId;
-    }
-
-    public int getExamId() {
-        return examId;
-    }
-
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
-    }
-
-    public void setExamId(int examId) {
-        this.examId = examId;
-    }
+//    private int studentId;
+//    private int examId;
+//
+//    private final EnrolmentDAO enrolmentDAO;
+//
+//    public EnrolmentInputBean() {
+//        enrolmentDAO = new EnrolmentDAOImpl();
+//    }
+//
+//    public void submit() {
+//        enrolmentDAO.addEnrolment(new Enrolment(studentId,examId));
+//    }
+//
+//    public int getStudentId() {
+//        return studentId;
+//    }
+//
+//    public int getExamId() {
+//        return examId;
+//    }
+//
+//    public void setStudentId(int studentId) {
+//        this.studentId = studentId;
+//    }
+//
+//    public void setExamId(int examId) {
+//        this.examId = examId;
+//    }
 }
