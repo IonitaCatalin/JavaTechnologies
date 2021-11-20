@@ -8,6 +8,9 @@ import java.io.Serializable;
 @NamedQueries({
         @NamedQuery(name = "Enrolments.findAll", query = "select e from Enrolment e"),
         @NamedQuery(name = "Enrolments.findByIds", query = "select e from Enrolment e where e.studentId = :studentId and e.examsId = :examsId"),
+        @NamedQuery(name = "Enrolments.findEnrolmentsByStudentId", query = "select e from Enrolment e where e.studentId = :studentId"),
+        @NamedQuery(name = "Enrolments.findEnrolmentsByExamId", query = "select e from Enrolment e where e.examsId = :examId"),
+        @NamedQuery(name = "Enrolments.updateEnrolment", query = "update Enrolment set examsId = :examId where id = :enrolmentId")
 })
 public class Enrolment implements Serializable {
 
@@ -24,7 +27,7 @@ public class Enrolment implements Serializable {
     @Basic(optional = false)
     private int studentId;
 
-    @Column(name = "exams_id")
+    @Column(name = "exam_id")
     @Basic(optional = false)
     private int examsId;
 
@@ -65,4 +68,6 @@ public class Enrolment implements Serializable {
     public void setExamsId(int examsId) {
         this.examsId = examsId;
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.jtechnologies.labs5.beans;
 
+import com.jtechnologies.labs5.exception.EnrolmentNotFoundException;
 import com.jtechnologies.labs5.service.EnrolmentService;
 import com.jtechnologies.labs5.models.Enrolment;
 
@@ -21,9 +22,6 @@ public class EnrolmentBean {
         return enrolmentService.getEnrolments();
     }
 
-    public void removeEnrolmentById() {
-        enrolmentService.removeEnrolmentById(id);
-    }
 
     public int getId() {
         return id;

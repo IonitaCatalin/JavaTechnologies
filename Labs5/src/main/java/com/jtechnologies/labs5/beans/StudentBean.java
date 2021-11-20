@@ -1,5 +1,6 @@
 package com.jtechnologies.labs5.beans;
 
+import com.jtechnologies.labs5.exception.StudentNotFoundException;
 import com.jtechnologies.labs5.service.StudentService;
 import com.jtechnologies.labs5.models.Student;
 
@@ -21,9 +22,6 @@ public class StudentBean {
         return studentService.getStudents();
     }
 
-    public void removeStudentById() {
-        studentService.removeStudentById(id);
-    }
 
     public int getId() {
         return id;

@@ -13,6 +13,7 @@
         <ui:define name="content">
             <b:container>
                 <b:form id="enrolmentForm">
+                    <h:outputText value="#{EnrolmentInputBean.getTransactionResult()}" />
                     <legend>Add Enrolment</legend>
                     <b:inputText id="studentId" value="#{EnrolmentInputBean.studentId}" name="studentId" placeholder="Student Id" required="true" requiredMessage="Please input Id of student!">
                         <f:facet name="prepend">

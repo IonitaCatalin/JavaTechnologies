@@ -12,6 +12,7 @@
         <ui:define name="content">
             <b:container>
                 <h:form id="examForm">
+                    <h:outputText value="#{ExamInputBean.getTransactionResult()}" />
                     <legend>Add Exam</legend>
                     <b:inputText id="subject" value="#{ExamInputBean.subject}" name="Subject" placeholder="Subject" required="true" requiredMessage="Please input Name of the Subject!">
                         <f:facet name="prepend">

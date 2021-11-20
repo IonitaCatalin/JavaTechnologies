@@ -1,5 +1,7 @@
 package com.jtechnologies.labs5.beans;
 
+import com.jtechnologies.labs5.exception.EnrolmentInvalidExamException;
+import com.jtechnologies.labs5.exception.EnrolmentInvalidStudentException;
 import com.jtechnologies.labs5.service.EnrolmentService;
 import com.jtechnologies.labs5.models.Enrolment;
 
@@ -14,12 +16,19 @@ public class EnrolmentInputBean {
     private int studentId;
     private int examId;
 
+    private String transactionResult;
+
     @Inject
     private EnrolmentService enrolmentService;
 
 
     public void submit() {
-        enrolmentService.addEnrolment(new Enrolment(studentId,examId));
+        try {
+            enrolmentService.addEnrolment(new Enrolment(studentId,examId));
+            transactionResult = "Enrolment added successfully!";
+        } catch (EnrolmentInvalidExamException | EnrolmentInvalidStudentException e) {
+            transactionResult = e.getMessage();
+        }
     }
 
     public int getStudentId() {
@@ -36,5 +45,9 @@ public class EnrolmentInputBean {
 
     public void setExamId(int examId) {
         this.examId = examId;
+    }
+
+    public String getTransactionResult() {
+        return transactionResult;
     }
 }

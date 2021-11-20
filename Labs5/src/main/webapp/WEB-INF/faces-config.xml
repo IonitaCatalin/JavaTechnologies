@@ -18,8 +18,13 @@
         </navigation-case>
 
         <navigation-case>
-            <from-outcome>removeEnrolment</from-outcome>
-            <to-view-id>/management/enrolments/remove.xhtml</to-view-id>
+            <from-outcome>deleteEnrolment</from-outcome>
+            <to-view-id>/management/enrolments/delete.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>updateEnrolment</from-outcome>
+            <to-view-id>/management/enrolments/update.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
@@ -33,8 +38,13 @@
         </navigation-case>
 
         <navigation-case>
-            <from-outcome>removeStudent</from-outcome>
-            <to-view-id>/management/students/remove.xhtml</to-view-id>
+            <from-outcome>deleteStudent</from-outcome>
+            <to-view-id>/management/students/delete.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>updateStudent</from-outcome>
+            <to-view-id>/management/students/update.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
@@ -43,13 +53,18 @@
         </navigation-case>
 
         <navigation-case>
-            <from-outcome>removeExam</from-outcome>
-            <to-view-id>/management/exams/remove.xhtml</to-view-id>
+            <from-outcome>deleteExam</from-outcome>
+            <to-view-id>/management/exams/delete.xhtml</to-view-id>
         </navigation-case>
 
         <navigation-case>
             <from-outcome>viewExam</from-outcome>
             <to-view-id>/management/exams/view.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>updateExam</from-outcome>
+            <to-view-id>/management/exams/update.xhtml</to-view-id>
         </navigation-case>
 
     </navigation-rule>

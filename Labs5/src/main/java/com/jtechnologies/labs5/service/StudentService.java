@@ -1,6 +1,7 @@
 package com.jtechnologies.labs5.service;
 
 import com.jtechnologies.labs5.exception.StudentConflictException;
+import com.jtechnologies.labs5.exception.StudentNotFoundException;
 import com.jtechnologies.labs5.models.Student;
 
 import javax.persistence.EntityManager;
@@ -20,8 +21,14 @@ public class StudentService{
     }
 
 
-    public Student getStudentById(int id) {
-        return em.find(Student.class,id);
+    public Student getStudentById(int id) throws StudentNotFoundException {
+        Student studentFromDb = em.find(Student.class,id);
+
+        if(studentFromDb == null) {
+            throw new StudentNotFoundException("Student with id " + id + "cannot be found!");
+        }
+
+        return studentFromDb;
     }
 
 
@@ -42,24 +49,27 @@ public class StudentService{
     }
 
 
-    public void removeStudentById(int id) {
+    public void removeStudentById(int id) throws StudentNotFoundException{
         Student studentFromDb = em.find(Student.class,id);
 
         if(studentFromDb == null) {
-            return;
+            throw new StudentNotFoundException("Student with id " + id + "cannot be found in the database");
         }
         em.remove(studentFromDb);
     }
 
-    public void getStudentExams(int id) {
 
-    }
+    public void updateStudent(int id,String name) throws StudentConflictException {
 
-    public int updateStudent(int id,String name) {
-        Student studentFromDb = em.find(Student.class, id);
+        List<Student> results = em.createNamedQuery("Student.findStudentByName",Student.class)
+                .setParameter("name", name)
+                .getResultList();
 
-        if(studentFromDb == null) {
-            return -1;
+        for(Student result: results) {
+            if(result.getName().equals(name)) {
+                throw new StudentConflictException("Student with name " +
+                        name + " already exists in the database");
+            }
         }
 
         em.createNamedQuery("Student.updateStudent", Student.class)
@@ -67,6 +77,5 @@ public class StudentService{
                 .setParameter("studentId",id)
                 .executeUpdate();
 
-        return 0;
     }
 }

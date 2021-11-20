@@ -7,9 +7,8 @@ import java.io.Serializable;
 @Table(name="exams", schema = "public")
 @NamedQueries({
         @NamedQuery(name = "Exam.findAll", query = "select e from Exam e"),
-        @NamedQuery(name = "Exam.updateExam", query = "update Student set name = :name where id = :studentId" +
-                "" +
-                "")
+        @NamedQuery(name = "Exam.updateExam", query = "update Exam set  subject = :subject, starting = :starting, duration=:duration where id = :examId"),
+
 })
 public class Exam implements Serializable {
     @Id
