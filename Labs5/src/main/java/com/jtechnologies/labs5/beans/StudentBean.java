@@ -1,11 +1,11 @@
 package com.jtechnologies.labs5.beans;
 
-import com.jtechnologies.labs5.dao.StudentDAO;
-import com.jtechnologies.labs5.dao.StudentDAOImpl;
+import com.jtechnologies.labs5.service.StudentService;
 import com.jtechnologies.labs5.models.Student;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.inject.Inject;
 import java.util.List;
 
 @ManagedBean(name = "StudentBean", eager = false)
@@ -13,18 +13,16 @@ import java.util.List;
 public class StudentBean {
 
     private int id;
-    private final StudentDAO studentsDAO;
 
-    public StudentBean() {
-        studentsDAO = new StudentDAOImpl();
-    }
+    @Inject
+    private StudentService studentService;
 
     public List<Student> getStudents() {
-        return studentsDAO.getStudents();
+        return studentService.getStudents();
     }
 
     public void removeStudentById() {
-        studentsDAO.removeStudentById(id);
+        studentService.removeStudentById(id);
     }
 
     public int getId() {

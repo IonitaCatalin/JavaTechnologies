@@ -1,11 +1,11 @@
 package com.jtechnologies.labs5.beans;
 
-import com.jtechnologies.labs5.dao.EnrolmentDAO;
-import com.jtechnologies.labs5.dao.EnrolmentDAOImpl;
+import com.jtechnologies.labs5.service.EnrolmentService;
 import com.jtechnologies.labs5.models.Enrolment;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
+import javax.inject.Inject;
 import java.util.List;
 
 @ManagedBean(name = "EnrolmentBean", eager = false)
@@ -14,18 +14,15 @@ public class EnrolmentBean {
 
     private int id;
 
-    private final EnrolmentDAO enrolmentDAO;
-
-    public EnrolmentBean() {
-        enrolmentDAO = new EnrolmentDAOImpl();
-    }
+    @Inject
+    private EnrolmentService enrolmentService;
 
     public List<Enrolment> getEnrolments() {
-        return enrolmentDAO.getEnrolments();
+        return enrolmentService.getEnrolments();
     }
 
     public void removeEnrolmentById() {
-        enrolmentDAO.removeEnrolmentById(id);
+        enrolmentService.removeEnrolmentById(id);
     }
 
     public int getId() {

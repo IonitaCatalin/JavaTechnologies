@@ -1,31 +1,33 @@
-package com.jtechnologies.labs5.dao;
+package com.jtechnologies.labs5.service;
 
 import com.jtechnologies.labs5.models.Enrolment;
 import com.jtechnologies.labs5.models.Exam;
-import com.jtechnologies.labs5.utils.PostgresRepository;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import javax.ejb.Stateless;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
-public class EnrolmentDAOImpl implements EnrolmentDAO{
-    @Override
+@Stateless
+public class EnrolmentService {
+
+    @PersistenceContext(unitName = "persistence/scheduler")
+    EntityManager em;
+
+
     public List<Enrolment> getEnrolments() {
         return null;
     }
 
-    @Override
     public Exam getEnrolmentById(int id) {
         return null;
     }
 
-    @Override
+
     public void removeEnrolmentById(int id) {
 
     }
 
-    @Override
     public void addEnrolment(Enrolment enrolment) {
 
     }

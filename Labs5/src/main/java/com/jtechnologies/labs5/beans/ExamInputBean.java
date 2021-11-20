@@ -1,8 +1,6 @@
 package com.jtechnologies.labs5.beans;
 
-import com.jtechnologies.labs5.dao.ExamDAO;
-import com.jtechnologies.labs5.dao.ExamDAOImpl;
-import com.jtechnologies.labs5.models.Exam;
+
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
