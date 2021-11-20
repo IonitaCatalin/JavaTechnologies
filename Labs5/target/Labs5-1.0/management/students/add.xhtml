@@ -12,8 +12,9 @@
         <ui:define name="content">
             <b:container>
                 <b:form id="studentForm">
+                    <h:outputText value="#{StudentInputBean.getTransactionResult()}" />
                     <legend>Add Student</legend>
-                    <b:inputText id="fullName" value="#{StudentInputBean.fullName}" name="fullName" placeholder="Name" required="true" requiredMessage="Please input Full Name!">
+                    <b:inputText id="name" value="#{StudentInputBean.name}" name="name" placeholder="Name" required="true" requiredMessage="Please input Full Name!">
                         <f:facet name="prepend">
                             <b:icon name="user"/>
                         </f:facet>

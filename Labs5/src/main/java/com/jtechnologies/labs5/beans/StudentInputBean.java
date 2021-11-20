@@ -1,5 +1,6 @@
 package com.jtechnologies.labs5.beans;
 
+import com.jtechnologies.labs5.exception.StudentConflictException;
 import com.jtechnologies.labs5.service.StudentService;
 import com.jtechnologies.labs5.models.Student;
 
@@ -10,21 +11,32 @@ import javax.inject.Inject;
 @ManagedBean(name = "StudentInputBean ", eager = false)
 @RequestScoped
 public class StudentInputBean {
-    private String fullName;
+    private String name;
 
     @Inject
     private StudentService studentService;
+    private String transactionResult;
 
 
     public void submit() {
-        studentService.addStudent(new Student(fullName));
+        try {
+            studentService.addStudent(new Student(name));
+            transactionResult = "Student with name " + name + " has been added successfully!";
+        } catch (StudentConflictException e) {
+            transactionResult = e.getMessage();
+        }
+
     }
 
-    public String getFullName() {
-        return fullName;
+    public String getName() {
+        return name;
     }
 
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getTransactionResult() {
+        return transactionResult;
     }
 }

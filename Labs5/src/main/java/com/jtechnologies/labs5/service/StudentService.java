@@ -1,5 +1,6 @@
 package com.jtechnologies.labs5.service;
 
+import com.jtechnologies.labs5.exception.StudentConflictException;
 import com.jtechnologies.labs5.models.Student;
 
 import javax.persistence.EntityManager;
@@ -24,26 +25,37 @@ public class StudentService{
     }
 
 
-    public void addStudent(Student student) {
+    public void addStudent(Student student) throws StudentConflictException {
+
+        List<Student> results = em.createNamedQuery("Student.findStudentByName",Student.class)
+                .setParameter("name", student.getName())
+                .getResultList();
+
+        for(Student result: results) {
+            if(result.getName().equals(student.getName())) {
+                throw new StudentConflictException("Student with name " +
+                        student.getName() + " already exists in the database");
+            }
+        }
+
         em.persist(student);
     }
 
 
-    public int removeStudentById(int id) {
+    public void removeStudentById(int id) {
         Student studentFromDb = em.find(Student.class,id);
 
         if(studentFromDb == null) {
-            return -1;
+            return;
         }
         em.remove(studentFromDb);
-        return 0;
     }
 
     public void getStudentExams(int id) {
 
     }
 
-    public int updateStudent(int id,String fullName) {
+    public int updateStudent(int id,String name) {
         Student studentFromDb = em.find(Student.class, id);
 
         if(studentFromDb == null) {
@@ -51,7 +63,7 @@ public class StudentService{
         }
 
         em.createNamedQuery("Student.updateStudent", Student.class)
-                .setParameter("fullName",fullName)
+                .setParameter("name",name)
                 .setParameter("studentId",id)
                 .executeUpdate();
 

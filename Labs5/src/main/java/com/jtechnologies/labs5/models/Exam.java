@@ -4,14 +4,20 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="exams")
+@Table(name="exams", schema = "public")
 @NamedQueries({
         @NamedQuery(name = "Exam.findAll", query = "select e from Exam e"),
+        @NamedQuery(name = "Exam.updateExam", query = "update Student set name = :name where id = :studentId" +
+                "" +
+                "")
 })
 public class Exam implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Basic(optional = false)
+    @SequenceGenerator(name="exam_id_seq",
+            sequenceName="exam_id_seq",
+            allocationSize=1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator="exam_id_seq")
     @Column(name = "id")
     private Integer id;
 
