@@ -2,6 +2,7 @@ package com.jtechnologies.labs5.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name="students",schema = "public")
@@ -24,6 +25,9 @@ public class Student implements Serializable {
     @Basic(optional = false)
     @Column(name = "name" )
     private String name;
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Exam> exams;
 
     public Student(int id, String name) {
         this.id = id;

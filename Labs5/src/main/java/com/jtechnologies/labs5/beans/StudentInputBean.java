@@ -39,4 +39,5 @@ public class StudentInputBean {
     public String getTransactionResult() {
         return transactionResult;
     }
+
 }

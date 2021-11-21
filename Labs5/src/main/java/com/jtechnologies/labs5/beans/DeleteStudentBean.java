@@ -10,7 +10,7 @@ import javax.inject.Inject;
 @ManagedBean(name = "DeleteStudentBean", eager = false)
 @RequestScoped
 public class DeleteStudentBean {
-    private int id;
+    private int studentId;
     private String transactionResult;
 
     @Inject
@@ -18,10 +18,26 @@ public class DeleteStudentBean {
 
     public void removeStudentById() {
         try {
-            studentService.removeStudentById(id);
-            transactionResult = "Student with id " + id + " has been deleted successfully!";
+            studentService.removeStudentById(studentId);
+            transactionResult = "Student with id " + studentId + " has been deleted successfully!";
         } catch (StudentNotFoundException e) {
             transactionResult = e.getMessage();
         }
     }
+
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getTransactionResult() {
+        return transactionResult;
+    }
+
+
+
 }

@@ -23,9 +23,7 @@ public class ExamBean {
         return examService.getExams();
     }
 
-    public void removeExamById() {
-        examService.removeExamById(this.id);
-    }
+
 
     public int getId() {
         return id;

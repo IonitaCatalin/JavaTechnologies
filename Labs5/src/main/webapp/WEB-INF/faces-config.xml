@@ -91,7 +91,7 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/management/exams/remove.xhtml</from-view-id>
+        <from-view-id>/management/exams/delete.xhtml</from-view-id>
 
         <navigation-case>
             <from-outcome>home</from-outcome>
@@ -100,8 +100,10 @@
 
     </navigation-rule>
 
+
+
     <navigation-rule>
-        <from-view-id>/management/enrolments/remove.xhtml</from-view-id>
+        <from-view-id>/management/enrolments/delete.xhtml</from-view-id>
 
         <navigation-case>
             <from-outcome>home</from-outcome>
@@ -131,7 +133,37 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/management/students/remove.xhtml</from-view-id>
+        <from-view-id>/management/students/delete.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/management/students/update.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/management/exams/update.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/management/enrolments/update.xhtml</from-view-id>
 
         <navigation-case>
             <from-outcome>home</from-outcome>
@@ -152,6 +184,16 @@
 
     <navigation-rule>
         <from-view-id>/management/enrolments/add.xhtml</from-view-id>
+
+        <navigation-case>
+            <from-outcome>home</from-outcome>
+            <to-view-id>/main.xhtml</to-view-id>
+        </navigation-case>
+
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/management/exams/search.xhtml</from-view-id>
 
         <navigation-case>
             <from-outcome>home</from-outcome>
@@ -205,6 +247,31 @@
         <managed-bean-class>com.jtechnologies.labs5.beans.SessionBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>UpdateStudentBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs5.beans.UpdateStudentBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>DeleteStudentBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs5.beans.DeleteStudentBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>DeleteExamBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs5.beans.DeleteExamBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>DeleteEnrolmentBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs5.beans.DeleteEnrolmentBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
 
     <application>
         <resource-bundle>

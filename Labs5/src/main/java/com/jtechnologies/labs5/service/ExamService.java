@@ -34,8 +34,13 @@ public class ExamService {
     }
 
 
-    public void removeExamById(int id) {
+    public void removeExamById(int id) throws ExamNotFoundException {
+        Exam exam = em.find(Exam.class,id);
 
+        if(exam == null) {
+            throw new ExamNotFoundException("Exam with id " + id + "cannot be found!");
+        }
+        em.remove(exam);
     }
 
     public void addExam(Exam exam) throws ExamInvalidDuration {

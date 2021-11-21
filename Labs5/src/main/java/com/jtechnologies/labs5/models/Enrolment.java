@@ -4,13 +4,13 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "enrolments", schema = "public")
+@Table(name = "students_exams", schema = "public")
 @NamedQueries({
         @NamedQuery(name = "Enrolments.findAll", query = "select e from Enrolment e"),
-        @NamedQuery(name = "Enrolments.findByIds", query = "select e from Enrolment e where e.studentId = :studentId and e.examsId = :examsId"),
+        @NamedQuery(name = "Enrolments.findByIds", query = "select e from Enrolment e where e.studentId = :studentId and e.examId = :examId"),
         @NamedQuery(name = "Enrolments.findEnrolmentsByStudentId", query = "select e from Enrolment e where e.studentId = :studentId"),
-        @NamedQuery(name = "Enrolments.findEnrolmentsByExamId", query = "select e from Enrolment e where e.examsId = :examId"),
-        @NamedQuery(name = "Enrolments.updateEnrolment", query = "update Enrolment set examsId = :examId where id = :enrolmentId")
+        @NamedQuery(name = "Enrolments.findEnrolmentsByExamId", query = "select e from Enrolment e where e.examId = :examId"),
+        @NamedQuery(name = "Enrolments.updateEnrolment", query = "update Enrolment set examId = :examId where id = :enrolmentId")
 })
 public class Enrolment implements Serializable {
 
@@ -27,19 +27,19 @@ public class Enrolment implements Serializable {
     @Basic(optional = false)
     private int studentId;
 
-    @Column(name = "exam_id")
+    @Column(name = "exams_id")
     @Basic(optional = false)
-    private int examsId;
+    private int examId;
 
-    public Enrolment(Integer id, int studentId, int examsId) {
+    public Enrolment(Integer id, int studentId, int examId) {
         this.id = id;
         this.studentId = studentId;
-        this.examsId = examsId;
+        this.examId = examId;
     }
 
-    public Enrolment(int studentId, int examsId) {
+    public Enrolment(int studentId, int examId) {
         this.studentId = studentId;
-        this.examsId = examsId;
+        this.examId = examId;
     }
 
     public Enrolment() {
@@ -61,12 +61,12 @@ public class Enrolment implements Serializable {
         this.studentId = studentId;
     }
 
-    public int getExamsId() {
-        return examsId;
+    public int getExamId() {
+        return examId;
     }
 
-    public void setExamsId(int examsId) {
-        this.examsId = examsId;
+    public void setExamId(int examId) {
+        this.examId = examId;
     }
 
 

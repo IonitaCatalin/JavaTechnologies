@@ -11,14 +11,30 @@ import javax.inject.Inject;
 @RequestScoped
 public class DeleteEnrolmentBean {
 
+    private int enrolmentId;
+    private String transactionResult;
+
     @Inject
     private EnrolmentService enrolmentService;
 
-    public void removeEnrolmentById(int id) {
+    public void removeEnrolmentById() {
         try {
-            enrolmentService.removeEnrolmentById(id);
+            enrolmentService.removeEnrolmentById(enrolmentId);
+            transactionResult = "Enrolment with id " + enrolmentId + " has been deleted successfully!";
         } catch (EnrolmentNotFoundException e) {
-            e.printStackTrace();
+            transactionResult = e.getMessage();
         }
+    }
+
+    public String getTransactionResult() {
+        return transactionResult;
+    }
+
+    public int getEnrolmentId() {
+        return enrolmentId;
+    }
+
+    public void setEnrolmentId(int enrolmentId) {
+        this.enrolmentId = enrolmentId;
     }
 }

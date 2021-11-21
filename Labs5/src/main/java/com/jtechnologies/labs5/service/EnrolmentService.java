@@ -41,7 +41,7 @@ public class EnrolmentService {
         }
 
         em.createNamedQuery("Enrolments.updateEnrolment",Enrolment.class)
-                .setParameter("examsId", examId)
+                .setParameter("examId", examId)
                 .setParameter("enrolmentId", id)
                 .executeUpdate();
     }
@@ -52,11 +52,12 @@ public class EnrolmentService {
         if(enrolment == null) {
             throw new EnrolmentNotFoundException("Enrolment with id " + id + "could not be found!");
         }
+        em.remove(enrolment);
 
     }
 
     public void addEnrolment(Enrolment enrolment) throws EnrolmentInvalidExamException, EnrolmentInvalidStudentException {
-        Exam exam = em.find(Exam.class, enrolment.getExamsId());
+        Exam exam = em.find(Exam.class, enrolment.getExamId());
         Student student = em.find(Student.class, enrolment.getStudentId());
 
         if(exam == null) {
