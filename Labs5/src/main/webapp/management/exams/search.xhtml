@@ -16,9 +16,42 @@
             <ui:define name="content">
                 <b:container>
                     <b:form id="examForm">
-                        <h:outputText value="#{DeleteEnrolmentBean.getTransactionResult()}" />
+                        <h:outputText value="#{SearchExamBean.getTransactionResult()}" />
                         <legend>Search Exams</legend>
-                        <b:commandButton look="primary" action="#{DeleteEnrolmentBean.removeEnrolmentById()}" value="Remove" style="margin-right: 10px" >
+                        <b:form>
+                            <b:selectBooleanCheckbox value="#{SearchExamBean.examSubjectCriteria}" caption="ExamSubject" />
+                            <b:inputText id="subject" value="#{SearchExamBean.examSubject}" name="Subject" placeholder="Exam's Subject" required="true">
+                                <f:facet name="prepend">
+                                    <b:icon name="user"/>
+                                </f:facet>
+                            </b:inputText>
+                            <b:selectBooleanCheckbox value="#{SearchExamBean.timeframeCriteria}" caption="Timeframe" />
+                            <b:dateTimePicker id="timeframe" value="#{SearchExamBean.timeFrame}" icon-position="left"
+                                              mode="popup"
+                                              show-date="true"
+                                              placeholder="Select Timeframe"
+                                              show-time="true"
+                                              show-icon="true"
+                                              use-current="true" style="margin-bottom: 20px;"/>
+                        </b:form>
+                        <b:dataTable id="Exams" value="#{SearchExamBean.getCriteriaSearchResults()}"
+                                     var="exam"
+                                     page-length="5"
+                                     page-length-menu="5,10,20">
+                            <f:facet name="header" >
+                                <tr>
+                                    <th>Id</th>
+                                    <th>Subject</th>
+                                    <th>Duration(h)</th>
+                                    <th>Starting</th>
+                                </tr>
+                            </f:facet>
+                            <b:dataTableColumn value="#{exam.getId()}"/>
+                            <b:dataTableColumn value="#{exam.getSubject()}" />
+                            <b:dataTableColumn value="#{exam.getDuration()}" />
+                            <b:dataTableColumn value="#{exam.getStarting()}" />
+                        </b:dataTable>
+                        <b:commandButton look="primary" update="Exams" action="#{SearchExamBean.searchForExamByCriteria}" value="Search" style="margin-right: 10px" >
                         </b:commandButton>
                         <b:button look="default" style="outline:none" outcome="home" value="Back"></b:button>
                     </b:form>

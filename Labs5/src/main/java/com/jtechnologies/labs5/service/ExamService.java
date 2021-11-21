@@ -8,6 +8,13 @@ import com.jtechnologies.labs5.models.Student;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Root;
+import javax.persistence.metamodel.EntityType;
+import javax.persistence.metamodel.Metamodel;
 import java.util.List;
 
 @Stateless
@@ -30,6 +37,26 @@ public class ExamService {
         }
 
         return examFromDb;
+
+    }
+
+    public List<Exam> searchByCriteria(boolean subjectCriteria, String subject, boolean timeframeCriteria, String timeframe) {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Exam> query = builder.createQuery(Exam.class);
+
+
+        Root<Exam> root = query.from(Exam.class);
+
+        if(subjectCriteria) {
+            query.select(root).where(builder.equal(root.get("subject"),subject));
+        }
+        if(timeframeCriteria) {
+            query.select(root).where(builder.equal(root.get("starting"),timeframe));
+        }
+
+        TypedQuery<Exam> tquery = em.createQuery(query);
+
+        return tquery.getResultList();
 
     }
 

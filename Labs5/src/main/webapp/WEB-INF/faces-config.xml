@@ -261,6 +261,12 @@
     </managed-bean>
 
     <managed-bean>
+        <managed-bean-name>SearchExamBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs5.beans.SearchExamBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
         <managed-bean-name>DeleteExamBean</managed-bean-name>
         <managed-bean-class>com.jtechnologies.labs5.beans.DeleteExamBean</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
