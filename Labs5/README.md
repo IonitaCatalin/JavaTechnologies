@@ -1,5 +1,4 @@
 ✔️ 1. Rewrite the persistence layer of the application created for the previous laboratory
-
 	- ✔️ Define the  _persistence unit_  using a  _data source_  configured as a JDBC Resource.
 	- ✔️ Create the  _EntityManager_  objects using dependency injection.
 	- ✔️ Define the mappings using JPA-only annotations.
