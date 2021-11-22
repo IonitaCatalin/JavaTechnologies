@@ -1,5 +1,5 @@
 
-- ✔️(2p) Create the pages using templates:
+1. ✔️(2p) Create the pages using templates:
 	-  ✔️page.xhtml: describing the general aspect of the application pages: header, content, footer. The header should display the title and might include a menu bar.The footer will display a copyright notice and the current version of the aplication. The header, footer and the menu bar should all be in separate .xhtml files.
 
 	- ❌dataView.xhtml: a generic page for displaying data as a list, dataTable, etc.
