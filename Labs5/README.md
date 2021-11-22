@@ -13,3 +13,7 @@ each having specific properties, such as _bibliography_ or _required resources_,
 4. Add an _"exam search page"_. This page will allow specifying various filters: exam name, a student name, a time, etc.
 	 -   Each filter will have a checkox - if it is checked then the filter will be taken into consideration.
 	 - 	 The query must be implemented using  **JPA Criteria API**.
+
+
+# **Explanations**
+---
