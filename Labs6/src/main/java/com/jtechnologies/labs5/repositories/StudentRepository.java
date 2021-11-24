@@ -4,12 +4,13 @@ import com.jtechnologies.labs5.exception.StudentConflictException;
 import com.jtechnologies.labs5.exception.StudentNotFoundException;
 import com.jtechnologies.labs5.models.Student;
 
-import javax.inject.Inject;
+import javax.ejb.LocalBean;
 import javax.persistence.EntityManager;
 import javax.ejb.Stateless;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@LocalBean
 @Stateless
 public class StudentRepository implements DataRepositoryInterface<Student,Integer> {
 

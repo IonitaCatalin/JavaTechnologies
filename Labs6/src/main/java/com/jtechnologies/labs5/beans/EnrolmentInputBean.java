@@ -25,7 +25,7 @@ public class EnrolmentInputBean {
 
     public void submit() {
         try {
-            enrolmentRepository.addEnrolment(new Enrolment(studentId,examId));
+            enrolmentRepository.save(new Enrolment(studentId,examId));
             transactionResult = "Enrolment added successfully!";
         } catch (EnrolmentInvalidExamException | EnrolmentInvalidStudentException e) {
             transactionResult = e.getMessage();

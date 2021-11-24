@@ -4,6 +4,7 @@ import com.jtechnologies.labs5.exception.ExamInvalidDuration;
 import com.jtechnologies.labs5.exception.ExamNotFoundException;
 import com.jtechnologies.labs5.models.Exam;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -13,13 +14,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-
+@LocalBean
 @Stateless
 public class ExamRepository implements DataRepositoryInterface<Exam,Integer>{
 
     @PersistenceContext(unitName = "persistence/scheduler")
     EntityManager em;
-    
+
     public List<Exam> getExams() {
         return em.createNamedQuery("Exam.findAll",Exam.class).getResultList();
     }
@@ -56,26 +57,6 @@ public class ExamRepository implements DataRepositoryInterface<Exam,Integer>{
 
     }
 
-
-    public void removeExamById(int id) throws ExamNotFoundException {
-        Exam exam = em.find(Exam.class,id);
-
-        if(exam == null) {
-            throw new ExamNotFoundException("Exam with id " + id + "cannot be found!");
-        }
-        em.remove(exam);
-    }
-
-    public void addExam(Exam exam) throws ExamInvalidDuration {
-        if(exam.getDuration() < 0 ) {
-            throw new ExamInvalidDuration("Exam's duration cannot be negative!");
-        }
-        if(exam.getDuration() > 10) {
-            throw new ExamInvalidDuration("Exam's duration cannot be bigger than 10 hours!");
-        }
-        em.persist(exam);
-    }
-
     public void updateExam(int id,String subject,String starting,int duration) {
 
 
@@ -88,23 +69,46 @@ public class ExamRepository implements DataRepositoryInterface<Exam,Integer>{
     }
 
     @Override
-    public Exam save(Exam obj) {
-        return null;
+    public Exam save(Exam exam) throws ExamInvalidDuration {
+        if(exam.getDuration() < 0 ) {
+            throw new ExamInvalidDuration("Exam's duration cannot be negative!");
+        }
+        if(exam.getDuration() > 10) {
+            throw new ExamInvalidDuration("Exam's duration cannot be bigger than 10 hours!");
+        }
+        em.persist(exam);
+        return exam;
     }
 
     @Override
-    public Exam findById(Integer integer) {
-        return null;
+    public Exam findById(Integer id) throws ExamNotFoundException {
+        Exam examFromDb = em.find(Exam.class, id);
+
+        if(examFromDb == null) {
+            throw new ExamNotFoundException("Exam with id " + id + "cannot be found");
+        }
+
+        return examFromDb;
     }
 
     @Override
-    public void deleteById( Integer integer) {
+    public void deleteById(Integer id) throws ExamNotFoundException {
+        Exam exam = em.find(Exam.class,id);
 
+        if(exam == null) {
+            throw new ExamNotFoundException("Exam with id " + id + "cannot be found!");
+        }
+        em.remove(exam);
     }
 
     @Override
-    public void delete(Exam obj) {
+    public void delete(Exam exam) throws ExamNotFoundException {
+        Exam examFromDb = em.find(Exam.class,exam.getId());
 
+        if(examFromDb == null) {
+            throw new ExamNotFoundException("Exam with id " + exam.getId() + "cannot be found!");
+        }
+        em.remove(examFromDb);
     }
 
 

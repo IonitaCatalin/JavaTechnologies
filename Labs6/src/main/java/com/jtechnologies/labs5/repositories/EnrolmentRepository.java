@@ -5,12 +5,13 @@ import com.jtechnologies.labs5.models.Enrolment;
 import com.jtechnologies.labs5.models.Exam;
 import com.jtechnologies.labs5.models.Student;
 
+import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@LocalBean
 @Stateless
 public class EnrolmentRepository implements DataRepositoryInterface<Enrolment,Integer>{
 

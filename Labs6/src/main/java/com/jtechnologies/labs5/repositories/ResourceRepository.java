@@ -2,7 +2,6 @@ package com.jtechnologies.labs5.repositories;
 
 import javax.ejb.*;
 import javax.annotation.PostConstruct;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -36,14 +35,14 @@ public class ResourceRepository implements DataRepositoryInterface<Resource,Inte
     }
 
     public void refresh() {
-//        List<Resource> resourceList = entityManager.createNamedQuery("Resource.findAll").getResultList();
-//        availableResources = new ArrayList<>();
-//        for (Resource resource :
-//                resourceList) {
-//            if (resource.getExam() == null) {
-//                availableResources.add(resource);
-//            }
-//        }
+    //        List<Resource> resourceList = entityManager.createNamedQuery("Resource.findAll").getResultList();
+    //        availableResources = new ArrayList<>();
+    //        for (Resource resource :
+    //                resourceList) {
+    //            if (resource.getExam() == null) {
+    //                availableResources.add(resource);
+    //            }
+    //        }
     }
 
     public List<Resource> getAvailableResources() {

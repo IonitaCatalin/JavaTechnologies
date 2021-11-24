@@ -23,7 +23,7 @@ public class ExamInputBean {
 
     public void submit() {
         try {
-            examRepository.addExam(new Exam(subject,starting,duration));
+            examRepository.save(new Exam(subject,starting,duration));
             transactionResult = "Exam has been added successfully !";
         } catch (ExamInvalidDuration e) {
             transactionResult = e.getMessage();

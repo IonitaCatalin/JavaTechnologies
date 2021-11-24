@@ -9,13 +9,13 @@ import javax.faces.bean.RequestScoped;
 import java.util.List;
 
 @ManagedBean(name = "StudentBean", eager = false)
-@RequestScoped
 public class StudentBean {
 
-    private int id;
 
     @EJB
     private StudentRepository studentRepository;
+
+    private int id;
 
     public List<Student> getStudents() {
         return studentRepository.getStudents();

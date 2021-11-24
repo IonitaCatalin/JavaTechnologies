@@ -19,7 +19,7 @@ public class DeleteExamBean {
 
     public void removeExamById() {
         try {
-            examRepository.removeExamById(this.examId);
+            examRepository.deleteById(this.examId);
             transactionResult = "Exam with id " + examId + "has been deleted successfully!";
         } catch (ExamNotFoundException e) {
             transactionResult = e.getMessage();
