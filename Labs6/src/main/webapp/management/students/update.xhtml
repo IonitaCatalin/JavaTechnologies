@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui">
+<h:head>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Update Students</title>
+</h:head>
+<h:body>
+    <h:form style=" position: absolute; top: 50%;left: 50%; transform: translate(-50%, -50%);">
+        <ui:composition template="/WEB-INF/templates/page.xhtml">
+            <h:outputText value="#{UpdateStudentBean.getTransactionResult()}" />
+            <ui:define name="content">
+                <b:container>
+                    <b:form id="studentForm">
+                        <h:outputText value="#{UpdateStudentBean.getTransactionResult()}" />
+                        <legend>Update Student</legend>
+                        <b:inputText id="id" value="#{UpdateStudentBean.studentId}" name="id" placeholder="StudentId" required="true" requiredMessage="Please input Student's id!">
+                            <f:facet name="prepend">
+                                <b:icon name="user"/>
+                            </f:facet>
+                        </b:inputText>
+                        <b:inputText id="name" value="#{UpdateStudentBean.studentName}" name="name" placeholder="StudentName" required="true" requiredMessage="Please input Student's full name!">
+                            <f:facet name="prepend">
+                                <b:icon name="user"/>
+                            </f:facet>
+                        </b:inputText>
+                        <h:outputText value=" &lt;br /&gt;  &lt;br /&gt; " escape="false" />
+                        <b:commandButton look="primary" action="#{UpdateStudentBean.updateStudent()}" value="Update" style="margin-right: 10px" >
+                        </b:commandButton>
+                        <b:button look="default" style="outline:none" outcome="home" value="Back"></b:button>
+                    </b:form>
+                </b:container>
+            </ui:define>
+        </ui:composition>
+
+    </h:form>
+</h:body>
+</html>

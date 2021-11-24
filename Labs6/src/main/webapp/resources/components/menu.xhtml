@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:composite="http://java.sun.com/jsf/composite">
+
+    <ui:composition>
+        <composite:interface>
+            <composite:attribute name="brand" type="java.lang.String" required="false">
+            </composite:attribute>
+
+            <composite:attribute name="brandHref" type="java.lang.String" required="false">
+            </composite:attribute>
+
+
+        </composite:interface>
+
+        <composite:implementation>
+            <b:navBar brand="#{cc.attrs.brand}" brandHref="#{cc.attrs.brandHref}" id="schedulerNavBar">
+                <b:navbarLinks>
+                    <b:dropMenu value="Students" >
+                        <b:navLink value="Add" href="#{msg['application.students.add']}"></b:navLink>
+                        <b:navLink value="View" href="#{msg['application.students.view']}"></b:navLink>
+                        <b:navLink value="Delete" href="#{msg['application.students.delete']}"></b:navLink>
+                        <b:navLink value="Update" href="#{msg['application.students.update']}"></b:navLink>
+
+                    </b:dropMenu>
+                    <b:dropMenu value="Exams" >
+                        <b:navLink value="Add" href="#{msg['application.exams.add']}"></b:navLink>
+                        <b:navLink value="View" href="#{msg['application.exams.view']}"></b:navLink>
+                        <b:navLink value="Delete" href="#{msg['application.exams.delete']}"></b:navLink>
+                        <b:navLink value="Update" href="#{msg['application.exams.update']}"></b:navLink>
+                        <b:navLink value="Search" href="#{msg['application.exams.search']}"></b:navLink>
+                    </b:dropMenu>
+                    <b:dropMenu value="Enrolment" >
+                        <b:navLink value="Add" href="#{msg['application.enrolments.add']}"></b:navLink>
+                        <b:navLink value="View" href="#{msg['application.enrolments.view']}"></b:navLink>
+                        <b:navLink value="Delete" href="#{msg['application.enrolments.delete']}"></b:navLink>
+                        <b:navLink value="Update" href="#{msg['application.enrolments.update']}"></b:navLink>
+                    </b:dropMenu>
+                </b:navbarLinks>
+            </b:navBar>
+        </composite:implementation>
+
+    </ui:composition>
+</html>
