@@ -3,6 +3,7 @@ package com.jtechnologies.labs5.beans;
 import com.jtechnologies.labs5.exception.ExamNotFoundException;
 import com.jtechnologies.labs5.repositories.ExamRepository;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -13,7 +14,7 @@ public class DeleteExamBean {
     private int examId;
     private String transactionResult;
 
-    @Inject
+    @EJB
     private ExamRepository examRepository;
 
     public void removeExamById() {

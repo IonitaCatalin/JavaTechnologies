@@ -3,6 +3,7 @@ package com.jtechnologies.labs5.beans;
 import com.jtechnologies.labs5.models.Exam;
 import com.jtechnologies.labs5.repositories.ExamRepository;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
@@ -11,6 +12,9 @@ import java.util.List;
 @ManagedBean(name = "SearchExamBean", eager = true)
 @SessionScoped
 public class SearchExamBean {
+
+    @EJB
+    private ExamRepository examRepository;
 
     private String transactionResult;
     private boolean examSubjectCriteria;
@@ -21,8 +25,7 @@ public class SearchExamBean {
 
     private List<Exam> criteriaSearchResult;
 
-    @Inject
-    private ExamRepository examRepository;
+
 
     public void searchForExamByCriteria() {
         transactionResult = "Searched succesfully!";

@@ -5,6 +5,7 @@ import com.jtechnologies.labs5.exception.EnrolmentInvalidStudentException;
 import com.jtechnologies.labs5.repositories.EnrolmentRepository;
 import com.jtechnologies.labs5.models.Enrolment;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -13,13 +14,13 @@ import javax.inject.Inject;
 @RequestScoped
 public class EnrolmentInputBean {
 
+    @EJB
+    private EnrolmentRepository enrolmentRepository;
+
     private int studentId;
     private int examId;
 
     private String transactionResult;
-
-    @Inject
-    private EnrolmentRepository enrolmentRepository;
 
 
     public void submit() {

@@ -1,17 +1,17 @@
 package com.jtechnologies.labs5.repositories;
 
+import com.jtechnologies.labs5.exception.StudentNotFoundException;
+
 import java.io.Serializable;
 
 public interface DataRepositoryInterface<T, ID extends Serializable> {
-    T save(T obj);
+    T save(T obj) throws Exception;
 
-    T findById(Class<T> tClass, ID id);
+    T findById(ID id) throws Exception;
 
-    void deleteById(Class<T> tClass, ID id);
+    void deleteById(ID id) throws Exception;
 
-    void delete(T obj);
-
-    void update(T obj);
+    void delete(T obj) throws Exception;
 
     long count();
 }

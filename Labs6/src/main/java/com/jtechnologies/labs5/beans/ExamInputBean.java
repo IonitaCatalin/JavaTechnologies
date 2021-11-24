@@ -4,6 +4,7 @@ import com.jtechnologies.labs5.exception.ExamInvalidDuration;
 import com.jtechnologies.labs5.models.Exam;
 import com.jtechnologies.labs5.repositories.ExamRepository;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -12,13 +13,13 @@ import javax.inject.Inject;
 @RequestScoped
 public class ExamInputBean {
 
+    @EJB
+    private ExamRepository examRepository;
+    private String transactionResult;
+
     private String subject;
     private String starting;
     private int duration;
-
-    @Inject
-    private ExamRepository examRepository;
-    private String transactionResult;
 
     public void submit() {
         try {

@@ -3,6 +3,7 @@ package com.jtechnologies.labs5.beans;
 import com.jtechnologies.labs5.repositories.EnrolmentRepository;
 import com.jtechnologies.labs5.models.Enrolment;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -14,7 +15,7 @@ public class EnrolmentBean {
 
     private int id;
 
-    @Inject
+    @EJB
     private EnrolmentRepository enrolmentRepository;
 
     public List<Enrolment> getEnrolments() {

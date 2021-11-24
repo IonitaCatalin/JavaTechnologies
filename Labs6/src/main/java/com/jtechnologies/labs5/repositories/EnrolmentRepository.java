@@ -1,19 +1,18 @@
 package com.jtechnologies.labs5.repositories;
 
-import com.jtechnologies.labs5.exception.EnrolmentInvalidExamException;
-import com.jtechnologies.labs5.exception.EnrolmentInvalidStudentException;
-import com.jtechnologies.labs5.exception.EnrolmentNotFoundException;
+import com.jtechnologies.labs5.exception.*;
 import com.jtechnologies.labs5.models.Enrolment;
 import com.jtechnologies.labs5.models.Exam;
 import com.jtechnologies.labs5.models.Student;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Stateless
-public class EnrolmentRepository implements DataRepositoryInterface<Exam,Integer>{
+public class EnrolmentRepository implements DataRepositoryInterface<Enrolment,Integer>{
 
     @PersistenceContext(unitName = "persistence/scheduler")
     EntityManager em;
@@ -24,13 +23,7 @@ public class EnrolmentRepository implements DataRepositoryInterface<Exam,Integer
     }
 
     public Enrolment getEnrolmentById(int id) throws EnrolmentNotFoundException {
-        Enrolment enrolment = em.find(Enrolment.class,id);
-
-        if(enrolment == null) {
-            throw new EnrolmentNotFoundException("Enrolment with id " + id + "could not be found!");
-        }
-
-        return enrolment;
+        return em.find(Enrolment.class,id);
     }
 
     public void updateEnrolment(int id, int studentId, int examId) throws EnrolmentNotFoundException {
@@ -46,17 +39,8 @@ public class EnrolmentRepository implements DataRepositoryInterface<Exam,Integer
                 .executeUpdate();
     }
 
-    public void removeEnrolmentById(int id) throws EnrolmentNotFoundException {
-        Enrolment enrolment = em.find(Enrolment.class,id);
-
-        if(enrolment == null) {
-            throw new EnrolmentNotFoundException("Enrolment with id " + id + "could not be found!");
-        }
-        em.remove(enrolment);
-
-    }
-
-    public void addEnrolment(Enrolment enrolment) throws EnrolmentInvalidExamException, EnrolmentInvalidStudentException {
+    @Override
+    public Enrolment save(Enrolment enrolment) throws EnrolmentInvalidExamException,EnrolmentInvalidStudentException {
         Exam exam = em.find(Exam.class, enrolment.getExamId());
         Student student = em.find(Student.class, enrolment.getStudentId());
 
@@ -69,32 +53,39 @@ public class EnrolmentRepository implements DataRepositoryInterface<Exam,Integer
         }
 
         em.persist(enrolment);
+        return enrolment;
 
     }
 
     @Override
-    public Exam save(Exam obj) {
-        return null;
+    public Enrolment findById( Integer id) throws Exception {
+        Enrolment enrolment = em.find(Enrolment.class,id);
+
+        if(enrolment == null) {
+            throw new EnrolmentNotFoundException("Enrolment with id " + id + "could not be found!");
+        }
+
+        return enrolment;
     }
 
     @Override
-    public Exam findById(Class<Exam> examClass, Integer integer) {
-        return null;
+    public void deleteById(Integer id) throws EnrolmentNotFoundException {
+        Enrolment enrolment = em.find(Enrolment.class,id);
+
+        if(enrolment == null) {
+            throw new EnrolmentNotFoundException("Enrolment with id " + id + "could not be found!");
+        }
+        em.remove(enrolment);
     }
 
     @Override
-    public  void deleteById(Class<Exam> examClass, Integer integer) {
+    public void delete(Enrolment enrolm) throws Exception {
+        Enrolment enrolment = em.find(Enrolment.class, enrolm.getId());
 
-    }
-
-    @Override
-    public void delete(Exam obj) {
-
-    }
-
-    @Override
-    public void update(Exam obj) {
-
+        if(enrolment == null) {
+            throw new EnrolmentNotFoundException("Enrolment with id " + enrolm.getId() + "could not be found!");
+        }
+        em.remove(enrolment);
     }
 
     @Override

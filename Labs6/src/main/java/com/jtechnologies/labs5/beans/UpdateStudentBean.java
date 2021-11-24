@@ -3,6 +3,7 @@ package com.jtechnologies.labs5.beans;
 import com.jtechnologies.labs5.exception.StudentConflictException;
 import com.jtechnologies.labs5.repositories.StudentRepository;
 
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Inject;
@@ -10,13 +11,15 @@ import javax.inject.Inject;
 @ManagedBean(name = "UpdateStudentBean", eager = false)
 @RequestScoped
 public class UpdateStudentBean {
+    @EJB
+    private StudentRepository studentRepository;
+
     private int studentId;
     private String studentName;
 
     private String transactionResult;
 
-    @Inject
-    private StudentRepository studentRepository;
+
 
     public void updateStudent() {
         try {

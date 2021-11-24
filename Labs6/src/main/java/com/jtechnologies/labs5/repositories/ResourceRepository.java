@@ -1,26 +1,24 @@
 package com.jtechnologies.labs5.repositories;
 
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.ejb.TransactionAttribute;
+import javax.ejb.*;
 import javax.annotation.PostConstruct;
-import javax.ejb.TransactionAttributeType;
-import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import com.jtechnologies.labs5.exception.UnreservableResourceException;
 import com.jtechnologies.labs5.models.Resource;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Singleton
 @Startup
 public class ResourceRepository implements DataRepositoryInterface<Resource,Integer> {
 
-    @Inject
-    EntityManager entityManager;
+    @PersistenceContext(unitName = "persistence/scheduler")
+    EntityManager em;
 
-
-    List<Resource> availableResources;
+    List<Resource> resources;
 
     @PostConstruct
     private void init() {
@@ -28,12 +26,13 @@ public class ResourceRepository implements DataRepositoryInterface<Resource,Inte
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void reserveResource(Resource resource) throws Exception {
-        if (!availableResources.contains(resource)) {
-            throw new Exception("The selected resource is not longer available");
+    public void reserve(Resource resource) throws UnreservableResourceException {
+        if (!resources.contains(resource)) {
+
+            throw new UnreservableResourceException("The selected resource is not longer available");
         }
-        entityManager.merge(resource);
-        availableResources.remove(resource);
+        em.merge(resource);
+        resources.remove(resource);
     }
 
     public void refresh() {
@@ -48,7 +47,7 @@ public class ResourceRepository implements DataRepositoryInterface<Resource,Inte
     }
 
     public List<Resource> getAvailableResources() {
-        return availableResources;
+        return resources;
     }
 
     @Override
@@ -57,12 +56,12 @@ public class ResourceRepository implements DataRepositoryInterface<Resource,Inte
     }
 
     @Override
-    public Resource findById(Class<Resource> resourceClass, Integer integer) {
+    public Resource findById(Integer integer) {
         return null;
     }
 
     @Override
-    public void deleteById(Class<Resource> resourceClass, Integer integer) {
+    public void deleteById(Integer integer) {
 
     }
 
@@ -71,10 +70,6 @@ public class ResourceRepository implements DataRepositoryInterface<Resource,Inte
 
     }
 
-    @Override
-    public void update(Resource obj) {
-
-    }
 
     @Override
     public long count() {

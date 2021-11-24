@@ -80,6 +80,16 @@
             <artifactId>primefaces</artifactId>
             <version>7.0</version>
         </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>8.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>jakarta.platform</groupId>
+            <artifactId>jakarta.jakartaee-web-api</artifactId>
+            <version>8.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

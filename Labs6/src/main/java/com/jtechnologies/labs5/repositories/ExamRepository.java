@@ -5,7 +5,6 @@ import com.jtechnologies.labs5.exception.ExamNotFoundException;
 import com.jtechnologies.labs5.models.Exam;
 
 import javax.ejb.Stateless;
-import javax.inject.Named;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
@@ -14,14 +13,13 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-@Named
+
 @Stateless
 public class ExamRepository implements DataRepositoryInterface<Exam,Integer>{
 
     @PersistenceContext(unitName = "persistence/scheduler")
     EntityManager em;
-
-
+    
     public List<Exam> getExams() {
         return em.createNamedQuery("Exam.findAll",Exam.class).getResultList();
     }
@@ -95,12 +93,12 @@ public class ExamRepository implements DataRepositoryInterface<Exam,Integer>{
     }
 
     @Override
-    public Exam findById(Class<Exam> examClass, Integer integer) {
+    public Exam findById(Integer integer) {
         return null;
     }
 
     @Override
-    public void deleteById(Class<Exam> examClass, Integer integer) {
+    public void deleteById( Integer integer) {
 
     }
 
@@ -109,10 +107,6 @@ public class ExamRepository implements DataRepositoryInterface<Exam,Integer>{
 
     }
 
-    @Override
-    public void update(Exam obj) {
-
-    }
 
     @Override
     public long count() {

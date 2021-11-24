@@ -18,7 +18,7 @@ public class DeleteStudentBean {
 
     public void removeStudentById() {
         try {
-            studentRepository.removeStudentById(studentId);
+            studentRepository.deleteById(new Integer(studentId));
             transactionResult = "Student with id " + studentId + " has been deleted successfully!";
         } catch (StudentNotFoundException e) {
             transactionResult = e.getMessage();
