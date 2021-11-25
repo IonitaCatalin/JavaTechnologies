@@ -8,7 +8,7 @@ import javax.ejb.Stateless;
 import java.util.List;
 import java.util.Map;
 
-@Stateful
+@Stateless
 public class ResourceChecker {
 
     @EJB
