@@ -10,6 +10,7 @@ There is a set of students and each student must attend a list of exams. A stude
 
 ✔️ Use a relational database and JDBC in order to store and retrieve data. (PostgreSQL is recommended).
 ✔️ Use at least one non trivial JSF component, for example a data table, a dialog, etc.
+
 ❌ Internationalize the user interface and offer support for at least two locales.
 
 
