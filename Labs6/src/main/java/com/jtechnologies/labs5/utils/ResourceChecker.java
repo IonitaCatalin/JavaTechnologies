@@ -23,12 +23,4 @@ public class ResourceChecker {
         return true;
     }
 
-//    boolean checkAvailable(Integer resourceId) {
-//        for(Map.Entry<Integer, List<Resource>> entry: resourceRepository.getOccupiedResources().entrySet()) {
-//            if(entry.getValue().contains(resource)) {
-//                return false;
-//            }
-//        }
-//        return true;
-//    }
 }
