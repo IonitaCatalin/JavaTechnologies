@@ -9,9 +9,10 @@ import javax.faces.bean.SessionScoped;
 import java.util.List;
 import java.util.Map;
 
-@ManagedBean(name = "ResourcesBean", eager = true)
+@ManagedBean(name = "ResourcesBean")
 @SessionScoped
 public class ResourceBean {
+
     @EJB
     ResourceRepository resourceRepository;
 

@@ -20,8 +20,15 @@ public class Resource implements Serializable {
         return id;
     }
 
-    public ResourceType getRt() {
-        return rt;
+    public String getRt() {
+        return rt.toString();
     }
 
+    @Override
+    public String toString() {
+        return "Resource{" +
+                "rt=" + rt +
+                ", id=" + id +
+                '}';
+    }
 }

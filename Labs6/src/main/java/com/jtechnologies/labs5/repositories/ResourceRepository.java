@@ -19,10 +19,8 @@ import java.util.Map;
 @Singleton
 @LocalBean
 @Startup
+@Lock(LockType.WRITE)
 public class ResourceRepository implements DataRepositoryInterface<Resource,Integer> {
-
-    @PersistenceContext(unitName = "persistence/scheduler")
-    EntityManager em;
 
     List<Resource> availables;
     Map<Integer, List<Resource>> occupied;
@@ -30,13 +28,18 @@ public class ResourceRepository implements DataRepositoryInterface<Resource,Inte
     public ResourceRepository() {
         availables = new ArrayList<>();
         occupied = new HashMap<>();
+    }
+
+    @PostConstruct
+    @Lock(LockType.WRITE)
+    void init() {
 
         int resourceId = 0;
 
         for(ResourceType rs: ResourceType.values()) {
-            availables.add(new Resource(resourceId++,rs));
+            availables.add(new Resource(resourceId,rs));
+            resourceId  = resourceId + 1;
         }
-
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -54,6 +57,7 @@ public class ResourceRepository implements DataRepositoryInterface<Resource,Inte
 
         }
     }
+
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
     public void reserve(Integer examId,Integer resourceId) throws UnavailableResourceException, ResourceNotFoundException {
@@ -75,6 +79,7 @@ public class ResourceRepository implements DataRepositoryInterface<Resource,Inte
 
         }
     }
+
 
     public void remove(Integer examId,Resource resource) throws ResourceNotAllocatedException {
         if(!occupied.get(examId).contains(resource)) {

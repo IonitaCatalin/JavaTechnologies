@@ -5,7 +5,7 @@ public enum ResourceType {
     ROOM_309("room_309"),
     ROOM_213("room_213"),
     ROOM_350("room_350"),
-    VIDEO_PROJECT_A("video_projector_a"),
+    VIDEO_PROJECTOR_A("video_projector_a"),
     VIDEO_PROJECTOR_B("video_projector_b");
 
     private String type;
