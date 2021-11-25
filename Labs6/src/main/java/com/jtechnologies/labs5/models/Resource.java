@@ -8,15 +8,15 @@ import java.util.List;
 
 public class Resource implements Serializable {
 
-    private final Integer id;
     private final ResourceType rt;
+    private int id;
 
-    public Resource(Integer id, ResourceType resourceType) {
-        this.id = id;
+    public Resource(int id, ResourceType resourceType) {
         this.rt = resourceType;
     }
 
-    public Integer getId() {
+
+    public int getId() {
         return id;
     }
 

@@ -14,11 +14,18 @@
                 <h:form id="assignForm">
                     <h:outputText value="#{ExamInputBean.getTransactionResult()}" />
                     <legend>Assign Resources</legend>
-                    <b:inputText id="subject" value="#{ExamInputBean.subject}" name="Subject" placeholder="Subject" required="true" requiredMessage="Please input Name of the Subject!">
+                    <b:inputText id="examId" value="#{ResourceInputBean.examId}" name="Exam ID" placeholder="Exam ID" required="true" requiredMessage="Please input id of Exam!">
                         <f:facet name="prepend">
                             <b:icon name="user"/>
                         </f:facet>
                     </b:inputText>
+
+                    <b:selectMultiMenu value="#{ResourceInputBean.selectedResources}" id="resources" >
+                        <ui:repeat value="#{ResourceBean.getAllAvailableResources()}" var="resource">
+                            <f:selectItem itemLabel="#{resource.getRt()}" itemValue="#{resource.getId()}" />
+                        </ui:repeat>
+                    </b:selectMultiMenu>
+
                     <b:commandButton look="primary" style="margin-right: 10px" value="Add" action="#{ExamInputBean.submit()}"></b:commandButton>
                     <b:button look="default" style="outline:none" outcome="home" value="Back"></b:button>
                 </h:form>

@@ -31,6 +31,20 @@
                     <b:dataTableColumn value="#{exam.getDuration()}" />
                     <b:dataTableColumn value="#{exam.getStarting()}" />
                 </b:dataTable>
+
+                <b:dataTable value="#{ResourceBean.getAllResources()}"
+                             var="resource"
+                             page-length="5"
+                             page-length-menu="5,10,20">
+                    <f:facet name="header" >
+                        <tr>
+                            <th>ExamId</th>
+                            <th>Resource</th>
+                        </tr>
+                    </f:facet>
+                    <b:dataTableColumn value="#{resource.getKey()}"/>
+                    <b:dataTableColumn value="#{resource.getValue().getRt()}" />
+                </b:dataTable>
                 <b:button look="default" style="margin-top: 15px;outline:none; width:80px;" outcome="home" value="Back"></b:button>
             </h:form>
         </ui:define>

@@ -26,17 +26,19 @@ public class ResourceBatcher {
         resourceList.add(resource);
     }
 
+    public void addSelectedResource(Integer resourceId) {
+        resourceList.add(resourceRepository.getAvailableResourceWithId(resourceId));
+    }
+
     @Remove
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public boolean reserveSelectedResources() {
+    public boolean reserveSelectedResources(Integer examId) {
         try {
-            for (Resource resource :
-                    resourceList) {
-                resourceRepository.reserve(resource);
+            for (Resource resource : resourceList) {
+                resourceRepository.reserve(examId,resource);
             }
             return true;
         } catch (Exception e) {
-            resourceRepository.refresh();
             return false;
         }
     }

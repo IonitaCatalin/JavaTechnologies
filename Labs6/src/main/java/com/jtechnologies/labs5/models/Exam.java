@@ -33,8 +33,6 @@ public class Exam implements Model,Serializable {
     @Column(name = "duration")
     private int duration;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Resource> resources;
 
     public Exam(Integer id, String subject, String starting, int duration) {
         this.id = id;

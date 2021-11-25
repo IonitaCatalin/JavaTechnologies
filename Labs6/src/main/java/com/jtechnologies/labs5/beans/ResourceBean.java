@@ -7,6 +7,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import java.util.List;
+import java.util.Map;
 
 @ManagedBean(name = "ResourcesBean", eager = true)
 @SessionScoped
@@ -14,9 +15,12 @@ public class ResourceBean {
     @EJB
     ResourceRepository resourceRepository;
 
-    public List<Resource> getAllResources() {
-//        return resourceRepository.getAvailableResources();
-        return null;
+    public Map<Integer, List<Resource>> getAllResources() {
+        return resourceRepository.getOccupiedResources();
+    }
+
+    public List<Resource> getAllAvailableResources() {
+        return resourceRepository.getAvailableResources();
     }
 
 }

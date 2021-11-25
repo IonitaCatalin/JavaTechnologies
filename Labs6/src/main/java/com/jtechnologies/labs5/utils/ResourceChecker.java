@@ -5,8 +5,8 @@ import com.jtechnologies.labs5.repositories.ResourceRepository;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
-import javax.inject.Inject;
 import java.util.List;
+import java.util.Map;
 
 @Stateless
 public class ResourceChecker {
@@ -15,6 +15,20 @@ public class ResourceChecker {
     ResourceRepository resourceRepository;
 
     boolean checkAvailable(Resource resource) {
-
+        for(Map.Entry<Integer, List<Resource>> entry: resourceRepository.getOccupiedResources().entrySet()) {
+            if(entry.getValue().contains(resource)) {
+                return false;
+            }
+        }
+        return true;
     }
+
+//    boolean checkAvailable(Integer resourceId) {
+//        for(Map.Entry<Integer, List<Resource>> entry: resourceRepository.getOccupiedResources().entrySet()) {
+//            if(entry.getValue().contains(resource)) {
+//                return false;
+//            }
+//        }
+//        return true;
+//    }
 }
