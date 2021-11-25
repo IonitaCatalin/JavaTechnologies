@@ -13,11 +13,11 @@ public enum ResourceType {
         this.type = type;
     }
 
-    public String getCategory() {
+    public String getResource() {
         return this.type;
     }
 
-    public ResourceType toResource(String str) {
+    static public ResourceType toResource(String str) {
         for(ResourceType resource:ResourceType.values()) {
             if(resource.type.equalsIgnoreCase(str)) {
                 return resource;

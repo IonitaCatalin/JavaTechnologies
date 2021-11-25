@@ -5,10 +5,12 @@ import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import com.jtechnologies.labs5.exception.UnreservableResourceException;
+package com.jtechnologies.labs5.exception;;
 import com.jtechnologies.labs5.models.Resource;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Singleton
 @Startup
@@ -17,7 +19,13 @@ public class ResourceRepository implements DataRepositoryInterface<Resource,Inte
     @PersistenceContext(unitName = "persistence/scheduler")
     EntityManager em;
 
-    List<Resource> resources;
+    Map<Integer, List<Resource>> availables;
+    Map<Integer, List<Resource>> occupied;
+
+    public ResourceRepository() {
+        availables = new HashMap<>();
+        occupied = new HashMap<>();
+    }
 
     @PostConstruct
     private void init() {
@@ -25,29 +33,29 @@ public class ResourceRepository implements DataRepositoryInterface<Resource,Inte
     }
 
     @TransactionAttribute(TransactionAttributeType.REQUIRED)
-    public void reserve(Resource resource) throws UnreservableResourceException {
-        if (!resources.contains(resource)) {
+    public void reserve(Integer examId,Resource resource)  {
 
-            throw new UnreservableResourceException("The selected resource is not longer available");
-        }
-        em.merge(resource);
-        resources.remove(resource);
+    }
+
+    public void remove(Resource resource) {
+
     }
 
     public void refresh() {
-    //        List<Resource> resourceList = entityManager.createNamedQuery("Resource.findAll").getResultList();
-    //        availableResources = new ArrayList<>();
-    //        for (Resource resource :
-    //                resourceList) {
-    //            if (resource.getExam() == null) {
-    //                availableResources.add(resource);
-    //            }
-    //        }
+
     }
 
-    public List<Resource> getAvailableResources() {
-        return resources;
+
+
+
+    public Map<Integer, List<Resource>> getAvailableResources() {
+        return availables;
     }
+
+    public Map<Integer, List<Resource>> getOccupiedResources() {
+        return occupied;
+    }
+
 
     @Override
     public Resource save(Resource obj) {

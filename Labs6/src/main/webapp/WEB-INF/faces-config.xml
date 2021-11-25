@@ -278,6 +278,24 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
+    <managed-bean>
+        <managed-bean-name>ResourceBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs5.beans.ResourceBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>ResourceBeanInput</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs5.beans.ResourceInputBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>DeleteResourceBean</managed-bean-name>
+        <managed-bean-class>com.jtechnologies.labs5.beans.DeleteResourceBean</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+
 
     <application>
         <resource-bundle>

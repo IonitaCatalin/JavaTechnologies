@@ -15,7 +15,6 @@ public class ResourceChecker {
     ResourceRepository resourceRepository;
 
     boolean checkAvailable(Resource resource) {
-        List<Resource> resourceList = resourceRepository.getAvailableResources();
-        return resourceList.contains(resource);
+
     }
 }
