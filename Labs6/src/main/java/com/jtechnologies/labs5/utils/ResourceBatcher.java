@@ -11,6 +11,8 @@ import javax.ejb.TransactionAttributeType;
 import java.util.ArrayList;
 import java.util.List;
 
+
+@Stateful
 public class ResourceBatcher {
     List<Resource> resourceList;
 
