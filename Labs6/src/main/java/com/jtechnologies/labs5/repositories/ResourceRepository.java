@@ -2,8 +2,6 @@ package com.jtechnologies.labs5.repositories;
 
 import javax.ejb.*;
 import javax.annotation.PostConstruct;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 
 import com.jtechnologies.labs5.enums.ResourceType;
 import com.jtechnologies.labs5.exception.ResourceNotAllocatedException;
@@ -19,7 +17,6 @@ import java.util.Map;
 @Singleton
 @LocalBean
 @Startup
-@Lock(LockType.WRITE)
 public class ResourceRepository implements DataRepositoryInterface<Resource,Integer> {
 
     List<Resource> availables;
