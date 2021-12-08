@@ -1,13 +1,13 @@
 package com.javatech.labs7.enums;
 
-public enum UserRole {
+public enum AccountRoleType {
     ADMIN("admin"),
     REVIEWER("reviewer"),
     AUTHOR("author");
 
     private String role;
 
-    UserRole(String role) {
+    AccountRoleType(String role) {
         this.role = role;
     }
 
@@ -15,14 +15,13 @@ public enum UserRole {
         return role;
     }
 
-    static public UserRole toResource(String str) {
-        for(UserRole role:UserRole.values()) {
+    static public AccountRoleType toRole(String str) {
+        for(AccountRoleType role: AccountRoleType.values()) {
             if(role.role.equalsIgnoreCase(str)) {
                 return role;
             }
         }
         return null;
     }
-
 
 }
