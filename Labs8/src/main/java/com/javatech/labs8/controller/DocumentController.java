@@ -18,7 +18,7 @@ public class DocumentController {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDocuments() {
-        return null
+        return null;
     }
 
     @PUT

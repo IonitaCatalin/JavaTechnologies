@@ -5,7 +5,6 @@ import com.javatech.labs8.entity.Document;
 import com.javatech.labs8.repository.ContestRepository;
 import com.javatech.labs8.security.AuthorizedUser;
 import com.javatech.labs8.service.ApplicationService;
-import com.javatech.labs8.service.Service;
 import org.primefaces.model.file.UploadedFile;
 
 import javax.decorator.Decorator;
@@ -17,7 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 @Decorator
-public abstract class Application implements Service {
+public abstract class Application {
     @Inject
     @Delegate
     @Any
@@ -29,14 +28,14 @@ public abstract class Application implements Service {
     @Inject
     AuthorizedUser authorizedUser;
 
-    @Override
+
     public void addDocument(UploadedFile file) {
         if (authorizedUser.hasPermission("document:write"))
             if (contestRepository.getEntities().stream().anyMatch(it -> it.getStartTime().before(new Date()) && it.getEndTime().after(new Date())))
                 applicationService.addDocument(file);
     }
 
-    @Override
+
     public List<Document> viewDocuments() {
         if (authorizedUser.hasPermission("document:read")) {
             return applicationService.viewDocuments();
@@ -44,7 +43,7 @@ public abstract class Application implements Service {
         return new ArrayList<>();
     }
 
-    @Override
+
     public void addContest(Contest contest) {
         if (authorizedUser.hasPermission("contest:write")) {
             applicationService.addContest(contest);
