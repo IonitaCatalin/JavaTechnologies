@@ -1,15 +1,16 @@
 package com.javatech.labs8.entity;
 
-
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Set;
 
 @NamedQueries({
         @NamedQuery(name = "Document.findAll", query = "Select e from Document e"),
 })
-@javax.persistence.Entity
-public class Document implements Entity {
+@Entity
+public class Document implements Serializable {
     @Size(min = 3, max = 50)
     String name;
 
@@ -23,6 +24,7 @@ public class Document implements Entity {
     @Basic(fetch = FetchType.LAZY)
     byte[] content;
     String contentType;
+
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)

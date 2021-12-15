@@ -4,17 +4,18 @@ import com.javatech.labs8.security.UserRole;
 
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
 
-@javax.persistence.Entity
+@Entity
 @NamedQueries({
         @NamedQuery(name = "User.findAll", query = "Select e from User e"),
         @NamedQuery(name = "User.findByName", query = "Select e from User e where e.name = ?1")
 })
 @SessionScoped
-public class User implements Entity, Serializable {
+public class User implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)

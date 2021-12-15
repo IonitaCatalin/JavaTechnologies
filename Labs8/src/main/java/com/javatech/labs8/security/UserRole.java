@@ -13,35 +13,31 @@ public enum UserRole {
 
     private static final Random RANDOM = new Random();
     private static final int SIZE = values().length;
-    private final Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+    private final Set<Permission> permissions = new HashSet<>();
 
     UserRole(HashSet<UserPermissions> userPermissions) {
         for (UserPermissions userPermission :
                 userPermissions) {
-            grantedAuthorities.add(new GrantedAuthority(userPermission.permission));
+            permissions.add(new Permission(userPermission.permission));
         }
-        grantedAuthorities.add(new GrantedAuthority("ROLE_" + this.name()));
+       permissions.add(new Permission("ROLE_" + this.name()));
     }
 
 
     UserRole(HashSet<UserRole> userRoles, HashSet<UserPermissions> userPermissions) {
         for (UserRole user :
                 userRoles) {
-            grantedAuthorities.addAll(user.grantedAuthorities);
+            permissions.addAll(user.permissions);
         }
 
         for (UserPermissions userPermission :
                 userPermissions) {
-            grantedAuthorities.add(new GrantedAuthority(userPermission.permission));
+            permissions.add(new Permission(userPermission.permission));
         }
-        grantedAuthorities.add(new GrantedAuthority("ROLE_" + this.name()));
+        permissions.add(new Permission("ROLE_" + this.name()));
     }
 
-    public static UserRole randomUserRole() {
-        return values()[RANDOM.nextInt(SIZE)];
-    }
-
-    public Set<GrantedAuthority> getGrantedAuthorities() {
-        return grantedAuthorities;
+    public Set<Permission> getPermissions() {
+        return permissions;
     }
 }

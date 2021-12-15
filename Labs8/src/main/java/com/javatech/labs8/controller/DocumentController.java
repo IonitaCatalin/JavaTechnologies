@@ -24,7 +24,7 @@ public class DocumentController {
     @PUT
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response updateDocument() {
+    public Response uploadDocument() {
         return null;
     }
 
@@ -33,5 +33,31 @@ public class DocumentController {
     public Response removeDocument() {
         return null;
     }
+
+    @POST
+    @Path("/{id}/references/{refId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addReferenceToDocument(@PathParam("id") long id, @PathParam("refId") long refId) {
+        return null;
+    }
+
+    @DELETE
+    @Path("/{id}/references/{refId}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteReferenceFromDocument(@PathParam("id") long id, @PathParam("refId") long refI) {
+        return null;
+    }
+
+    @GET
+    @Path("/{id}/references")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getReferencesFromDocument(@PathParam("id") long id) {
+        return null;
+    }
+
+
+
 
 }

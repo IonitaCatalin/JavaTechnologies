@@ -1,6 +1,7 @@
 package com.javatech.labs8.entity;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
@@ -9,8 +10,8 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name = "Contest.findAll", query = "Select e from Contest e"),
 })
-@javax.persistence.Entity
-public class Contest implements Entity, Serializable {
+@Entity
+public class Contest implements Serializable {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)

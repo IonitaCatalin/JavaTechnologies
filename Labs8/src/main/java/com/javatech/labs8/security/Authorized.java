@@ -8,17 +8,17 @@ import javax.faces.bean.SessionScoped;
 
 @ManagedBean
 @SessionScoped
-public class AuthorizedUser extends User {
+public class Authorized extends User {
     public boolean hasPermission(String permission) {
         if (getRole() != null) {
-            return getRole().getGrantedAuthorities().stream().anyMatch(it -> it.getAuthority().equals(permission));
+            return getRole().getPermissions().stream().anyMatch(it -> it.getPermission().equals(permission));
         }
         return false;
     }
 
     public boolean hasRole(String role) {
         if (getRole() != null) {
-            return getRole().getGrantedAuthorities().stream().anyMatch(it -> it.getAuthority().equals("ROLE_" + role));
+            return getRole().getPermissions().stream().anyMatch(it -> it.getPermission().equals("ROLE_" + role));
         }
         return false;
     }

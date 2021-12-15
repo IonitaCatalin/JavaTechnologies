@@ -5,6 +5,7 @@ import com.javatech.labs8.service.ContestService;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -25,7 +26,14 @@ public class ContestController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getContests() {
 
-        return Response.ok(documentRepository.getEntities()).build();
+       return null;
+    }
+
+    @DELETE
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deleteContest() {
+        return null;
+
     }
 
 }
