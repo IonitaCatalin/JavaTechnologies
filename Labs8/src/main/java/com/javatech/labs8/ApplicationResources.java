@@ -8,6 +8,6 @@ import javax.persistence.PersistenceContext;
 @ApplicationScoped
 public class ApplicationResources {
     @Produces
-    @PersistenceContext(unitName = "jdbc/reviewer")
+    @PersistenceContext(unitName = "reviewer")
     private EntityManager entityManager;
 }
