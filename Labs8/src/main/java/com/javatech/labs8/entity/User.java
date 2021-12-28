@@ -1,6 +1,6 @@
 package com.javatech.labs8.entity;
 
-import com.javatech.labs8.security.UserRole;
+import com.javatech.labs8.pemissions.Role;
 
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
@@ -33,7 +33,7 @@ public class User implements ApplicationEntity,Serializable {
     @NotNull
     @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private Role role;
 
     public Long getId() {
         return id;
@@ -59,11 +59,11 @@ public class User implements ApplicationEntity,Serializable {
         this.password = password;
     }
 
-    public UserRole getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(UserRole role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 

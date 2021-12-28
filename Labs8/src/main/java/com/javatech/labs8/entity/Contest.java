@@ -1,12 +1,11 @@
 package com.javatech.labs8.entity;
 
 import javax.enterprise.context.SessionScoped;
-import javax.persistence.*;
-import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
+import javax.persistence.*;
 
 @NamedQueries({
         @NamedQuery(name = "Contest.findAll", query = "Select e from Contest e"),
@@ -14,23 +13,40 @@ import java.util.Date;
 @Entity
 @SessionScoped
 public class Contest implements Serializable, ApplicationEntity {
+
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
-    @Size(min = 5, max = 20)
+    @Column(name = "name", nullable = false)
     private String name;
 
     @NotNull
+    @Column(name = "start_time", nullable = false)
     private Date startTime;
 
     @NotNull
+    @Column(name = "end_time", nullable = false)
     private Date endTime;
 
     @NotNull
+    @Column(name = "resistration_stamp", nullable = false)
     private String registrationStamp;
+
+    @OneToMany
+    @JoinTable(
+            name="entries",
+            joinColumns = @JoinColumn(
+                    name = "contest_id",
+                    referencedColumnName = "id"
+            ),
+            inverseJoinColumns = @JoinColumn(
+                    name = "document_id",
+                    referencedColumnName = "id")
+    )
+    private Set<Document> entries;
 
 
     public Long getId() {
@@ -71,5 +87,9 @@ public class Contest implements Serializable, ApplicationEntity {
 
     public void setRegistrationStamp(String registrationStamp) {
         this.registrationStamp = registrationStamp;
+    }
+
+    public Set<Document> getEntries() {
+        return entries;
     }
 }

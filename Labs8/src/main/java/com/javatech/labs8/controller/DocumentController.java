@@ -16,14 +16,14 @@ public class DocumentController {
     DocumentService documentService;
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces("application/json")
     public Response getDocuments() {
         return null;
     }
 
     @PUT
-    @Produces(MediaType.APPLICATION_JSON)
-    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces("application/json")
+    @Consumes("application/json")
     public Response uploadDocument() {
         return null;
     }
@@ -36,16 +36,16 @@ public class DocumentController {
 
     @POST
     @Path("/{id}/references/{refId}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes("application/json")
+    @Produces("application/json")
     public Response addReferenceToDocument(@PathParam("id") long id, @PathParam("refId") long refId) {
         return null;
     }
 
     @DELETE
     @Path("/{id}/references/{refId}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes("application/json")
+    @Produces("application/json")
     public Response deleteReferenceFromDocument(@PathParam("id") long id, @PathParam("refId") long refI) {
         return null;
     }

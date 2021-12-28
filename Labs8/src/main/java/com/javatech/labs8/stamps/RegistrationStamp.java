@@ -10,8 +10,7 @@ public class RegistrationStamp implements Stamp {
     public String getStamp() {
         byte[] array = new byte[7];
         new Random().nextBytes(array);
-        String generatedString = new String(array, StandardCharsets.UTF_8);
 
-        return generatedString;
+        return new String(array, StandardCharsets.UTF_8);
     }
 }
