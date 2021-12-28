@@ -1,14 +1,14 @@
 package com.javatech.labs8.repository;
 
 
-import com.javatech.labs8.entity.Entity;
+import com.javatech.labs8.entity.ApplicationEntity;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 
-public class CrudRepository<T extends Entity, ID> implements Repository<T, ID> {
+public class CrudRepository<T extends ApplicationEntity, ID> implements Repository<T, ID> {
 
     @Inject
     protected EntityManager entityManager;

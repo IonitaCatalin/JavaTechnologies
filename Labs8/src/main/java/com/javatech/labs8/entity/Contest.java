@@ -1,5 +1,6 @@
 package com.javatech.labs8.entity;
 
+import javax.enterprise.context.SessionScoped;
 import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
@@ -11,7 +12,8 @@ import java.util.Date;
         @NamedQuery(name = "Contest.findAll", query = "Select e from Contest e"),
 })
 @Entity
-public class Contest implements Serializable {
+@SessionScoped
+public class Contest implements Serializable, ApplicationEntity {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,6 +31,7 @@ public class Contest implements Serializable {
 
     @NotNull
     private String registrationStamp;
+
 
     public Long getId() {
         return id;

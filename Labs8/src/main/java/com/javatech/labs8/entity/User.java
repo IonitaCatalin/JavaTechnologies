@@ -15,20 +15,23 @@ import java.io.Serializable;
         @NamedQuery(name = "User.findByName", query = "Select e from User e where e.name = ?1")
 })
 @SessionScoped
-public class User implements Serializable {
+public class User implements ApplicationEntity,Serializable {
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @NotNull
+    @Column(name = "name", nullable = false)
     @Size(min = 5, max = 20)
     private String name;
 
     @NotNull
+    @Column(name = "password", nullable = false)
     private String password;
 
     @NotNull
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private UserRole role;
 
