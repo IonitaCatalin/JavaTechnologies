@@ -1,5 +1,7 @@
 package com.javatech.labs8.exceptions;
 
-public class ContestAlreadyExistsException extends Exception{
+import com.javatech.labs8.exceptions.translatables.TranslatableConflictException;
+
+public class ContestAlreadyExistsException extends TranslatableConflictException {
 
 }

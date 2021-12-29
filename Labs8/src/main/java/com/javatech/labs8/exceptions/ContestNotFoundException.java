@@ -1,4 +1,6 @@
 package com.javatech.labs8.exceptions;
 
-public class ContestNotFoundException extends Exception{
+import com.javatech.labs8.exceptions.translatables.TranslatableNotFoundException;
+
+public class ContestNotFoundException extends TranslatableNotFoundException {
 }

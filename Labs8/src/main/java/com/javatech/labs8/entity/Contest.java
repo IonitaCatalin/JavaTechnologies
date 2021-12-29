@@ -16,7 +16,13 @@ public class Contest implements Serializable, ApplicationEntity {
 
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name="contest_seq_id",
+            sequenceName="contest_seq_id",
+            allocationSize=1)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator="contest_seq_id")
     private Long id;
 
     @NotNull
@@ -48,6 +54,8 @@ public class Contest implements Serializable, ApplicationEntity {
     )
     private Set<Document> entries;
 
+    public Contest() {
+    }
 
     public Long getId() {
         return id;

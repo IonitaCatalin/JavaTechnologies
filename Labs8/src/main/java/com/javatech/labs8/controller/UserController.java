@@ -3,8 +3,11 @@ package com.javatech.labs8.controller;
 import com.javatech.labs8.annotations.Secured;
 import com.javatech.labs8.dtos.UserDTO;
 import com.javatech.labs8.dtos.UserRegisterDTO;
-import com.javatech.labs8.entity.User;
-import com.javatech.labs8.service.UserService;
+import com.javatech.labs8.entity.Account;
+import com.javatech.labs8.exceptions.AccountAlreadyExistsException;
+import com.javatech.labs8.exceptions.AccountNotFoundException;
+import com.javatech.labs8.pemissions.Role;
+import com.javatech.labs8.service.AccountService;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -15,7 +18,7 @@ import javax.ws.rs.core.Response;
 @RequestScoped
 public class UserController {
     @Inject
-    UserService userService;
+    AccountService accountService;
 
     @GET
     @Secured
@@ -26,10 +29,10 @@ public class UserController {
     }
 
     @POST
-    @Secured
+    @Secured({Role.ADMIN})
     @Consumes("application/json")
     @Produces("application/json")
-    public Response addWithRole(User user) {
+    public Response addWithRole(Account user) {
         return null;
     }
 
@@ -51,15 +54,16 @@ public class UserController {
     @Path("/register")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response register(UserRegisterDTO user) {
-        return null;
+    public Response register(UserRegisterDTO user) throws AccountAlreadyExistsException {
+        accountService.create(user);
+        return Response.accepted().build();
     }
 
     @PUT
     @Secured
     @Path("/{id}")
     @Produces("application/json")
-    public Response update(@PathParam("id") long id, UserDTO user) {
+    public Response update(@PathParam("id") long id, UserDTO user) throws AccountNotFoundException {
         return null;
     }
 
@@ -72,7 +76,7 @@ public class UserController {
     }
 
     @PUT
-    @Secured
+    @Secured({Role.ADMIN})
     @Path("/{id}")
     @Consumes("application/json")
     @Produces("application/json")

@@ -1,6 +1,5 @@
 package com.javatech.labs8.entity;
 
-import com.javatech.labs8.pemissions.Role;
 
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
@@ -11,14 +10,20 @@ import java.io.Serializable;
 
 @Entity
 @NamedQueries({
-        @NamedQuery(name = "User.findAll", query = "Select e from User e"),
-        @NamedQuery(name = "User.findByName", query = "Select e from User e where e.name = ?1")
+        @NamedQuery(name = "User.findAll", query = "Select e from Account e"),
+        @NamedQuery(name = "User.findByName", query = "Select e from Account e where e.name = ?1")
 })
 @SessionScoped
-public class User implements ApplicationEntity,Serializable {
+public class Account implements ApplicationEntity,Serializable {
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name="user_seq_id",
+            sequenceName="user_seq_id",
+            allocationSize=1)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator="user_seq_id")
     private Long id;
 
     @NotNull
@@ -32,8 +37,16 @@ public class User implements ApplicationEntity,Serializable {
 
     @NotNull
     @Column(name = "role", nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Role role;
+    private String role;
+
+    public Account(String name, String password, String role) {
+        this.name = name;
+        this.password = password;
+        this.role = role;
+    }
+
+    public Account() {
+    }
 
     public Long getId() {
         return id;
@@ -59,17 +72,17 @@ public class User implements ApplicationEntity,Serializable {
         this.password = password;
     }
 
-    public Role getRole() {
+    public String getRole() {
         return role;
     }
 
-    public void setRole(Role role) {
+    public void setRole(String role) {
         this.role = role;
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "Account{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", role=" + role +

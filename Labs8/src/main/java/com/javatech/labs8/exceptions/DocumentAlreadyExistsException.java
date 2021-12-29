@@ -1,4 +1,6 @@
 package com.javatech.labs8.exceptions;
 
-public class DocumentAlreadyExistsException extends Exception{
+import com.javatech.labs8.exceptions.translatables.TranslatableConflictException;
+
+public class DocumentAlreadyExistsException extends TranslatableConflictException {
 }

@@ -1,8 +1,8 @@
 package com.javatech.labs8.filters;
 
-import com.javatech.labs8.annotations.AuthenticatedUser;
+import com.javatech.labs8.annotations.AuthenticatedAccount;
 import com.javatech.labs8.annotations.Secured;
-import com.javatech.labs8.exceptions.InvalidTokenException;
+import com.javatech.labs8.exceptions.AccountInvalidTokenException;
 
 import javax.annotation.Priority;
 import javax.enterprise.event.Event;
@@ -20,7 +20,7 @@ import javax.ws.rs.ext.Provider;
 public class AuthenticationFilter implements ContainerRequestFilter {
 
     @Inject
-    @AuthenticatedUser
+    @AuthenticatedAccount
     Event<String> userAuthenticatedEvent;
 
     private static final String REALM = "example";
@@ -60,9 +60,11 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                         .build());
     }
 
-    private void validateToken(String token) throws InvalidTokenException {
+    private void validateToken(String token) throws AccountInvalidTokenException {
 
         //Extract username from token
+
+
         userAuthenticatedEvent.fire("");
     }
 }

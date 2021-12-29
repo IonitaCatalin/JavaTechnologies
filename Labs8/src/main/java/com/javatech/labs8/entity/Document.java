@@ -16,7 +16,13 @@ public class Document implements Serializable, ApplicationEntity {
 
     @Id
     @Column(name = "id", nullable = false)
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @SequenceGenerator(
+            name="document_seq_id",
+            sequenceName="document_seq_id",
+            allocationSize=1)
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator="document_seq_id")
     private Long id;
 
     @NotNull
@@ -33,7 +39,7 @@ public class Document implements Serializable, ApplicationEntity {
     String type;
 
 
-    @OneToMany
+    @ManyToMany
     @JoinTable(
              name = "authors",
              joinColumns = @JoinColumn(
@@ -43,7 +49,7 @@ public class Document implements Serializable, ApplicationEntity {
                      name = "document_id",
                      referencedColumnName = "id")
      )
-    Set<User> authors;
+    Set<Account> authors;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
@@ -57,6 +63,8 @@ public class Document implements Serializable, ApplicationEntity {
     )
     Set<Document> bibliography;
 
+    public Document() {
+    }
 
     public Long getId() {
         return id;
@@ -82,11 +90,11 @@ public class Document implements Serializable, ApplicationEntity {
         this.content = content;
     }
 
-    public Set<User> getAuthors() {
+    public Set<Account> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Set<User> authors) {
+    public void setAuthors(Set<Account> authors) {
         this.authors = authors;
     }
 

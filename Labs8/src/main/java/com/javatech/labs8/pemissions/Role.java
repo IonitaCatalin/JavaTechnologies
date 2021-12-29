@@ -10,4 +10,13 @@ public enum Role {
     Role(String reviewer) {
         this.role = reviewer;
     }
+
+    public static Role fromString(String text) {
+        for (Role b : Role.values()) {
+            if (b.role.equalsIgnoreCase(text)) {
+                return b;
+            }
+        }
+        return null;
+    }
 }
