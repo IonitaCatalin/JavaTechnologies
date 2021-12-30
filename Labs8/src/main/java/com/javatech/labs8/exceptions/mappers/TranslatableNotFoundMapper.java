@@ -13,7 +13,6 @@ public class TranslatableNotFoundMapper implements ExceptionMapper<TranslatableN
     public Response toResponse(TranslatableNotFoundException e) {
         ResponsePayload payload = new ResponsePayload(
                 "FAILURE",
-                e.getCode(),
                 e.getMessage());
 
         return Response

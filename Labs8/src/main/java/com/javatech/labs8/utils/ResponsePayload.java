@@ -4,7 +4,7 @@ public class ResponsePayload {
     private final String status;
     private final String message;
 
-    public ResponsePayload(String status, String code,String message) {
+    public ResponsePayload(String status,String message) {
         this.status = status;
         this.message = message;
     }

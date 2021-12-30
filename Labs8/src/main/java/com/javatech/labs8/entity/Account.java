@@ -50,6 +50,10 @@ public class Account implements ApplicationEntity,Serializable {
     public Account() {
     }
 
+    public Account(Long id) {
+        this.id = id;
+    }
+
     public Long getId() {
         return id;
     }

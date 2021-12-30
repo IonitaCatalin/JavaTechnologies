@@ -14,7 +14,6 @@ public class TranslatableUnauthorizedMapper implements ExceptionMapper<Translata
     public Response toResponse(TranslatableUnauthorizedException e) {
         ResponsePayload payload = new ResponsePayload(
                 "FAILURE",
-                e.getCode(),
                 e.getMessage());
 
         return Response

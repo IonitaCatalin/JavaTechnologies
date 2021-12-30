@@ -14,6 +14,7 @@ import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.ext.Provider;
 import java.lang.reflect.Method;
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,13 +36,12 @@ public class AuthorizationFilter implements ContainerRequestFilter {
         Method method = resourceInfo.getResourceMethod();
         if( method != null){
 
+            Principal principal = requestContext.getSecurityContext().getUserPrincipal();
+
             JWTTokenRequired JWTContext = method.getAnnotation(JWTTokenRequired.class);
             Role[] permissions =  JWTContext.Permissions();
 
-            Long id = (Long) requestContext.getProperty("account_id");
-
-            checkPermissions(permissions, id);
-
+            checkPermissions(permissions, Long.valueOf(principal.getName()));
 
         }
     }
@@ -49,8 +49,6 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     private void checkPermissions(Role[] permissions, Long id) throws AccountNotAllowedException {
         List<Role> permissionsList = Arrays.asList(permissions);
         Role userPermission = accountService.getAccountRole(id);
-
-        System.out.println("Trebuie sa gasim permisiunea:" + userPermission);
 
         if(!permissionsList.contains(userPermission)) {
             throw new AccountNotAllowedException();

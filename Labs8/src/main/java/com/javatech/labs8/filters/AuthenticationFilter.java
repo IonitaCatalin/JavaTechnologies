@@ -12,7 +12,9 @@ import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
+import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.ext.Provider;
+import java.security.Principal;
 
 @Provider
 @JWTTokenRequired
@@ -48,6 +50,29 @@ public class AuthenticationFilter implements ContainerRequestFilter {
         Long id = TokenHandler.validate(token);
 
         context.setProperty("account_id",id);
+
+        context.setSecurityContext(new SecurityContext() {
+            @Override
+            public Principal getUserPrincipal() {
+                return () -> String.valueOf(id);
+            }
+
+            @Override
+            public boolean isUserInRole(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean isSecure() {
+                return false;
+            }
+
+            @Override
+            public String getAuthenticationScheme() {
+                return null;
+            }
+
+        });
 
     }
 }

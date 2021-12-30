@@ -30,16 +30,6 @@ public class AccountService {
 
 
     }
-    public void delete(Long id) throws AccountNotFoundException {
-
-        boolean exists = accountRepository.checkIfExistsById(id);
-        if(!exists) {
-            accountRepository.deleteById(Account.class,id);
-        } else{
-            throw new AccountNotFoundException();
-        }
-
-    }
 
     public AccountDTO findById(Long id) throws AccountNotFoundException {
         boolean exists = accountRepository.checkIfExistsById(id);
@@ -84,8 +74,28 @@ public class AccountService {
         }
     }
 
+    public void remove(Long id) throws AccountNotFoundException{
+        boolean exists = accountRepository.checkIfExistsById(id);
+
+        if(exists) {
+            accountRepository.deleteById(Account.class, id);
+        } else {
+            throw new AccountNotFoundException();
+        }
+    }
+
     public void update(Long id, AccountUpdateDTO user) {
 
+    }
+
+    public void updateRole(Long id, Role newRole) throws AccountNotFoundException {
+        boolean exists = accountRepository.checkIfExistsById(id);
+
+        if(exists) {
+
+        } else {
+            throw new AccountNotFoundException();
+        }
     }
 
 }

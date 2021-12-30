@@ -12,7 +12,6 @@ public class TranslatableNoResultExceptionMapper implements ExceptionMapper<NoRe
     public Response toResponse(NoResultException e) {
         ResponsePayload payload = new ResponsePayload(
                 "FAILURE",
-                "ERROR_WRONG_PATH",
                 e.getMessage()
         );
 

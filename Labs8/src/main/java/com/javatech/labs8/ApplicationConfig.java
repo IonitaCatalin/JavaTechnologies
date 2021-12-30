@@ -10,6 +10,8 @@ import com.javatech.labs8.filters.AuthorizationFilter;
 import javax.faces.bean.ApplicationScoped;
 import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
+import javax.ws.rs.core.SecurityContext;
+import java.security.Principal;
 import java.util.Set;
 
 @ApplicationPath("api/v1")
@@ -17,8 +19,11 @@ import java.util.Set;
 public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         // Bind authorization and authentication filters
+
         resources.add(AuthenticationFilter.class);
         resources.add(AuthorizationFilter.class);
+        resources.add(SecurityContext.class);
+        resources.add(Principal.class);
 
         // Bind API Controllers
         resources.add(UserController.class);
@@ -32,9 +37,6 @@ public class ApplicationConfig extends Application {
         resources.add(TranslatableUnauthorizedMapper.class);
         resources.add(TranslatableServerErrorMapper.class);
         resources.add(TranslatableNoResultExceptionMapper.class);
-
-
-
 
     }
 

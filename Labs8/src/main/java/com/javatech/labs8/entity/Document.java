@@ -5,11 +5,13 @@ import javax.persistence.*;
 import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @NamedQueries({
         @NamedQuery(name = "Document.findAll", query = "Select e from Document e"),
+        @NamedQuery(name = "Document.countById" , query = "Select Count(e) from Document e where e.id = ?1"),
+        @NamedQuery(name = "Document.countByName" , query = "Select Count(e) from Document e where e.name = ?1")
 })
 @SessionScoped
 public class Document implements Serializable, ApplicationEntity {
@@ -29,29 +31,28 @@ public class Document implements Serializable, ApplicationEntity {
     @Column(name = "name", nullable = false)
     String name;
 
-    @Lob
     @NotNull
-    @Basic(fetch = FetchType.LAZY)
-    byte[] content;
+    @Column(name = "content", nullable = false)
+    String content;
 
     @NotNull
     @Column(name = "type", nullable = false)
     String type;
 
 
-    @ManyToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.REMOVE, orphanRemoval=true)
     @JoinTable(
              name = "authors",
              joinColumns = @JoinColumn(
-                     name = "user_id",
+                     name = "document_id",
                      referencedColumnName = "id"),
              inverseJoinColumns = @JoinColumn(
-                     name = "document_id",
+                     name = "user_id",
                      referencedColumnName = "id")
      )
-    Set<Account> authors;
+    List<Account> authors = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.REMOVE, orphanRemoval=true)
     @JoinTable(
             name="bibliographies",
             joinColumns = @JoinColumn(
@@ -61,9 +62,20 @@ public class Document implements Serializable, ApplicationEntity {
                     name = "reference_document_id",
                     referencedColumnName = "id")
     )
-    Set<Document> bibliography;
+    List<Document> bibliography = new ArrayList<>();
+
+
+    public Document(String name, String content, String type) {
+        this.name = name;
+        this.content = content;
+        this.type = type;
+    }
 
     public Document() {
+    }
+
+    public Document(Long id) {
+        this.id = id;
     }
 
     public Long getId() {
@@ -82,27 +94,35 @@ public class Document implements Serializable, ApplicationEntity {
         this.name = name;
     }
 
-    public byte[] getContent() {
+    public String getContent() {
         return content;
     }
 
-    public void setContent(byte[] content) {
+    public void setContent(String content) {
         this.content = content;
     }
 
-    public Set<Account> getAuthors() {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public List<Account> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(Set<Account> authors) {
+    public void setAuthors(List<Account> authors) {
         this.authors = authors;
     }
 
-    public Set<Document> getBibliography() {
+    public List<Document> getBibliography() {
         return bibliography;
     }
 
-    public void setBibliography(Set<Document> bibliography) {
+    public void setBibliography(List<Document> bibliography) {
         this.bibliography = bibliography;
     }
 

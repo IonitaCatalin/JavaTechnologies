@@ -7,7 +7,6 @@ import javax.ws.rs.core.Response;
 public class AccountInvalidCredentialsException extends TranslatableUnauthorizedException {
     public AccountInvalidCredentialsException() {
         this.message = "Account credentials are invalid";
-        this.code = "ERROR_ACCOUNT_INVALID_CREDENTIALS";
     }
 
 }

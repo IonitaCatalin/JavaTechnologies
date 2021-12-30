@@ -14,7 +14,6 @@ public class TranslatableConflictMapper implements ExceptionMapper<TranslatableC
     public Response toResponse(TranslatableConflictException e) {
         ResponsePayload payload = new ResponsePayload(
                 "FAILURE",
-                e.getCode(),
                 e.getMessage()
         );
 
