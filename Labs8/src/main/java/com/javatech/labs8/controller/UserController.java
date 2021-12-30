@@ -1,18 +1,24 @@
 package com.javatech.labs8.controller;
 
-import com.javatech.labs8.annotations.Secured;
-import com.javatech.labs8.dtos.UserDTO;
-import com.javatech.labs8.dtos.UserRegisterDTO;
+import com.javatech.labs8.annotations.JWTTokenRequired;
+import com.javatech.labs8.dtos.AccountDTO;
+import com.javatech.labs8.dtos.AccountLoginDTO;
+import com.javatech.labs8.dtos.AccountRegisterDTO;
 import com.javatech.labs8.entity.Account;
 import com.javatech.labs8.exceptions.AccountAlreadyExistsException;
+import com.javatech.labs8.exceptions.AccountInvalidCredentialsException;
 import com.javatech.labs8.exceptions.AccountNotFoundException;
 import com.javatech.labs8.pemissions.Role;
 import com.javatech.labs8.service.AccountService;
+import com.javatech.labs8.tokens.TokenHandler;
+import com.javatech.labs8.utils.ResponseEntityPayload;
+import com.javatech.labs8.utils.ResponsePayload;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
+import java.util.Collections;
 
 @Path("/users")
 @RequestScoped
@@ -21,7 +27,6 @@ public class UserController {
     AccountService accountService;
 
     @GET
-    @Secured
     @Path("/users")
     @Produces("application/json")
     public Response getUsers() {
@@ -29,16 +34,9 @@ public class UserController {
     }
 
     @POST
-    @Secured({Role.ADMIN})
     @Consumes("application/json")
     @Produces("application/json")
     public Response addWithRole(Account user) {
-        return null;
-    }
-
-    @GET
-    @Path("/hello")
-    public Response helloFromUser() {
         return null;
     }
 
@@ -46,37 +44,62 @@ public class UserController {
     @Path("/authenticate")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response authenticate(UserDTO user) {
-        return null;
+    public Response authenticate(AccountLoginDTO user) throws AccountInvalidCredentialsException,AccountNotFoundException {
+
+        Long id = accountService.validate(user);
+
+        String token = TokenHandler.issue(id);
+
+        ResponseEntityPayload<String> payload = new ResponseEntityPayload<String>(
+                "SUCCESS",
+                "User logged in successfully",
+                Collections.singletonList(token)
+        );
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(payload)
+                .build();
+
     }
 
     @POST
     @Path("/register")
     @Consumes("application/json")
     @Produces("application/json")
-    public Response register(UserRegisterDTO user) throws AccountAlreadyExistsException {
+    public Response register(AccountRegisterDTO user) throws AccountAlreadyExistsException {
+
         accountService.create(user);
-        return Response.accepted().build();
+
+        ResponsePayload payload = new ResponsePayload (
+                "SUCCESS",
+                "ACCOUNT_CREATED",
+                "Account successfully created!");
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(payload)
+                .build();
     }
 
     @PUT
-    @Secured
     @Path("/{id}")
     @Produces("application/json")
-    public Response update(@PathParam("id") long id, UserDTO user) throws AccountNotFoundException {
+    public Response update(@PathParam("id") long id, AccountDTO user) throws AccountNotFoundException {
         return null;
     }
 
     @DELETE
-    @Secured
     @Path("/{id}")
+    @JWTTokenRequired(Permissions = {
+            Role.ADMIN})
     @Produces("application/json")
+
     public Response delete(@PathParam("id") long id) {
         return null;
     }
 
     @PUT
-    @Secured({Role.ADMIN})
     @Path("/{id}")
     @Consumes("application/json")
     @Produces("application/json")

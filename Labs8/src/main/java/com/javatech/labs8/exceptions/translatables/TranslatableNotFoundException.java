@@ -5,8 +5,5 @@ import javax.ejb.ApplicationException;
 @ApplicationException
 public class TranslatableNotFoundException extends TranslatableException{
 
-    public TranslatableNotFoundException() {
-        this.http = 404;
-    }
 
 }

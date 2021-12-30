@@ -12,7 +12,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 @NameBinding
 @Retention(RUNTIME)
-@Target({TYPE, METHOD})
-public @interface Secured {
-    Role[] value() default {};
+@Target({TYPE,METHOD})
+public @interface JWTTokenRequired {
+    Role[] Permissions() default {Role.AUTHOR};
 }

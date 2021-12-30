@@ -1,6 +1,6 @@
 package com.javatech.labs8.dtos;
 
-public class UserRegisterDTO {
+public class AccountUpdateDTO {
     String username;
     String password;
 

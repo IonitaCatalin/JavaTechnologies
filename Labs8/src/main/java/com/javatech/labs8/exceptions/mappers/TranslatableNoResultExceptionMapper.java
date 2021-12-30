@@ -1,26 +1,25 @@
 package com.javatech.labs8.exceptions.mappers;
 
-import com.javatech.labs8.exceptions.translatables.TranslatableConflictException;
 import com.javatech.labs8.utils.ResponsePayload;
 
+import javax.persistence.NoResultException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
 
-@Provider
-public class TranslatableConflictMapper implements ExceptionMapper<TranslatableConflictException> {
+public class TranslatableNoResultExceptionMapper implements ExceptionMapper<NoResultException> {
 
     @Override
-    public Response toResponse(TranslatableConflictException e) {
+    public Response toResponse(NoResultException e) {
         ResponsePayload payload = new ResponsePayload(
                 "FAILURE",
-                e.getCode(),
+                "ERROR_WRONG_PATH",
                 e.getMessage()
         );
 
         return Response
-                .status(Response.Status.CONFLICT)
+                .status(Response.Status.METHOD_NOT_ALLOWED)
                 .entity(payload)
                 .build();
+
     }
 }

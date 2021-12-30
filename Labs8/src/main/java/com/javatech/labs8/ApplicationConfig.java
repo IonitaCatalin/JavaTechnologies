@@ -4,6 +4,8 @@ import com.javatech.labs8.controller.ContestController;
 import com.javatech.labs8.controller.DocumentController;
 import com.javatech.labs8.controller.UserController;
 import com.javatech.labs8.exceptions.mappers.*;
+import com.javatech.labs8.filters.AuthenticationFilter;
+import com.javatech.labs8.filters.AuthorizationFilter;
 
 import javax.faces.bean.ApplicationScoped;
 import javax.ws.rs.ApplicationPath;
@@ -14,6 +16,9 @@ import java.util.Set;
 @ApplicationScoped
 public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        // Bind authorization and authentication filters
+        resources.add(AuthenticationFilter.class);
+        resources.add(AuthorizationFilter.class);
 
         // Bind API Controllers
         resources.add(UserController.class);
@@ -26,6 +31,10 @@ public class ApplicationConfig extends Application {
         resources.add(TranslatableBadRequestMapper.class);
         resources.add(TranslatableUnauthorizedMapper.class);
         resources.add(TranslatableServerErrorMapper.class);
+        resources.add(TranslatableNoResultExceptionMapper.class);
+
+
+
 
     }
 

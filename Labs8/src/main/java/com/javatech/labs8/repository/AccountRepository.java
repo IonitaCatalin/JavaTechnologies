@@ -8,15 +8,7 @@ import java.util.List;
 
 @RequestScoped
 public class AccountRepository extends CrudRepository<Account, Long> {
-    public List<Account> getEntities() {
-        List results = entityManager.createNamedQuery("User.findAll").getResultList();
 
-        if(results == null) {
-            return null;
-        }
-        return (List<Account>) results;
-
-    }
 
     public Account getUserByName(String name) {
         Object result = entityManager.createNamedQuery("User.findByName")
@@ -32,14 +24,17 @@ public class AccountRepository extends CrudRepository<Account, Long> {
     }
 
     public boolean checkIfExists(String name) {
-        try{
-            Object result = entityManager.createNamedQuery("User.findByName")
-                    .setParameter(1, name)
-                    .getSingleResult();
-        } catch(NoResultException exception) {
-            return false;
-        }
-        return true;
+        Long count = (Long) entityManager.createNamedQuery("User.countByName")
+                .setParameter(1, name)
+                .getSingleResult();
+        return !count.equals(0L);
+    }
+
+    public boolean checkIfExistsById(Long id) {
+        Long count = (Long)entityManager.createNamedQuery("User.countById")
+                .setParameter(1,id)
+                .getSingleResult();
+        return !count.equals(0L);
     }
 
 

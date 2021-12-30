@@ -4,5 +4,4 @@ import javax.ejb.ApplicationException;
 
 @ApplicationException
 public class TranslatableConflictException extends TranslatableException{
-
 }

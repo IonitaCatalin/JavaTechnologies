@@ -11,7 +11,9 @@ import java.io.Serializable;
 @Entity
 @NamedQueries({
         @NamedQuery(name = "User.findAll", query = "Select e from Account e"),
-        @NamedQuery(name = "User.findByName", query = "Select e from Account e where e.name = ?1")
+        @NamedQuery(name = "User.findByName", query = "Select e from Account e where e.name = ?1"),
+        @NamedQuery(name = "User.countByName" , query = "Select count(e) from Account e where e.name = ?1"),
+        @NamedQuery(name = "User.countById" , query = "Select count(e) from Account e where e.id = ?1")
 })
 @SessionScoped
 public class Account implements ApplicationEntity,Serializable {

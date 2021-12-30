@@ -1,8 +1,9 @@
 package com.javatech.labs8.filters;
 
-import com.javatech.labs8.annotations.AuthenticatedAccount;
-import com.javatech.labs8.annotations.Secured;
+import com.javatech.labs8.annotations.JWTTokenRequired;
 import com.javatech.labs8.exceptions.AccountInvalidTokenException;
+import com.javatech.labs8.exceptions.AuthorizationMissingTokenException;
+import com.javatech.labs8.tokens.TokenHandler;
 
 import javax.annotation.Priority;
 import javax.enterprise.event.Event;
@@ -11,40 +12,30 @@ import javax.ws.rs.Priorities;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.core.HttpHeaders;
-import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.Provider;
 
-@Secured
 @Provider
+@JWTTokenRequired
 @Priority(Priorities.AUTHENTICATION)
 public class AuthenticationFilter implements ContainerRequestFilter {
 
-    @Inject
-    @AuthenticatedAccount
-    Event<String> userAuthenticatedEvent;
 
-    private static final String REALM = "example";
     private static final String AUTHENTICATION_SCHEME = "Bearer";
 
     @Override
-    public void filter(ContainerRequestContext requestContext) {
+    public void filter(ContainerRequestContext requestContext) throws AuthorizationMissingTokenException {
 
         String authorizationHeader =
                 requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
         if (!isTokenBasedAuthentication(authorizationHeader)) {
-            abortWithUnauthorized(requestContext);
-            return;
+            throw new AuthorizationMissingTokenException();
         }
 
         String token = authorizationHeader
                 .substring(AUTHENTICATION_SCHEME.length()).trim();
 
-        try {
-            validateToken(token);
-        } catch (Exception e) {
-            abortWithUnauthorized(requestContext);
-        }
+        validateToken(token, requestContext);
     }
 
     private boolean isTokenBasedAuthentication(String authorizationHeader) {
@@ -52,19 +43,11 @@ public class AuthenticationFilter implements ContainerRequestFilter {
                 .startsWith(AUTHENTICATION_SCHEME.toLowerCase() + " ");
     }
 
-    private void abortWithUnauthorized(ContainerRequestContext requestContext) {
-        requestContext.abortWith(
-                Response.status(Response.Status.UNAUTHORIZED)
-                        .header(HttpHeaders.WWW_AUTHENTICATE,
-                                AUTHENTICATION_SCHEME + " realm=\"" + REALM + "\"")
-                        .build());
-    }
 
-    private void validateToken(String token) throws AccountInvalidTokenException {
+    private void validateToken(String token, ContainerRequestContext context) throws AccountInvalidTokenException {
+        Long id = TokenHandler.validate(token);
 
-        //Extract username from token
+        context.setProperty("account_id",id);
 
-
-        userAuthenticatedEvent.fire("");
     }
 }
