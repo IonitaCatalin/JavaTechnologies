@@ -41,6 +41,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
             JWTTokenRequired JWTContext = method.getAnnotation(JWTTokenRequired.class);
             Role[] permissions =  JWTContext.Permissions();
 
+
             checkPermissions(permissions, Long.valueOf(principal.getName()));
 
         }
@@ -48,7 +49,11 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
     private void checkPermissions(Role[] permissions, Long id) throws AccountNotAllowedException {
         List<Role> permissionsList = Arrays.asList(permissions);
+        System.out.println("Incercam sa gasim permisiunile:" + permissionsList.toString());
+
         Role userPermission = accountService.getAccountRole(id);
+
+        System.out.println("User-ul curent are permisiunea de:" + userPermission.toString());
 
         if(!permissionsList.contains(userPermission)) {
             throw new AccountNotAllowedException();

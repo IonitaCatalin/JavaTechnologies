@@ -40,7 +40,7 @@ public class Document implements Serializable, ApplicationEntity {
     String type;
 
 
-    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.REMOVE, orphanRemoval=true)
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
     @JoinTable(
              name = "authors",
              joinColumns = @JoinColumn(
@@ -52,7 +52,7 @@ public class Document implements Serializable, ApplicationEntity {
      )
     List<Account> authors = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, cascade=CascadeType.REMOVE, orphanRemoval=true)
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
     @JoinTable(
             name="bibliographies",
             joinColumns = @JoinColumn(

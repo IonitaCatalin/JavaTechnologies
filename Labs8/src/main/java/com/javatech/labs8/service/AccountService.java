@@ -12,11 +12,44 @@ import com.javatech.labs8.pemissions.Role;
 import com.javatech.labs8.repository.AccountRepository;
 
 import javax.inject.Inject;
+import java.util.ArrayList;
+import java.util.List;
 
 public class AccountService {
 
     @Inject
     protected AccountRepository accountRepository;
+
+    public AccountDTO get(Long accountId) throws AccountNotFoundException {
+        boolean exists = accountRepository.checkIfExistsById(accountId);
+
+        if(exists) {
+            Account account = accountRepository.findById(Account.class, accountId);
+            AccountDTO accountDTO = new AccountDTO();
+
+            accountDTO.setId(account.getId());
+            accountDTO.setUsername(account.getName());
+
+            return accountDTO;
+        } else {
+            throw new AccountNotFoundException();
+        }
+    }
+
+    public List<AccountDTO> gets() {
+
+        List<AccountDTO> accountsDTO = new ArrayList<>();
+        for(Account account : accountRepository.getAll()) {
+            AccountDTO accountDTO = new AccountDTO();
+
+            accountDTO.setId(account.getId());
+            accountDTO.setUsername(account.getName());
+
+            accountsDTO.add(accountDTO);
+        }
+
+        return accountsDTO;
+    }
 
     public void create(AccountRegisterDTO user) throws AccountAlreadyExistsException {
 
@@ -31,23 +64,6 @@ public class AccountService {
 
     }
 
-    public AccountDTO findById(Long id) throws AccountNotFoundException {
-        boolean exists = accountRepository.checkIfExistsById(id);
-
-        if(!exists) {
-            Account account = accountRepository.findById(Account.class,id);
-            AccountDTO accountDTO = new AccountDTO();
-
-            accountDTO.setUsername(account.getName());
-            accountDTO.setPassword(account.getPassword());
-            accountDTO.setRole(account.getRole());
-            accountDTO.setId(account.getId());
-
-            return accountDTO;
-        } else {
-            throw new AccountNotFoundException();
-        }
-    }
 
     public Role getAccountRole(Long id) {
         boolean exists = accountRepository.checkIfExistsById(id);

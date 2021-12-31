@@ -1,11 +1,11 @@
 package com.javatech.labs8.repository;
 
-
 import com.javatech.labs8.entity.ApplicationEntity;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
+import java.util.List;
 
 
 public class CrudRepository<T extends ApplicationEntity, ID> implements Repository<T, ID> {
@@ -52,7 +52,6 @@ public class CrudRepository<T extends ApplicationEntity, ID> implements Reposito
             T obj = findById(tClass, id);
             if (obj == null)
                 return false;
-//            dataEvent.fire(obj);
             return delete(obj);
         } catch (Exception e) {
             return false;
@@ -65,7 +64,6 @@ public class CrudRepository<T extends ApplicationEntity, ID> implements Reposito
         try {
             if (entityManager.contains(obj)) {
                 entityManager.remove(obj);
-//                dataEvent.fire(obj);
                 return true;
             }
             return false;
@@ -73,4 +71,5 @@ public class CrudRepository<T extends ApplicationEntity, ID> implements Reposito
             return false;
         }
     }
+
 }

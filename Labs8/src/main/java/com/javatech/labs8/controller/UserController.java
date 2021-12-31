@@ -1,9 +1,9 @@
 package com.javatech.labs8.controller;
 
 import com.javatech.labs8.annotations.JWTTokenRequired;
+import com.javatech.labs8.dtos.AccountDTO;
 import com.javatech.labs8.dtos.AccountLoginDTO;
 import com.javatech.labs8.dtos.AccountRegisterDTO;
-import com.javatech.labs8.entity.Account;
 import com.javatech.labs8.pemissions.Role;
 import com.javatech.labs8.service.AccountService;
 import com.javatech.labs8.tokens.TokenHandler;
@@ -15,6 +15,7 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import java.util.Collections;
+import java.util.List;
 
 @Path("/users")
 @RequestScoped
@@ -23,18 +24,44 @@ public class UserController {
     AccountService accountService;
 
     @GET
-    @Path("/users")
     @Produces("application/json")
-    public Response getUsers() {
-        return null;
+    @JWTTokenRequired(Permissions = {
+            Role.AUTHOR,Role.ADMIN,Role.REVIEWER})
+    public Response getAccounts() {
+        List<AccountDTO> accounts = accountService.gets();
+
+        ResponseEntityPayload<AccountDTO> entity = new ResponseEntityPayload<>(
+                "SUCCESS",
+                "Accounts fetched successfully",
+                accounts);
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(entity)
+                .build();
+
     }
 
-    @POST
-    @Consumes("application/json")
+    @GET
+    @Path("/{accountId}")
     @Produces("application/json")
-    public Response addWithRole(Account user) {
-        return null;
+    @JWTTokenRequired(Permissions = {
+            Role.AUTHOR,Role.ADMIN,Role.REVIEWER})
+    public Response getAccount(@PathParam("accountId") Long accountId) {
+
+        AccountDTO account = accountService.get(accountId);
+        ResponseEntityPayload<AccountDTO> entity = new ResponseEntityPayload<>(
+                "SUCCESS",
+                "Account fetched successfully",
+                Collections.singletonList(account));
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(entity)
+                .build();
+
     }
+
 
     @POST
     @Path("/authenticate")

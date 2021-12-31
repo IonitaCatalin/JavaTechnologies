@@ -3,6 +3,7 @@ package com.javatech.labs8.repository;
 import com.javatech.labs8.entity.Document;
 
 import javax.enterprise.context.RequestScoped;
+import java.util.Collections;
 import java.util.List;
 
 @RequestScoped
@@ -20,6 +21,17 @@ public class DocumentRepository extends CrudRepository<Document, Long> {
                 .setParameter(1,id)
                 .getSingleResult();
         return !count.equals(0L);
+    }
+
+    public List<Document> getAll() {
+        try {
+            return (List<Document>) entityManager
+                    .createQuery("Select t from Document t")
+                    .getResultList();
+
+        } catch(Exception e) {
+            return null;
+        }
     }
 
 }

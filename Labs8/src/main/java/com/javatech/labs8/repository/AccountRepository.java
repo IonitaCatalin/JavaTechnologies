@@ -37,6 +37,16 @@ public class AccountRepository extends CrudRepository<Account, Long> {
         return !count.equals(0L);
     }
 
+    public List<Account> getAll() {
+        try {
+            return (List<Account>) entityManager
+                    .createQuery("Select t from Account t")
+                    .getResultList();
+        } catch(Exception e){
+            return null;
+        }
+    }
+
 
 }
 
