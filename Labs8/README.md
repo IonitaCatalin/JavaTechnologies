@@ -1,5 +1,6 @@
 # **Requirements**
 --
+
 Continue the application created in [the previous lab](https://profs.info.uaic.ro/~acf/tj/labs/lab_07.html), exposing some functionalities through various Web services.
 
 1.  (2p) Create RESTful Web services using **JAX-RS** that allow the interaction with at least one JPA entity, implementing CRUD operations. For example, the application may offer the following services:
