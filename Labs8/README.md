@@ -18,4 +18,4 @@ Continue the application created in [the previous lab](https://profs.info.uaic.r
     -   establish a possible chronological order of the documents, based on their bibliography.Consider using an asynchronous implementation, both at the client and container side.
 
 # **Explanations**
---
+
