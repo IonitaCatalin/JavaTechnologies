@@ -49,11 +49,9 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
     private void checkPermissions(Role[] permissions, Long id) throws AccountNotAllowedException {
         List<Role> permissionsList = Arrays.asList(permissions);
-        System.out.println("Incercam sa gasim permisiunile:" + permissionsList.toString());
 
         Role userPermission = accountService.getAccountRole(id);
 
-        System.out.println("User-ul curent are permisiunea de:" + userPermission.toString());
 
         if(!permissionsList.contains(userPermission)) {
             throw new AccountNotAllowedException();

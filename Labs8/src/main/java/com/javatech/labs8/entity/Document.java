@@ -40,7 +40,7 @@ public class Document implements Serializable, ApplicationEntity {
     String type;
 
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
              name = "authors",
              joinColumns = @JoinColumn(
@@ -52,7 +52,7 @@ public class Document implements Serializable, ApplicationEntity {
      )
     List<Account> authors = new ArrayList<>();
 
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name="bibliographies",
             joinColumns = @JoinColumn(
@@ -126,5 +126,15 @@ public class Document implements Serializable, ApplicationEntity {
         this.bibliography = bibliography;
     }
 
-
+    @Override
+    public String toString() {
+        return "Document{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", content='" + content + '\'' +
+                ", type='" + type + '\'' +
+                ", authors=" + authors +
+                ", bibliography=" + bibliography +
+                '}';
+    }
 }

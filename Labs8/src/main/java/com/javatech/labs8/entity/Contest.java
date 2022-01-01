@@ -100,4 +100,17 @@ public class Contest implements Serializable, ApplicationEntity {
     public Set<Document> getEntries() {
         return entries;
     }
+
+    @Override
+    public String toString() {
+        return "Contest{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", startTime=" + startTime +
+                ", endTime=" + endTime +
+                ", registrationStamp='" + registrationStamp + '\'' +
+                ", entries=" + entries +
+                '}';
+    }
 }
+

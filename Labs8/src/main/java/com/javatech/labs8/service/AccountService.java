@@ -66,12 +66,14 @@ public class AccountService {
 
 
     public Role getAccountRole(Long id) {
-        boolean exists = accountRepository.checkIfExistsById(id);
 
-        if(exists) {
-            return Role.fromString(accountRepository.findById(Account.class,id).getRole());
+        Account account = accountRepository.findById(Account.class, id);
+
+        if(account != null) {
+            return Role.fromString(account.getRole());
         }
         return null;
+
     }
 
     public Long validate(AccountLoginDTO user) throws AccountInvalidCredentialsException, AccountNotFoundException {
@@ -105,13 +107,7 @@ public class AccountService {
     }
 
     public void updateRole(Long id, Role newRole) throws AccountNotFoundException {
-        boolean exists = accountRepository.checkIfExistsById(id);
 
-        if(exists) {
-
-        } else {
-            throw new AccountNotFoundException();
-        }
     }
 
 }

@@ -3,17 +3,14 @@ package com.javatech.labs8.service;
 import com.javatech.labs8.dtos.*;
 import com.javatech.labs8.entity.Account;
 import com.javatech.labs8.entity.Document;
-import com.javatech.labs8.exceptions.DocumentAuthorAlreadyExistsException;
-import com.javatech.labs8.exceptions.DocumentAuthorNotFoundException;
-import com.javatech.labs8.exceptions.DocumentInvalidOwnershipException;
-import com.javatech.labs8.exceptions.DocumentNotFoundException;
+import com.javatech.labs8.exceptions.*;
+import com.javatech.labs8.graph.ReferencesGraph;
 import com.javatech.labs8.repository.AccountRepository;
 import com.javatech.labs8.repository.DocumentRepository;
 
 import javax.inject.Inject;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class DocumentService {
 
@@ -24,42 +21,41 @@ public class DocumentService {
     protected AccountRepository accountRepository;
 
 
-    public DocumentDTO get(Long documentId)  throws DocumentNotFoundException{
-        boolean exists = documentRepository.checkIfExistsById(documentId);
+    public DocumentDTO get(Long documentId) {
 
-        if(exists) {
-            Document document = documentRepository.findById(Document.class, documentId);
+        Document document = documentRepository.findById(Document.class, documentId);
 
-                DocumentDTO documentDTO = new DocumentDTO();
-                List<DocumentAuthorDTO> documentAuthorsDTO = new ArrayList<>();
-                List<DocumentReferenceDTO> documentReferencesDTO = new ArrayList<>();
+        if(document != null) {
 
-                for(Account account: document.getAuthors()) {
-                   DocumentAuthorDTO authorDTO = new DocumentAuthorDTO();
+            DocumentDTO documentDTO = new DocumentDTO();
+            List<DocumentAuthorDTO> documentAuthorsDTO = new ArrayList<>();
+            List<DocumentReferenceDTO> documentReferencesDTO = new ArrayList<>();
 
-                   authorDTO.setId(account.getId());
-                   authorDTO.setName(account.getName());
+            for(Account account: document.getAuthors()) {
+                DocumentAuthorDTO authorDTO = new DocumentAuthorDTO();
 
-                   documentAuthorsDTO.add(authorDTO);
-                }
+                authorDTO.setId(account.getId());
+                authorDTO.setName(account.getName());
 
-                for(Document reference : document.getBibliography()) {
-                    DocumentReferenceDTO referenceDTO = new DocumentReferenceDTO();
+                documentAuthorsDTO.add(authorDTO);
+            }
 
-                    referenceDTO.setId(reference.getId());
-                    referenceDTO.setName(reference.getName());
+            for(Document reference : document.getBibliography()) {
+                DocumentReferenceDTO referenceDTO = new DocumentReferenceDTO();
 
-                    documentReferencesDTO.add(referenceDTO);
-                }
+                referenceDTO.setId(reference.getId());
+                referenceDTO.setName(reference.getName());
 
-                documentDTO.setContent(document.getContent());
-                documentDTO.setName(document.getName());
-                documentDTO.setId(document.getId());
-                documentDTO.setAuthors(documentAuthorsDTO);
-                documentDTO.setReferences(documentReferencesDTO);
+                documentReferencesDTO.add(referenceDTO);
+            }
 
-                return documentDTO;
+            documentDTO.setContent(document.getContent());
+            documentDTO.setName(document.getName());
+            documentDTO.setId(document.getId());
+            documentDTO.setAuthors(documentAuthorsDTO);
+            documentDTO.setReferences(documentReferencesDTO);
 
+            return documentDTO;
         } else {
             throw new DocumentNotFoundException();
         }
@@ -109,25 +105,20 @@ public class DocumentService {
     }
 
 
-    public void create(DocumentAddDTO addDocument, Long id) {
-        boolean exists = accountRepository.checkIfExistsById(id);
+    public void create(DocumentAddDTO addDocument, Long accountId) {
 
-        if(exists) {
-            Account account = accountRepository.findById(Account.class,id);
-            Document document = new Document(addDocument.getName(), addDocument.getName(), addDocument.getType());
+        Account account = accountRepository.findById(Account.class, accountId);
+        Document document = new Document(addDocument.getName(), addDocument.getName(), addDocument.getType());
 
-            document.setAuthors(Collections.singletonList(account));
-            documentRepository.save(document);
-        }
+        document.setAuthors(Collections.singletonList(account));
+        documentRepository.save(document);
     }
 
-    public void remove(Long id, Long accountId) throws DocumentNotFoundException, DocumentInvalidOwnershipException {
-        boolean exists = documentRepository.checkIfExistsById(id);
+    public void remove(Long documentId, Long accountId) {
 
-        if(exists) {
+        Document document = documentRepository.findById(Document.class, documentId);
 
-            Document document = documentRepository.findById(Document.class,id);
-
+        if(document != null) {
             Account author = null;
 
             for(Account account: document.getAuthors()) {
@@ -137,22 +128,21 @@ public class DocumentService {
             }
 
             if(author != null) {
-                documentRepository.deleteById(Document.class, id);
+                documentRepository.deleteById(Document.class, documentId);
             } else {
                 throw new DocumentInvalidOwnershipException();
             }
-
         } else {
             throw new DocumentNotFoundException();
         }
+
     }
 
-    public void removeAuthorFromDocument(Long id, Long accountId,Long authorId) throws DocumentAuthorNotFoundException,
-            DocumentInvalidOwnershipException, DocumentNotFoundException  {
-        boolean exists = documentRepository.checkIfExistsById(id);
+    public void removeAuthorFromDocument(Long documentId, Long accountId,Long authorId) {
 
-        if(exists) {
-            Document document = documentRepository.findById(Document.class, id);
+        Document document = documentRepository.findById(Document.class, documentId);
+
+        if(document != null) {
             Account author = null;
 
             for(Account account: document.getAuthors()) {
@@ -186,8 +176,6 @@ public class DocumentService {
             } else {
                 throw new DocumentInvalidOwnershipException();
             }
-
-
         } else {
             throw new DocumentNotFoundException();
         }
@@ -195,7 +183,7 @@ public class DocumentService {
 
     public List<DocumentDTO> getPersonal(Long accountId) {
 
-        List<DocumentDTO> documentsDTO = new DocumentDTO;
+        List<DocumentDTO> documentsDTO = new ArrayList<>();
 
         for(Document document : documentRepository.getAll()) {
             Account author = (Account) document.getAuthors()
@@ -215,8 +203,28 @@ public class DocumentService {
               List<DocumentAuthorDTO> authorsDTO = new ArrayList<>();
 
               for(Account account : document.getAuthors()) {
+                    DocumentAuthorDTO documentAccountDTO = new DocumentAuthorDTO();
+
+                    documentAccountDTO.setId(account.getId());
+                    documentAccountDTO.setName(account.getName());
+
+                    authorsDTO.add(documentAccountDTO);
+              }
+              List<DocumentReferenceDTO> referencesDTO = new ArrayList<>();
+
+              for(Document reference : document.getBibliography()) {
+                  DocumentReferenceDTO documentReferenceDTO = new DocumentReferenceDTO();
+
+                  documentReferenceDTO.setId(document.getId());
+                  documentReferenceDTO.setName(document.getName());
+
+                  referencesDTO.add(documentReferenceDTO);
 
               }
+
+
+              documentDTO.setAuthors(authorsDTO);
+              documentDTO.setReferences(referencesDTO);
 
               documentsDTO.add(documentDTO);
             }
@@ -228,10 +236,11 @@ public class DocumentService {
 
 
     public void addAuthorToDocument(Long documentId,Long authorId, Long accountId) {
-        boolean exists = documentRepository.checkIfExistsById(documentId);
 
-        if(exists) {
-            Document document = documentRepository.findById(Document.class, documentId);
+        Document document = documentRepository.findById(Document.class, documentId);
+
+        if(document != null) {
+
             Account author = null;
 
             for(Account account: document.getAuthors()) {
@@ -241,16 +250,16 @@ public class DocumentService {
             }
 
             if(author != null) {
-                boolean existsAuthor = accountRepository.checkIfExistsById(authorId);
 
-                if(existsAuthor) {
+                Account authorAccount = accountRepository.findById(Account.class, authorId);
+
+                if(authorAccount != null) {
                     List<Account> authors = document.getAuthors();
-                    Account authorToAdd = accountRepository.findById(Account.class, authorId);
 
-                    if(!authors.contains(authorToAdd)) {
-                        authors.add(authorToAdd);
+                    if(!authors.contains(authorAccount)) {
+
+                        authors.add(authorAccount);
                         document.setAuthors(authors);
-
                         documentRepository.save(document);
 
                     } else {
@@ -263,6 +272,139 @@ public class DocumentService {
             } else {
                 throw new DocumentInvalidOwnershipException();
             }
+        } else {
+            throw new DocumentNotFoundException();
+        }
+
+    }
+
+    public void addReferenceToDocument(Long documentId, Long accountId,DocumentAddReferenceDTO referenceToAdd) {
+        Document document = documentRepository.findById(Document.class, documentId);
+
+        if(document != null) {
+
+            Account author = null;
+
+            for(Account account : document.getAuthors()) {
+                if(account.getId().equals(accountId)) {
+                    author = account;
+                }
+            }
+
+            if(author == null) {
+                throw new DocumentInvalidOwnershipException();
+            }
+
+            List<Document> references = document.getBibliography();
+
+            Document reference = documentRepository.findById(Document.class, referenceToAdd.getDocumentId());
+
+            if(reference == null) {
+                throw new DocumentReferenceNotFoundException();
+            }
+
+            for(Document entry: references) {
+                if(entry.getId().equals(reference.getId())) {
+                    throw new DocumentReferenceAlreadyExistsException();
+                }
+            }
+            Map<Long,List<Long>> globalReferencesGraphInit = new HashMap<>();
+            List<Document> allDocuments = documentRepository.getAll();
+
+            List<Long> currentDocumentRefs = document.getBibliography()
+                    .stream()
+                    .map(Document::getId)
+                    .collect(Collectors.toList());
+
+
+            currentDocumentRefs.add(reference.getId());
+            globalReferencesGraphInit.put(document.getId(), currentDocumentRefs);
+
+            System.out.println("Global Refs Init:" + globalReferencesGraphInit.toString());
+
+            allDocuments.removeIf(doc -> doc.getId().equals(document.getId()));
+
+
+            for(Document entry : allDocuments) {
+                List<Long> entryRefs = entry.getBibliography()
+                        .stream()
+                        .map(Document::getId)
+                        .collect(Collectors.toList());
+
+                globalReferencesGraphInit.put(entry.getId(),entryRefs);
+            }
+
+            ReferencesGraph referencesGraph = new ReferencesGraph(globalReferencesGraphInit);
+
+
+            if(!referencesGraph.hasCycle()) {
+                List<Document> documentExistingRefs = document.getBibliography();
+
+                documentExistingRefs.add(reference);
+                document.setBibliography(documentExistingRefs);
+
+                documentRepository.save(document);
+            } else {
+                throw new DocumentCircularReferenceException();
+            }
+        } else {
+            throw new DocumentNotFoundException();
+        }
+    }
+
+    public void removeReferenceFromDocument(Long documentId, Long referenceId, Long accountId) {
+        Document document = documentRepository.findById(Document.class, documentId);
+
+        if (document != null) {
+
+            Account author = null;
+
+            for (Account account: document.getAuthors()) {
+                if (account.getId().equals(accountId)) {
+                    author = account;
+                }
+            }
+
+            if (author != null) {
+                Document reference = null;
+
+                for (Document referee: document.getBibliography()) {
+                    if (referee.getId().equals(referenceId)) {
+                        reference = referee;
+                    }
+                }
+                if (reference != null) {
+                    List < Document > actualReferences = document.getBibliography();
+                    actualReferences.remove(reference);
+                    document.setBibliography(actualReferences);
+                    documentRepository.save(document);
+                } else {
+                    throw new DocumentReferenceNotFoundException();
+                }
+            } else {
+                throw new DocumentInvalidOwnershipException();
+            }
+
+        } else {
+            throw new DocumentNotFoundException();
+        }
+    }
+
+    public List<DocumentReferenceDTO> getReferencesOfDocument(Long documentId, Long userId) {
+
+        Document document = documentRepository.findById(Document.class, documentId);
+
+        if(document != null) {
+            List<DocumentReferenceDTO> referencesDTO = new ArrayList<>();
+            for(Document reference : document.getBibliography()) {
+                DocumentReferenceDTO documentReferenceDTO = new DocumentReferenceDTO();
+
+                documentReferenceDTO.setName(reference.getName());
+                documentReferenceDTO.setId(reference.getId());
+
+                referencesDTO.add(documentReferenceDTO);
+            }
+            return referencesDTO;
         } else {
             throw new DocumentNotFoundException();
         }

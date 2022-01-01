@@ -1,16 +1,14 @@
 package com.javatech.labs8.controller;
 
 import com.javatech.labs8.annotations.JWTTokenRequired;
-import com.javatech.labs8.dtos.DocumentAddAuthorDTO;
-import com.javatech.labs8.dtos.DocumentAddDTO;
-import com.javatech.labs8.dtos.DocumentAddReferenceDTO;
-import com.javatech.labs8.dtos.DocumentDTO;
+import com.javatech.labs8.dtos.*;
 import com.javatech.labs8.entity.Document;
 import com.javatech.labs8.pemissions.Role;
 import com.javatech.labs8.service.AccountService;
 import com.javatech.labs8.service.DocumentService;
 import com.javatech.labs8.utils.ResponseEntityPayload;
 import com.javatech.labs8.utils.ResponsePayload;
+import net.bytebuddy.implementation.ToStringMethod;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;
@@ -37,7 +35,7 @@ public class DocumentController {
 
     @GET
     @Produces("application/json")
-    @JWTTokenRequired(Permissions = {Role.AUTHOR, Role.AUTHOR, Role.REVIEWER})
+    @JWTTokenRequired(Permissions = {Role.AUTHOR, Role.AUTHOR})
     public Response getDocuments() {
 
         List<DocumentDTO> documents = documentService.gets();
@@ -81,12 +79,13 @@ public class DocumentController {
     public Response getPersonalDocuments(@Context SecurityContext securityContext) {
 
         Long id = Long.valueOf(securityContext.getUserPrincipal().getName());
-        List<DocumentDTO> document = documentService.getPersonal(id);
 
-        ResponseEntityPayload<DocumentDTO> entity = new ResponseEntityPayload<>(
+        List<DocumentDTO> documents = documentService.getPersonal(id);
+
+        ResponseEntityPayload<DocumentDTO> entity = new ResponseEntityPayload<DocumentDTO>(
                 "SUCCESS",
-                "Document fetched successfully",
-                Collections.singletonList(document)
+                "Personal documents fetched successfully",
+                documents
         );
 
 
@@ -101,8 +100,9 @@ public class DocumentController {
     @Produces(MediaType.APPLICATION_JSON)
     @JWTTokenRequired(Permissions = {Role.AUTHOR, Role.AUTHOR, Role.REVIEWER})
     public Response addDocument(@Context SecurityContext securityContext,DocumentAddDTO document ) {
-        String idAsString = securityContext.getUserPrincipal().getName();
-        documentService.create(document,Long.valueOf(idAsString));
+
+        Long id = Long.valueOf(securityContext.getUserPrincipal().getName());
+        documentService.create(document,id);
 
         ResponsePayload payload = new ResponsePayload (
                 "SUCCESS",
@@ -122,8 +122,8 @@ public class DocumentController {
     public Response addAuthorToDocument(@Context SecurityContext securityContext,
                                         @PathParam("docId") Long documentId,
                                         DocumentAddAuthorDTO author) {
-        String idAsString = securityContext.getUserPrincipal().getName();
-        Long id = Long.valueOf(idAsString);
+
+        Long id = Long.valueOf(securityContext.getUserPrincipal().getName());
 
         documentService.addAuthorToDocument(documentId, author.getAuthorId(), id);
 
@@ -143,8 +143,8 @@ public class DocumentController {
     @JWTTokenRequired(Permissions = {Role.AUTHOR, Role.AUTHOR, Role.REVIEWER})
     @Produces(MediaType.APPLICATION_JSON)
     public Response removeDocument(@Context SecurityContext securityContext, @PathParam("docId") Long documentId) {
-        String idAsString = securityContext.getUserPrincipal().getName();
-        Long id = Long.valueOf(idAsString);
+
+        Long id = Long.valueOf(securityContext.getUserPrincipal().getName());
 
         documentService.remove(documentId, id);
 
@@ -166,8 +166,8 @@ public class DocumentController {
     public Response removeAuthorFromDocument(@Context SecurityContext securityContext,
                                              @PathParam("docId") Long documentId,
                                              @PathParam("authorId") Long authorId) {
-        String idAsString = securityContext.getUserPrincipal().getName();
-        Long id = Long.valueOf(idAsString);
+
+        Long id = Long.valueOf(securityContext.getUserPrincipal().getName());
 
         documentService.removeAuthorFromDocument(documentId, id, authorId);
 
@@ -183,29 +183,71 @@ public class DocumentController {
 
 
     @POST
-    @Path("/{id}/references/")
+    @Path("/{documentId}/references/")
     @Consumes("application/json")
     @Produces("application/json")
     @JWTTokenRequired(Permissions = {Role.AUTHOR, Role.ADMIN, Role.REVIEWER})
-    public Response addReferenceToDocument(@PathParam("id") long documentId, DocumentAddReferenceDTO reference) {
-        return null;
+    public Response addReferenceToDocument(@Context SecurityContext securityContext,
+                                           @PathParam("documentId") long documentId,
+                                           DocumentAddReferenceDTO reference) {
+
+        Long id = Long.valueOf(securityContext.getUserPrincipal().getName());
+
+        documentService.addReferenceToDocument(documentId,id, reference);
+
+        ResponsePayload payload = new ResponsePayload(
+                "SUCCESS",
+                "Reference added successfully");
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(payload)
+                .build();
     }
 
     @DELETE
-    @Path("/{id}/references/{refId}")
+    @Path("/{documentId}/references/{referenceId}")
     @Consumes("application/json")
     @Produces("application/json")
     @JWTTokenRequired(Permissions = {Role.AUTHOR, Role.ADMIN, Role.REVIEWER})
-    public Response deleteReferenceFromDocument(@PathParam("id") long id, @PathParam("refId") long refI) {
-        return null;
+    public Response deleteReferenceFromDocument(@Context SecurityContext securityContext,
+                                                @PathParam("documentId") long documentId,
+                                                @PathParam("referenceId") long referenceId) {
+
+        Long id = Long.valueOf(securityContext.getUserPrincipal().getName());
+
+        documentService.removeReferenceFromDocument(documentId,referenceId,id);
+
+        ResponsePayload payload = new ResponsePayload(
+                "SUCCESS",
+                "Document's reference deleted successfully");
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(payload)
+                .build();
     }
 
     @GET
-    @Path("/{id}/references")
+    @Path("/{documentId}/references")
     @Produces(MediaType.APPLICATION_JSON)
     @JWTTokenRequired(Permissions = {Role.AUTHOR, Role.ADMIN, Role.REVIEWER})
-    public Response getReferencesFromDocument(@PathParam("id") long id) {
-        return null;
+    public Response getReferencesFromDocument(@Context SecurityContext securityContext,
+                                              @PathParam("documentId") long documentId) {
+
+        Long id = Long.valueOf(securityContext.getUserPrincipal().getName());
+
+        List<DocumentReferenceDTO> references = documentService.getReferencesOfDocument(documentId, id);
+
+        ResponseEntityPayload<DocumentReferenceDTO> entity = new ResponseEntityPayload<>(
+                "SUCCESS",
+                "Document's references fetched successfully",
+                references);
+
+        return Response
+                .status(Response.Status.OK)
+                .entity(entity)
+                .build();
     }
 
 
