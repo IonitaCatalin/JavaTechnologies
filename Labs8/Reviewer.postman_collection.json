@@ -1,0 +1,540 @@
+{
+	"info": {
+		"_postman_id": "29bff59e-c5bd-43d2-b990-7a6e1c1c4662",
+		"name": "Reviewer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Catalin124\",\r\n    \"password\":\"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/Labs8-1.0/api/v1/users/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Labs8-1.0",
+								"api",
+								"v1",
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"Catalin12\",\r\n    \"password\":\"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/Labs8-1.0/api/v1/users/authenticate",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Labs8-1.0",
+								"api",
+								"v1",
+								"users",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJSZXZpZXdlciIsImlhdCI6MTY0MDg1NTQ3MCwiaWQiOjE2fQ.BwQzXYRiG8V5Ov3s_l4BoH8jragI8q0qzoOv4epUcx0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/Labs8-1.0/api/v1/users/18",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Labs8-1.0",
+								"api",
+								"v1",
+								"users",
+								"18"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJSZXZpZXdlciIsImlhdCI6MTY0MDk2NzI3NywiaWQiOjE5fQ.m6n06qF8v6jrYWFtrBf9jrdc7srivUlHyLfro5Juh-k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/Labs8-1.0/api/v1/users/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Labs8-1.0",
+								"api",
+								"v1",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Documents",
+			"item": [
+				{
+					"name": "Create Document",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJSZXZpZXdlciIsImlhdCI6MTY0MDg2NjczNCwiaWQiOjE2fQ.wRevcTzRsnCUshHYLVmlOFVPncWTdIoG6QCJL_bkylk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"testDocument\",\r\n    \"content\":\"testDocument\",\r\n    \"type\":\"document\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/Labs8-1.0/api/v1/documents",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Labs8-1.0",
+								"api",
+								"v1",
+								"documents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Author to Document",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJSZXZpZXdlciIsImlhdCI6MTY0MDg5NjgwOSwiaWQiOjE5fQ.aelkIQKsStqDN9eRXAkZiKJtaDVBbHuGxB4J6797fPw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"authorId\": 12\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/Labs8-1.0/api/v1/documents/93/authors",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Labs8-1.0",
+								"api",
+								"v1",
+								"documents",
+								"93",
+								"authors"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Document Content",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Document",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Add reference to another Document",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJSZXZpZXdlciIsImlhdCI6MTY0MTA0MzE3OSwiaWQiOjIxfQ.43yZz1iLKTrunp1vPkran9M5p6pjWg-mlLVPDUvNYRk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"documentId\":95\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/Labs8-1.0/api/v1/documents/96/references",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Labs8-1.0",
+								"api",
+								"v1",
+								"documents",
+								"96",
+								"references"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Reference from Docuement",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJSZXZpZXdlciIsImlhdCI6MTY0MTA0Mjc2NywiaWQiOjE5fQ.u5R6oAzOQnahhSLT5Ihp0cc7tHDswYx78PtcsIhGa-0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/Labs8-1.0/api/v1/documents/96/references/95",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Labs8-1.0",
+								"api",
+								"v1",
+								"documents",
+								"96",
+								"references",
+								"95"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Author from Document",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/Labs8-1.0/api/v1/documents/93/authors/20",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Labs8-1.0",
+								"api",
+								"v1",
+								"documents",
+								"93",
+								"authors",
+								"20"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Personal Document",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJSZXZpZXdlciIsImlhdCI6MTY0MDk2Mjg4NCwiaWQiOjE5fQ.Qo8FljySGcWrLNbO69RhW07BAqHhgX0vOMIJ313LhT0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/Labs8-1.0/api/v1/documents/me",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Labs8-1.0",
+								"api",
+								"v1",
+								"documents",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Document's References",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/Labs8-1.0/api/v1/documents/94/references",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Labs8-1.0",
+								"api",
+								"v1",
+								"documents",
+								"94",
+								"references"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Documents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/Labs8-1.0/api/v1/documents/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"Labs8-1.0",
+								"api",
+								"v1",
+								"documents",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contests",
+			"item": [
+				{
+					"name": "Add Contest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Contest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Contest",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Update Contest timeframe",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get all contests",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Documents from contest",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Contest",
+			"item": [
+				{
+					"name": "Add Contest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Contest",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Get Contests",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Add Entry to contest",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				},
+				{
+					"name": "Finish contest",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": null
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
