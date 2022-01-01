@@ -1,5 +1,4 @@
 # **Requirements**
---
 
 Continue the application created in [the previous lab](https://profs.info.uaic.ro/~acf/tj/labs/lab_07.html), exposing some functionalities through various Web services.
 
