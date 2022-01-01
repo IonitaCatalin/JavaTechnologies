@@ -1,5 +1,6 @@
 package com.javatech.labs8.controller;
 
+import com.javatech.labs8.annotations.CacheControlConfig;
 import com.javatech.labs8.annotations.JWTTokenRequired;
 import com.javatech.labs8.dtos.AccountDTO;
 import com.javatech.labs8.dtos.AccountLoginDTO;
@@ -13,6 +14,7 @@ import com.javatech.labs8.utils.ResponsePayload;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
+import javax.ws.rs.core.CacheControl;
 import javax.ws.rs.core.Response;
 import java.util.Collections;
 import java.util.List;
@@ -22,6 +24,10 @@ import java.util.List;
 public class UserController {
     @Inject
     AccountService accountService;
+
+    @Inject
+    @CacheControlConfig(maxAge = 20)
+    CacheControl cc;
 
     @GET
     @Produces("application/json")

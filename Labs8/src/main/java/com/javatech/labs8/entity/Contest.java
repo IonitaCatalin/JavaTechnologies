@@ -3,7 +3,6 @@ package com.javatech.labs8.entity;
 import javax.enterprise.context.SessionScoped;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.Set;
 import javax.persistence.*;
 
@@ -30,16 +29,12 @@ public class Contest implements Serializable, ApplicationEntity {
     private String name;
 
     @NotNull
-    @Column(name = "start_time", nullable = false)
-    private Date startTime;
-
-    @NotNull
-    @Column(name = "end_time", nullable = false)
-    private Date endTime;
-
-    @NotNull
     @Column(name = "resistration_stamp", nullable = false)
     private String registrationStamp;
+
+    @NotNull
+    @Column(name = "running", nullable = false)
+    private boolean running;
 
     @OneToMany
     @JoinTable(
@@ -73,22 +68,6 @@ public class Contest implements Serializable, ApplicationEntity {
         this.name = name;
     }
 
-    public Date getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Date startTime) {
-        this.startTime = startTime;
-    }
-
-    public Date getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(Date endTime) {
-        this.endTime = endTime;
-    }
-
     public String getRegistrationStamp() {
         return registrationStamp;
     }
@@ -101,16 +80,16 @@ public class Contest implements Serializable, ApplicationEntity {
         return entries;
     }
 
-    @Override
-    public String toString() {
-        return "Contest{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", startTime=" + startTime +
-                ", endTime=" + endTime +
-                ", registrationStamp='" + registrationStamp + '\'' +
-                ", entries=" + entries +
-                '}';
+    public boolean isRunning() {
+        return running;
+    }
+
+    public void setRunning(boolean running) {
+        this.running = running;
+    }
+
+    public void setEntries(Set<Document> entries) {
+        this.entries = entries;
     }
 }
 

@@ -35,7 +35,7 @@ public class DocumentController {
 
     @GET
     @Produces("application/json")
-    @JWTTokenRequired(Permissions = {Role.AUTHOR, Role.AUTHOR})
+    @JWTTokenRequired(Permissions = {Role.AUTHOR, Role.ADMIN})
     public Response getDocuments() {
 
         List<DocumentDTO> documents = documentService.gets();

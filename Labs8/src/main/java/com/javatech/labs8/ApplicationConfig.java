@@ -1,5 +1,6 @@
 package com.javatech.labs8;
 
+import com.javatech.labs8.cache.CacheControlFactory;
 import com.javatech.labs8.controller.ContestController;
 import com.javatech.labs8.controller.DocumentController;
 import com.javatech.labs8.controller.UserController;
@@ -19,11 +20,8 @@ import java.util.Set;
 public class ApplicationConfig extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         // Bind authorization and authentication filters
-
         resources.add(AuthenticationFilter.class);
         resources.add(AuthorizationFilter.class);
-        resources.add(SecurityContext.class);
-        resources.add(Principal.class);
 
         // Bind API Controllers
         resources.add(UserController.class);
