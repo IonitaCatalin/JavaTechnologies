@@ -21,7 +21,7 @@ import java.util.List;
 
 @Path("/users")
 @RequestScoped
-public class UserController {
+public class AccountController {
     @Inject
     AccountService accountService;
 
@@ -51,8 +51,7 @@ public class UserController {
     @GET
     @Path("/{accountId}")
     @Produces("application/json")
-    @JWTTokenRequired(Permissions = {
-            Role.AUTHOR,Role.ADMIN,Role.REVIEWER})
+    @JWTTokenRequired(Permissions = {Role.ADMIN})
     public Response getAccount(@PathParam("accountId") Long accountId) {
 
         AccountDTO account = accountService.get(accountId);
