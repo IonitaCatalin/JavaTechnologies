@@ -1,7 +1,7 @@
 package com.javatech.labs8.filters;
 
 import com.javatech.labs8.annotations.JWTTokenRequired;
-import com.javatech.labs8.exceptions.AccountInvalidTokenException;
+import com.javatech.labs8.exceptions.InvalidTokenException;
 import com.javatech.labs8.exceptions.AuthorizationMissingTokenException;
 import com.javatech.labs8.tokens.TokenHandler;
 
@@ -44,7 +44,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     }
 
 
-    private void validateToken(String token, ContainerRequestContext context) throws AccountInvalidTokenException {
+    private void validateToken(String token, ContainerRequestContext context) throws InvalidTokenException {
         Long id = TokenHandler.validate(token);
 
         context.setProperty("account_id",id);

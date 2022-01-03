@@ -11,8 +11,9 @@ import javax.ws.rs.core.Application;
 import java.util.Set;
 
 @ApplicationPath("api/v1")
+
 @ApplicationScoped
-public class ApplicationConfig extends Application {
+public class RestApplication extends Application {
     private void addRestResourceClasses(Set<Class<?>> resources) {
         // Bind authorization and authentication filters
         resources.add(AuthenticationFilter.class);

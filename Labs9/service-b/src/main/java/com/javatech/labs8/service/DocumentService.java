@@ -1,9 +1,11 @@
 package com.javatech.labs8.service;
 
 import com.javatech.labs8.dtos.*;
+import com.javatech.labs8.entity.Account;
 import com.javatech.labs8.entity.Document;
 import com.javatech.labs8.exceptions.*;
 import com.javatech.labs8.graph.ReferencesGraph;
+import com.javatech.labs8.repository.AccountRepository;
 import com.javatech.labs8.repository.DocumentRepository;
 
 import javax.inject.Inject;

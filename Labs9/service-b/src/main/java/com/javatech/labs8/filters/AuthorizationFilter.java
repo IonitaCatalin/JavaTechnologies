@@ -1,7 +1,9 @@
 package com.javatech.labs8.filters;
 
 import com.javatech.labs8.annotations.JWTTokenRequired;
+import com.javatech.labs8.exceptions.RequestNotAllowedException;
 import com.javatech.labs8.pemissions.Role;
+import com.javatech.labs8.repository.AccountRepository;
 
 import javax.annotation.Priority;
 import javax.inject.Inject;
@@ -25,11 +27,11 @@ public class AuthorizationFilter implements ContainerRequestFilter {
     private ResourceInfo resourceInfo;
 
     @Inject
-    AccountService accountService;
+    AccountRepository accountRepository;
 
 
     @Override
-    public void filter(ContainerRequestContext requestContext) throws AccountNotAllowedException {
+    public void filter(ContainerRequestContext requestContext) {
 
         Method method = resourceInfo.getResourceMethod();
         if( method != null){
@@ -45,14 +47,13 @@ public class AuthorizationFilter implements ContainerRequestFilter {
         }
     }
 
-    private void checkPermissions(Role[] permissions, Long id) throws AccountNotAllowedException {
+    private void checkPermissions(Role[] permissions, Long id) {
         List<Role> permissionsList = Arrays.asList(permissions);
 
-        Role userPermission = accountService.getAccountRole(id);
-
+        Role userPermission = accountRepository.getUserRole(id);
 
         if(!permissionsList.contains(userPermission)) {
-            throw new AccountNotAllowedException();
+            throw new RequestNotAllowedException();
         }
     }
 

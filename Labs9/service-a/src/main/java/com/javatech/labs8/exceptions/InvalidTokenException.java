@@ -2,8 +2,8 @@ package com.javatech.labs8.exceptions;
 
 import com.javatech.labs8.exceptions.translatables.TranslatableUnauthorizedException;
 
-public class AccountInvalidTokenException extends TranslatableUnauthorizedException {
-    public AccountInvalidTokenException() {
+public class InvalidTokenException extends TranslatableUnauthorizedException {
+    public InvalidTokenException() {
         this.message = "Provided token is invalid";
     }
 }

@@ -1,6 +1,5 @@
 package com.javatech.labs8;
 
-import com.javatech.labs8.controller.ContestController;
 import com.javatech.labs8.controller.DocumentController;
 import com.javatech.labs8.exceptions.mappers.*;
 import com.javatech.labs8.filters.AuthenticationFilter;
@@ -21,7 +20,6 @@ public class ApplicationConfig extends Application {
 
         // Bind API Controllers
         resources.add(DocumentController.class);
-        resources.add(ContestController.class);
 
         // Bind Exception Mappers
         resources.add(TranslatableConflictMapper.class);
