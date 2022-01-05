@@ -9,5 +9,5 @@ import javax.ws.rs.core.Application;
  */
 @ApplicationPath("/data")
 @ApplicationScoped
-public class DemoRestApplication extends Application {
+public class RestApplication extends Application {
 }

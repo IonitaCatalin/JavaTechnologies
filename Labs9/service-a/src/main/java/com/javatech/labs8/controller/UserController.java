@@ -134,5 +134,18 @@ public class UserController {
                 .build();
     }
 
+    @GET
+    @Path("welcome")
+    public Response getHello() {
+        ResponsePayload payload = new ResponsePayload(
+                "SUCCESS",
+                "Hello from API"
+        );
+        return Response
+                .status(Response.Status.OK)
+                .entity(payload)
+                .build();
+    }
+
 
 }
