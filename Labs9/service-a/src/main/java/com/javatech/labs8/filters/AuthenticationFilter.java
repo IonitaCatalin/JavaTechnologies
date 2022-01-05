@@ -1,7 +1,7 @@
 package com.javatech.labs8.filters;
 
 import com.javatech.labs8.annotations.JWTTokenRequired;
-import com.javatech.labs8.exceptions.InvalidTokenException;
+import com.javatech.labs8.exceptions.AccountInvalidTokenException;
 import com.javatech.labs8.exceptions.AuthorizationMissingTokenException;
 import com.javatech.labs8.tokens.TokenHandler;
 
@@ -23,19 +23,27 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     private static final String AUTHENTICATION_SCHEME = "Bearer";
 
     @Override
-    public void filter(ContainerRequestContext requestContext) throws AuthorizationMissingTokenException {
+    public void filter(ContainerRequestContext requestContext)  {
 
         String authorizationHeader =
                 requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
         if (!isTokenBasedAuthentication(authorizationHeader)) {
-            throw new AuthorizationMissingTokenException();
+            try {
+                throw new AuthorizationMissingTokenException();
+            } catch (AuthorizationMissingTokenException e) {
+                e.printStackTrace();
+            }
         }
 
         String token = authorizationHeader
                 .substring(AUTHENTICATION_SCHEME.length()).trim();
 
-        validateToken(token, requestContext);
+        try {
+            validateToken(token, requestContext);
+        } catch (AccountInvalidTokenException e) {
+            e.printStackTrace();
+        }
     }
 
     private boolean isTokenBasedAuthentication(String authorizationHeader) {
@@ -44,7 +52,7 @@ public class AuthenticationFilter implements ContainerRequestFilter {
     }
 
 
-    private void validateToken(String token, ContainerRequestContext context) throws InvalidTokenException {
+    private void validateToken(String token, ContainerRequestContext context) throws AccountInvalidTokenException {
         Long id = TokenHandler.validate(token);
 
         context.setProperty("account_id",id);

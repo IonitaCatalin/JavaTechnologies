@@ -3,7 +3,6 @@ package com.javatech.labs8.entity;
 
 import javax.faces.bean.SessionScoped;
 import javax.persistence.*;
-import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;

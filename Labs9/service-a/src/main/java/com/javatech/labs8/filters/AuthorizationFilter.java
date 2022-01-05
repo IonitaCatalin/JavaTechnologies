@@ -31,7 +31,7 @@ public class AuthorizationFilter implements ContainerRequestFilter {
 
 
     @Override
-    public void filter(ContainerRequestContext requestContext) throws AccountNotAllowedException {
+    public void filter(ContainerRequestContext requestContext) {
 
         Method method = resourceInfo.getResourceMethod();
         if( method != null){
@@ -42,7 +42,15 @@ public class AuthorizationFilter implements ContainerRequestFilter {
             Role[] permissions =  JWTContext.Permissions();
 
 
-            checkPermissions(permissions, Long.valueOf(principal.getName()));
+            try {
+                checkPermissions(permissions, Long.valueOf(principal.getName()));
+            } catch (Exception e) {
+                try {
+                    throw new AccountNotAllowedException();
+                } catch (AccountNotAllowedException ex) {
+                    ex.printStackTrace();
+                }
+            }
 
         }
     }

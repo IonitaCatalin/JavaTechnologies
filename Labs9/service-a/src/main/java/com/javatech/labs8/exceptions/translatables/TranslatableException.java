@@ -1,9 +1,7 @@
 package com.javatech.labs8.exceptions.translatables;
 
-import javax.ejb.ApplicationException;
 
-@ApplicationException
-public abstract class TranslatableException extends RuntimeException {
+public abstract class TranslatableException extends Exception {
     protected int http;
     protected String message;
     protected String code;
