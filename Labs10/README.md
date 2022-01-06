@@ -1,3 +1,4 @@
+
 # **Requirements**
 
 (1p) ✔️ Run the microservices using an Eclipse Microprofile server implementation (Payara Micro, Open Liberty, Quarkus, etc.)
@@ -14,3 +15,10 @@
 
 # **Explanations**
  
+ For this laboratory we used the containerized PayaraMicro microservices that we created in the previous [`laboratory`](https://github.com/IonitaCatalin/JavaTechnologies/tree/main/Labs9), to add a specific set of maintanance features such as health check, metrics and also resilience.
+
+`1`. The entire process of running our microservices as docker containers is further detailed in the previous laboratory which is [Laboratory9](https://github.com/IonitaCatalin/JavaTechnologies/tree/main/Labs9), also details over how to run the database as a container were included. 
+
+`2`.
+
+`3`.
