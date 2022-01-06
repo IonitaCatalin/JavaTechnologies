@@ -1,0 +1,23 @@
+package com.javatech.labs10.exceptions.mappers;
+
+import com.javatech.labs10.exceptions.translatables.TranslatableUnauthorizedException;
+import com.javatech.labs10.utils.ResponsePayload;
+
+import javax.ws.rs.core.Response;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
+
+@Provider
+public class TranslatableUnauthorizedMapper implements ExceptionMapper<TranslatableUnauthorizedException> {
+    @Override
+    public Response toResponse(TranslatableUnauthorizedException e) {
+        ResponsePayload payload = new ResponsePayload(
+                "FAILURE",
+                e.getMessage());
+
+        return Response
+                .status(Response.Status.NOT_FOUND.getStatusCode())
+                .entity(payload)
+                .build();
+    }
+}
