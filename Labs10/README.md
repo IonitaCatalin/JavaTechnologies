@@ -4,7 +4,7 @@
 (1p) ✔️ Run the microservices using an Eclipse Microprofile server implementation (Payara Micro, Open Liberty, Quarkus, etc.)
 - Create Docker containers for the microservices. Consider deploying the database also as a container.
 
-(2p) ✔️ Implement simple test cases to highlight the support offered by MicroProfile for writing resilient microservices.
+(2p) ❌ Implement simple test cases to highlight the support offered by MicroProfile for writing resilient microservices.
 - Use the following: Fallback + Timeout and Retry(0.5p), CircuitBreaker(0.5p), Bulkhead thread-pool(0.5p) and semaphore(0.5p).
 - You should be able to invoke the annotated methods and analyze their behaviour.
 
