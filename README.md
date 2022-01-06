@@ -17,4 +17,5 @@ Each laboratory has its associated folder with an additional file README.md used
  - **[Laboratory 7](https://github.com/IonitaCatalin/JavaTechnologies/tree/main/Labs7)** ❌ 
  - **[Laboratory 8](https://github.com/IonitaCatalin/JavaTechnologies/tree/main/Labs8)**  ✔️
  - **[Laboratory 9](https://github.com/IonitaCatalin/JavaTechnologies/tree/main/Labs9)** ✔️
- - **Laboratory 10**⌛
+ - **[Laboratory 10](https://github.com/IonitaCatalin/JavaTechnologies/tree/main/Labs10)** ✔️
+ - **Laboratory 11**⌛
